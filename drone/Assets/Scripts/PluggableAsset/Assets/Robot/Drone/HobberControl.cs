@@ -146,8 +146,6 @@ public class HobberControl : MonoBehaviour
 
         //float angle_x = this.my_body.transform.up.x;
         //float angle_z = this.my_body.transform.up.z;
-        float af = 0.0f;
-        float ab = 0.0f;
         if (hasControl == false)
         {
             //af = (1 - my_body.transform.up.y) * (my_body.transform.up.x);
@@ -159,14 +157,22 @@ public class HobberControl : MonoBehaviour
             var del_x = this.GetDel(this.my_body.transform.localEulerAngles.x);
             var del_z = this.GetDel(this.my_body.transform.localEulerAngles.z);
             Debug.Log("del_x =" + del_x + " del_z=" + del_z);
-            this.my_body.AddTorque(adjust * this.my_body.transform.right * del_x);
-            this.my_body.AddTorque(adjust * this.my_body.transform.forward * del_z);
+
+            del_x_integral = del_x + del_x_integral * p_integral;
+            del_z_integral = del_z + del_z_integral * p_integral;
+            this.my_body.AddTorque(this.my_body.transform.right * CalcForce(del_x, del_x_prev, del_x_integral));
+            this.my_body.AddTorque(this.my_body.transform.forward * CalcForce(del_z, del_z_prev, del_z_integral));
+
+            del_x_prev = del_x;
+            del_z_prev = del_z;
+            //this.my_body.AddTorque(adjust * this.my_body.transform.right * del_x);
+            //this.my_body.AddTorque(adjust * this.my_body.transform.forward * del_z);
         }
 
-        motor_fr.GetComponent<Hobber>().SetForce( force_base + ( -cf + cb + cl - cr) + adjust * ( af + ab ), hasControl);
-        motor_fl.GetComponent<Hobber>().SetForce( force_base + ( -cf + cb - cl + cr) + adjust * ( af - ab), hasControl);
-        motor_br.GetComponent<Hobber>().SetForce( force_base + (  cf - cb + cl - cr) + adjust * (-af + ab), hasControl);
-        motor_bl.GetComponent<Hobber>().SetForce( force_base + (  cf - cb - cl + cr) + adjust * (-af - ab), hasControl);
+        motor_fr.GetComponent<Hobber>().SetForce( force_base + ( -cf + cb + cl - cr), hasControl);
+        motor_fl.GetComponent<Hobber>().SetForce( force_base + ( -cf + cb - cl + cr), hasControl);
+        motor_br.GetComponent<Hobber>().SetForce( force_base + (  cf - cb + cl - cr), hasControl);
+        motor_bl.GetComponent<Hobber>().SetForce( force_base + (  cf - cb - cl + cr), hasControl);
 
         if (t_r > 0)
         {
@@ -181,6 +187,19 @@ public class HobberControl : MonoBehaviour
 
 
     }
+    private float del_x_prev = 0f;
+    private float del_z_prev = 0f;
+    private float del_x_integral = 0f;
+    private float del_z_integral = 0f;
+    public float k_diff = 0.7f;
+    public float k_integral = 0.1f;
+    public float k_bibun = 1.0f;
+    public float p_integral = 0.01f;
+    float CalcForce(float diff, float prev_diff, float integral)
+    {
+        return k_diff * diff + k_integral * integral + k_bibun * (diff - prev_diff);
+    }
+
     float GetDel(float value)
     {
         var del = 0f;
