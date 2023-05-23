@@ -23,6 +23,11 @@ public class Hobber : MonoBehaviour
         current_force = this.force * this.my_body.transform.up;
         this.my_body.AddForce(current_force, ForceMode.Force);
 
+        if (this.propera != null)
+        {
+            rotationSpeed = 20 * rotation_keisu * current_force.magnitude;
+            this.propera.Rotate(0f, rotationSpeed, 0f);
+        }
     }
     bool hasControl = false;
     public void SetForce(float c_force, bool ctrl)
@@ -34,10 +39,5 @@ public class Hobber : MonoBehaviour
     public float rotation_keisu = 2.0f;
     private void Update()
     {
-        if (this.propera != null)
-        {
-            rotationSpeed = 3 * rotation_keisu * current_force.magnitude;
-            this.propera.Rotate(0f, rotationSpeed, 0f);
-        }
     }
 }

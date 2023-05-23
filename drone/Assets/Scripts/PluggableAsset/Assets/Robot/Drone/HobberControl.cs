@@ -108,12 +108,12 @@ public class HobberControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
-            t_r = 0.3f;
+            t_r = 0.01f;
             hasControl = true;
         }
         else
         {
-            t_r = -0.1f;
+            t_r = -0.001f;
         }
         if (t_r <= 0.0f)
         {
@@ -121,12 +121,12 @@ public class HobberControl : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.E))
         {
-            t_l = 0.3f;
+            t_l = 0.01f;
             hasControl = true;
         }
         else
         {
-            t_l = -0.1f;
+            t_l = -0.001f;
         }
         if (t_l <= 0.0f)
         {
@@ -146,7 +146,7 @@ public class HobberControl : MonoBehaviour
 
         //float angle_x = this.my_body.transform.up.x;
         //float angle_z = this.my_body.transform.up.z;
-        if (hasControl == false)
+        //if (hasControl == false)
         {
             //af = (1 - my_body.transform.up.y) * (my_body.transform.up.x);
             //ab = (1 - my_body.transform.up.y) * (-my_body.transform.up.z);
