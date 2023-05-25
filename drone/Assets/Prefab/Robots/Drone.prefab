@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 2773254782584318091}
   - component: {fileID: 6155371194679317187}
   - component: {fileID: 7169791360158839167}
+  - component: {fileID: 2243152136725385903}
   - component: {fileID: 2773254782584318131}
   - component: {fileID: 2773254782584318128}
   - component: {fileID: 2773254782584318129}
@@ -335,6 +336,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on: 1
+--- !u!114 &2243152136725385903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2773254782584318093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af0dbb2b433564a0591a3c17e877b500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topic_type: sensor_msgs/Imu
+  update_cycle: 1
+  topic_name: imu
+  io_method: 1
+  comm_method: 0
 --- !u!114 &2773254782584318131
 MonoBehaviour:
   m_ObjectHideFlags: 0
