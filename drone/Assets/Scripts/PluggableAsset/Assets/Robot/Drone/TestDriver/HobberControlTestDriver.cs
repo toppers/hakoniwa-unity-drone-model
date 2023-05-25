@@ -72,11 +72,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                value.x = 1f;
+                value.x = -1f;
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                value.x = -1f;
+                value.x = 1f;
             }
 
             if (Input.GetKey(KeyCode.Space))
