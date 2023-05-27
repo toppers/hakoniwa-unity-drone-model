@@ -1,3 +1,5 @@
 [submodule "plugin"]
 	path = plugin
 	url = https://github.com/toppers/hakoniwa-unity-simasset-plugin.git
+[submodule "hakoniwa-base"]
+	path = hakoniwa-base
