@@ -3,3 +3,4 @@
 	url = https://github.com/toppers/hakoniwa-unity-simasset-plugin.git
 [submodule "hakoniwa-base"]
 	path = hakoniwa-base
+	url = https://github.com/toppers/hakoniwa-base.git
