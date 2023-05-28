@@ -51,6 +51,21 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 return value;
             }
         }
+        private float GetLimit(float value, float limit)
+        {
+            if (value > limit)
+            {
+                return limit;
+            }
+            else if (value < 0.0f)
+            {
+                return 0.0f;
+            }
+            else
+            {
+                return value;
+            }
+        }
 
 
         private void BalanceControl()
@@ -187,6 +202,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         Vector3 motor_control = new Vector3();
         float rotate_value = 0f;
         public bool enableBalance = false;
+        public bool enableExCtrl = false;
         public void DoControl()
         {
             this.count++;
@@ -195,7 +211,14 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 return;
             }
             this.count = 0;
-            this.RecvMsg();
+            if (enableExCtrl)
+            {
+                this.RecvMsg2();
+            }
+            else
+            {
+                this.RecvMsg();
+            }
 
             DoHobberControl();
             if (enableBalance)
@@ -204,6 +227,42 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             }
             RotateControl();
             DoSpeedControl();
+        }
+        private void RecvMsg2()
+        {
+            float limit = 1.0f;
+            //cl, cr
+            motor_control.x = (float)this.pdu_reader.GetReadOps().Ref("linear").GetDataFloat64("x");
+            //cu, cd
+            motor_control.y = (float)this.pdu_reader.GetReadOps().Ref("linear").GetDataFloat64("y");
+            //cf, cb
+            motor_control.z = (float)this.pdu_reader.GetReadOps().Ref("linear").GetDataFloat64("z");
+            //t_l, t_r
+            rotate_value = (float)this.pdu_reader.GetReadOps().Ref("angular").GetDataFloat64("x");
+            //Debug.Log("motor_control=" + motor_control);
+            //Debug.Log("rotate_value=" + rotate_value);
+            if (motor_control.z > 0f)
+            {
+                cf = GetLimit(motor_control.z, limit);
+                cb = 0f;
+            }
+            if (motor_control.z < 0f)
+            {
+                cf = 0f;
+                cb = GetLimit(-motor_control.z, limit) ;
+            }
+            if (motor_control.x > 0f)
+            {
+                cl = GetLimit(motor_control.x, limit);
+                cr = 0f;
+            }
+            if (motor_control.x < 0f)
+            {
+                cl = 0f;
+                cr = GetLimit(-motor_control.x, limit);
+            }
+
+
         }
         // Update is called once per frame
         private void RecvMsg()

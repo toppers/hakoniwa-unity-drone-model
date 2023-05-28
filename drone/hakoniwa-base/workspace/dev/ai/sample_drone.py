@@ -18,10 +18,10 @@ import drone_sensor
 from drone_angle_control import PIDController
 
 # パラメータ設定
-kp = 0.01  # 比例ゲイン
+kp = 0.100  # 比例ゲイン
 ki = 0.001  # 積分ゲイン
-kd = 2.0  # 微分ゲイン
-dt = 0.02 # 単位時間[20msec]
+kd = 0.100  # 微分ゲイン
+dt = 0.02   # 単位時間[20msec]
 controller = PIDController(kp, ki, kd) 
 
 def handler(signum, frame):
@@ -55,9 +55,9 @@ for episode in range(1):
   state = 0
   total_reward = 0
 
+  value=0.0
   while not done and total_time < 4000:
     
-    value=0.0
     # input command
     if total_time % 10 == 0:
       f = open('dev/ai/cmd.txt', 'r')
@@ -78,12 +78,12 @@ for episode in range(1):
 
     commanded_control_signal = controller.control(target_angles, current_angles, dt)
     print("cr=" + str(commanded_control_signal))
-
+    power_rate = 0.1
     #motor control
     motor = robo.get_action('hobber_control')
-    motor['linear']['x'] =  0.000 * commanded_control_signal[0]
+    motor['linear']['x'] =  power_rate * commanded_control_signal[0]
     motor['linear']['y'] =  0.0
-    motor['linear']['z'] = -0.010 * commanded_control_signal[1]
+    motor['linear']['z'] = -power_rate * commanded_control_signal[1]
     motor['angular']['x'] = 0.0
     motor['angular']['y'] = 0.0
     motor['angular']['z'] = 0.0
