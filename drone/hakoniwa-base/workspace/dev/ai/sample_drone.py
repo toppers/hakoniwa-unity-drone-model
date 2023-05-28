@@ -14,6 +14,16 @@ from types import MethodType
 import hako_robomodel_any
 import struct
 
+import drone_sensor
+from drone_angle_control import PIDController
+
+# パラメータ設定
+kp = 0.01  # 比例ゲイン
+ki = 0.001  # 積分ゲイン
+kd = 2.0  # 微分ゲイン
+dt = 0.02 # 単位時間[20msec]
+controller = PIDController(kp, ki, kd) 
+
 def handler(signum, frame):
   print(f'SIGNAL(signum={signum})')
   sys.exit(0)
@@ -44,45 +54,39 @@ for episode in range(1):
   done = False
   state = 0
   total_reward = 0
-  #100secs
+
   while not done and total_time < 4000:
     
+    value=0.0
     # input command
-    if total_time % 100 == 0:
+    if total_time % 10 == 0:
       f = open('dev/ai/cmd.txt', 'r')
-      value = f.readlines()
+      value = float(f.readlines()[0])
       f.close()
     
     sensors = env.hako.execute()
 
-    #laser scan
-    scan = robo.get_state("scan", sensors)
-    scan_ranges = scan['ranges']
-    scan_min = min(min(scan_ranges[0:15]), min(scan_ranges[345:359]))
-    #print("scan=" + str(scan_min))
+    #imu
+    imu = robo.get_state("imu", sensors)
+    imu_orientation = imu['orientation']
+    current_angles = drone_sensor.quaternion_to_euler_xyz(imu_orientation)
+    imu_angular_velocity = imu['angular_velocity']
+    print("or=" + str(current_angles))
+    print("vl=" + str(imu_angular_velocity))
+    target_angles = [ value, 0.0, 0.0 ]
+    print("tr=" + str(target_angles))
 
-    #camera sensor
-    if total_time % 100 == 0:
-      img = robo.get_state("camera_image_jpg", sensors)
-      file_data = img['data__raw']
-      #file_data = struct.pack('B' * len(image_data), *image_data)
-      with open("camera-01.jpg" , 'bw') as f:
-          f.write(file_data)
+    commanded_control_signal = controller.control(target_angles, current_angles, dt)
+    print("cr=" + str(commanded_control_signal))
 
     #motor control
     motor = robo.get_action('hobber_control')
-    motor['linear']['x'] = float(value[0])
-    motor['linear']['y'] = 0.0
-    motor['linear']['z'] = 0.0
+    motor['linear']['x'] =  0.000 * commanded_control_signal[0]
+    motor['linear']['y'] =  0.0
+    motor['linear']['z'] = -0.010 * commanded_control_signal[1]
     motor['angular']['x'] = 0.0
     motor['angular']['y'] = 0.0
     motor['angular']['z'] = 0.0
-    #if (scan_min >= 0.2):
-      #motor['linear']['x'] = float(value[0])
-      #motor['angular']['x'] = 0.0
-    #else:
-      #motor['linear']['x'] = 0.0
-      #motor['angular']['x'] = -2.0
     
     for channel_id in robo.actions:
       robo.hako.write_pdu(channel_id, robo.actions[channel_id])

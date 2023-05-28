@@ -186,6 +186,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         Vector3 motor_control = new Vector3();
         float rotate_value = 0f;
+        public bool enableBalance = false;
         public void DoControl()
         {
             this.count++;
@@ -197,7 +198,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.RecvMsg();
 
             DoHobberControl();
-            BalanceControl();
+            if (enableBalance)
+            {
+                BalanceControl();
+            }
             RotateControl();
             DoSpeedControl();
         }
