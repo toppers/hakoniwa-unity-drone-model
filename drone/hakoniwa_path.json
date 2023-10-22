@@ -1,0 +1,6 @@
+{
+    "hakoniwa_base": "../..",
+    "settings": "./",
+    "pdu_path": "./ros_types/json/",
+    "offset_path": "./ros_types/offset"
+}
