@@ -303,6 +303,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             pdu.SetData("lat", lat);
             pdu.SetData("lon", lon);
             pdu.SetData("alt", alt);
+
+            //Debug.Log("lat=" + lat  + " lon= " + lon + " alt=" + alt);
         }
         /*
          * Unityの位置情報を実際の緯度、経度、高度に変換するための実装は、使用する地球モデルやシミュレーションのスケールに依存します。

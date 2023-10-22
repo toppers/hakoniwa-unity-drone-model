@@ -20,10 +20,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public GameObject motor_bl;
         public GameObject motor_br;
 
-        private Hobber motor_parts_fl;
-        private Hobber motor_parts_fr;
-        private Hobber motor_parts_bl;
-        private Hobber motor_parts_br;
+        private Px4Hobber motor_parts_fl;
+        private Px4Hobber motor_parts_fr;
+        private Px4Hobber motor_parts_bl;
+        private Px4Hobber motor_parts_br;
 
         public string topic_type = "hako_mavlink_msgs/HakoHilActuatorControls";
         public string topic_name = "hobber_control";
@@ -45,15 +45,16 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[0].value.method_type = this.comm_method.ToString();
             return configs;
         }
+        public float keisu = 0.01f;
 
         public void DoControl()
         {
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
             // 各モーターの指示値を取得
-            float motorForceFR = controls[0];
-            float motorForceBL = controls[1];
-            float motorForceFL = controls[2];
-            float motorForceBR = controls[3];
+            float motorForceFR = keisu * controls[0];
+            float motorForceBL = keisu * controls[1];
+            float motorForceFL = keisu * controls[2];
+            float motorForceBR = keisu * controls[3];
 
             // 各モーターに指示を送る
             motor_parts_fr.AddForce(motorForceFR);
@@ -90,10 +91,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 {
                     throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
                 }
-                motor_parts_fr = motor_fr.GetComponent<Hobber>();
-                motor_parts_fl = motor_fl.GetComponent<Hobber>();
-                motor_parts_br = motor_br.GetComponent<Hobber>();
-                motor_parts_bl = motor_bl.GetComponent<Hobber>();
+                motor_parts_fr = motor_fr.GetComponent<Px4Hobber>();
+                motor_parts_fl = motor_fl.GetComponent<Px4Hobber>();
+                motor_parts_br = motor_br.GetComponent<Px4Hobber>();
+                motor_parts_bl = motor_bl.GetComponent<Px4Hobber>();
             }
             motor_parts_fr.Initialize(motor_fr);
             motor_parts_fl.Initialize(motor_fl);
