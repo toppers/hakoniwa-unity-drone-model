@@ -1,0 +1,16 @@
+single:primitive:time_usec:uint64:0:8
+single:primitive:xacc:float32:8:4
+single:primitive:yacc:float32:12:4
+single:primitive:zacc:float32:16:4
+single:primitive:xgyro:float32:20:4
+single:primitive:ygyro:float32:24:4
+single:primitive:zgyro:float32:28:4
+single:primitive:xmag:float32:32:4
+single:primitive:ymag:float32:36:4
+single:primitive:zmag:float32:40:4
+single:primitive:abs_pressure:float32:44:4
+single:primitive:diff_pressure:float32:48:4
+single:primitive:pressure_alt:float32:52:4
+single:primitive:temperature:float32:56:4
+single:primitive:fields_updated:uint32:60:4
+single:primitive:id:uint8:64:1
