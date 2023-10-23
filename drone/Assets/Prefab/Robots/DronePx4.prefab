@@ -466,8 +466,8 @@ MonoBehaviour:
   update_cycle: 1
   io_method: 0
   comm_method: 2
-  keisu: 10
-  friction_k: 1
+  keisu: 3
+  friction_k: 10
 --- !u!1 &2773254782606439913
 GameObject:
   m_ObjectHideFlags: 0
