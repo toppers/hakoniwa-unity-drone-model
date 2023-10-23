@@ -513,7 +513,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2773254782584318090, guid: c4fd342370ac74169afb8672486894ee, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 2773254782584318090, guid: c4fd342370ac74169afb8672486894ee, type: 3}
       propertyPath: m_LocalPosition.y
@@ -521,7 +521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2773254782584318090, guid: c4fd342370ac74169afb8672486894ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4.45
       objectReference: {fileID: 0}
     - target: {fileID: 2773254782584318090, guid: c4fd342370ac74169afb8672486894ee, type: 3}
       propertyPath: m_LocalRotation.w
@@ -554,6 +554,14 @@ PrefabInstance:
     - target: {fileID: 2773254782584318093, guid: c4fd342370ac74169afb8672486894ee, type: 3}
       propertyPath: m_Name
       value: DronePx4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412633774155921011, guid: c4fd342370ac74169afb8672486894ee, type: 3}
+      propertyPath: keisu
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412633774155921011, guid: c4fd342370ac74169afb8672486894ee, type: 3}
+      propertyPath: friction_k
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

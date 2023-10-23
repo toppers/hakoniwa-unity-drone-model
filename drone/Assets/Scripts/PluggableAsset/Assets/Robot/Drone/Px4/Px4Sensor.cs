@@ -223,10 +223,18 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         // CalculateAltitude, CalculateLatitude, and CalculateLongitude functions remain the same as before
 
 
-        Quaternion ConvertUnityToMavlink(Quaternion unityQuat)
+
+        private const int AVERAGE_COUNT = 1;
+        private List<Vector3> accelerationSamples = new List<Vector3>();
+
+        Vector3 CalculateAverage(List<Vector3> samples)
         {
-            Vector3 eulerAngles = unityQuat.eulerAngles;
-            return Quaternion.Euler(eulerAngles.z, -eulerAngles.y, eulerAngles.x);
+            Vector3 sum = Vector3.zero;
+            foreach (var sample in samples)
+            {
+                sum += sample;
+            }
+            return sum / samples.Count;
         }
 
         private void UpdateHilStateQuaternion(Pdu pdu)
@@ -236,38 +244,55 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             // Time (you might want to get the actual timestamp value)
             ulong time_usec = 0;
 
-            // Get Quaternion from Rigidbody and rearrange it to (w, x, y, z) format
-            Quaternion rotation = ConvertUnityToMavlink(my_rigidbody.rotation);
-
             // Angular velocities in Unity's coordinate system
             Vector3 unityAngularVelocity = my_rigidbody.angularVelocity;
 
             // Convert to MAVLink's coordinate system (NED)
-            float rollspeed = unityAngularVelocity.z;
-            float pitchspeed = -unityAngularVelocity.x;
-            float yawspeed = -unityAngularVelocity.y;
+            float rollspeed = unityAngularVelocity.z;  // Unity's z becomes MAVLink's roll
+            float pitchspeed = -unityAngularVelocity.x; // Unity's x becomes MAVLink's -pitch
+            float yawspeed = unityAngularVelocity.y;    // Unity's y becomes MAVLink's yaw
 
             // Linear velocities in Unity's coordinate system
             Vector3 unityVelocity = my_rigidbody.velocity;
 
             // Convert to MAVLink's coordinate system (NED)
-            short vx = (short)(unityVelocity.x * 100);
-            short vy = (short)(-unityVelocity.z * 100);
-            short vz = (short)(-unityVelocity.y * 100);
+            short vx = (short)(unityVelocity.z * 100);  // Unity's z (前方) becomes MAVLink's x
+            short vy = (short)(-unityVelocity.x * 100); // Unity's x (右方) becomes MAVLink's -y (左方)
+            short vz = (short)(unityVelocity.y * 100);  // Unity's y (上方) becomes MAVLink's z
 
-            // Accelerations in Unity's coordinate system
             Vector3 unityAcceleration = (currentVelocity - lastVelocity) / deltaTime;
+            //gravity element
+            unityAcceleration += transform.InverseTransformDirection(Physics.gravity);
+            //Debug.Log("lastVelocity = " + currentVelocity);
+            //Debug.Log("currentVelocity = " + currentVelocity);
+            // 新しいサンプルをリストに追加
+            accelerationSamples.Add(unityAcceleration);
 
-            // Convert to MAVLink's coordinate system (NED)
-            short xacc = (short)(unityAcceleration.x * 1000 / 9.81f); // Unity's X axis to MAVLink's X axis
-            short yacc = (short)(-unityAcceleration.z * 1000 / 9.81f); // Unity's Z axis to MAVLink's Y axis
-            short zacc = (short)(-unityAcceleration.y * 1000 / 9.81f); // Unity's Y axis to MAVLink's Z axis
+            // サンプルの数が10を超えた場合、古いサンプルを削除
+            if (accelerationSamples.Count > AVERAGE_COUNT)
+            {
+                accelerationSamples.RemoveAt(0);
+            }
+
+            // 平均を計算
+            Vector3 averageAcceleration = CalculateAverage(accelerationSamples);
+
+            // MAVLinkの座標系に変換
+            short xacc = (short)(averageAcceleration.z * 1000);  // Unity's z becomes MAVLink's x
+            short yacc = (short)(-averageAcceleration.x * 1000); // Unity's x becomes MAVLink's -y
+            short zacc = (short)(averageAcceleration.y * 1000);  // Unity's y becomes MAVLink's z
 
             lastVelocity = currentVelocity;
 
             // Populate the struct
             hil_state_quaternion.time_usec = time_usec;
-            hil_state_quaternion.attitude_quaternion = new float[4] { rotation.w, rotation.x, rotation.y, rotation.z };
+            hil_state_quaternion.attitude_quaternion = new float[4] {
+                //order: w, x, y, z
+                my_rigidbody.rotation.w,
+                my_rigidbody.rotation.z,
+                -my_rigidbody.rotation.x,
+                my_rigidbody.rotation.y
+            };
             hil_state_quaternion.rollspeed = rollspeed;
             hil_state_quaternion.pitchspeed = pitchspeed;
             hil_state_quaternion.yawspeed = yawspeed;
@@ -356,6 +381,18 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             int latitude = (int)((referenceLatitude + deltaLatitude) * 1e7); // Convert to 1e7 format used by MAVLink
             return latitude;
         }
+        // 東京の地磁気の北方向を示すベクトル
+        // ここでは強度も0.5ガウスで考慮しています
+        private Vector3 TOKYO_MAGNETIC_NORTH = new Vector3(0, 0.5f, 0);
+
+        private Vector3 CalcMAVLinkMagnet()
+        {
+            // センサーの現在の回転に基づいて磁場の方向と強度を調整
+            Vector3 adjustedMagneticNorth = sensor.transform.rotation * TOKYO_MAGNETIC_NORTH;
+
+            return adjustedMagneticNorth;
+        }
+
         private void UpdateHilSensor(Pdu pdu)
         {
             // Use values from hil_state_quaternion or default/dummy values
@@ -366,13 +403,13 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             float zacc = hil_state_quaternion.zacc / 1000.0f;
 
             float xgyro = hil_state_quaternion.rollspeed;  // Assuming radian/sec
-            float ygyro = hil_state_quaternion.pitchspeed;
-            float zgyro = hil_state_quaternion.yawspeed;
+            float ygyro = hil_state_quaternion.yawspeed;
+            float zgyro = hil_state_quaternion.pitchspeed;
 
-            // Dummy or default values (You might want to provide actual sensor readings)
-            float xmag = 0.0f;
-            float ymag = 0.0f;
-            float zmag = 0.0f;
+            var mag = CalcMAVLinkMagnet();
+            float xmag = mag.x;
+            float ymag = mag.y;
+            float zmag = mag.z;
             float abs_pressure = 1013.25f;  // Standard atmospheric pressure at sea level
             float diff_pressure = 0.0f;  // Differential pressure (used for airspeed calculation)
             float pressure_alt = 0.0f;  // Pressure altitude

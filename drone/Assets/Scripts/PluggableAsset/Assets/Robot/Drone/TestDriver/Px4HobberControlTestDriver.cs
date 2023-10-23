@@ -61,11 +61,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                input_value += 1f;
+                input_value += 0.01f;
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                input_value += -1f;
+                input_value += -0.01f;
             }
             if (Input.GetKey(KeyCode.Space))
             {
@@ -86,7 +86,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             values[1] = input_value;
             values[2] = input_value;
             values[3] = input_value;
-            //Debug.Log("motor_control=" + move_control);
+            Debug.Log("input_value=" + input_value);
             this.pdu_reader.GetWriteOps().SetData("controls", values);
         }
         public RoboPartsConfigData[] GetRoboPartsConfig()

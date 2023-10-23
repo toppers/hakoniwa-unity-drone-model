@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f56d5f84bc3481a991ca7ba38e6883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my_body: {fileID: 0}
+  my_body: {fileID: 2773254782584318128}
   motor_fl: {fileID: 2773254784129114870}
   motor_fr: {fileID: 2773254784176334570}
   motor_bl: {fileID: 2773254784155637514}
@@ -466,6 +466,8 @@ MonoBehaviour:
   update_cycle: 1
   io_method: 0
   comm_method: 2
+  keisu: 10
+  friction_k: 1
 --- !u!1 &2773254782606439913
 GameObject:
   m_ObjectHideFlags: 0

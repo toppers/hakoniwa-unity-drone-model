@@ -45,22 +45,58 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[0].value.method_type = this.comm_method.ToString();
             return configs;
         }
-        public float keisu = 0.01f;
+        public float keisu = 2.0f;
+        public float friction_k = 1.0f;
+
+        private void DoSpeedControl()
+        {
+            Vector3 velocity = new Vector3(my_body.velocity.x, my_body.velocity.y, my_body.velocity.z);
+
+            Vector3 deceleration = -velocity.normalized * friction_k;
+            my_body.AddForce(deceleration, ForceMode.Acceleration);
+            motor_parts_fr.DoFriction(deceleration);
+            motor_parts_fl.DoFriction(deceleration);
+            motor_parts_br.DoFriction(deceleration);
+            motor_parts_bl.DoFriction(deceleration);
+        }
+
 
         public void DoControl()
         {
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
-            // 各モーターの指示値を取得
-            float motorForceFR = keisu * controls[0];
-            float motorForceBL = keisu * controls[1];
-            float motorForceFL = keisu * controls[2];
-            float motorForceBR = keisu * controls[3];
+
+            // ロール、ピッチ、ヨー、スロットルの値を取得
+            float roll = controls[0];
+            float pitch = controls[1];
+            float yaw = controls[2];
+            float throttle = controls[3];
+
+            // モーターの出力を計算
+#if false
+            float motorForceFR = throttle + roll - pitch - yaw; // 右前
+            float motorForceFL = throttle + roll + pitch + yaw; // 左前
+            float motorForceBR = throttle - roll - pitch + yaw; // 右後ろ
+            float motorForceBL = throttle - roll + pitch - yaw; // 左後ろ
+#else
+            float motorForceFR = throttle; // 右前
+            float motorForceFL = throttle; // 左前
+            float motorForceBR = throttle; // 右後ろ
+            float motorForceBL = throttle; // 左後ろ
+#endif
+            // 係数を掛ける
+            motorForceFR *= keisu;
+            motorForceFL *= keisu;
+            motorForceBR *= keisu;
+            motorForceBL *= keisu;
 
             // 各モーターに指示を送る
             motor_parts_fr.AddForce(motorForceFR);
             motor_parts_bl.AddForce(motorForceBL);
             motor_parts_fl.AddForce(motorForceFL);
             motor_parts_br.AddForce(motorForceBR);
+
+
+            DoSpeedControl();
         }
 
         public void Initialize(System.Object obj)
