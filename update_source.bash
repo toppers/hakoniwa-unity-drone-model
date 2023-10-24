@@ -2,6 +2,7 @@
 
 #Scene
 cp -rp plugin/plugin-srcs/Assets/Scenes/Drone* drone/Assets/Scenes/
+cp plugin/plugin-srcs/Assets/Scenes/Hakoniwa.unity* drone/Assets/Scenes/
 
 #Scripts
 cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/* \
