@@ -47,7 +47,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         public float keisu = 2.0f;
         public float friction_k = 1.0f;
-
+        public float rotationalFriction_k = 1.0f;
         private void DoSpeedControl()
         {
             Vector3 velocity = new Vector3(my_body.velocity.x, my_body.velocity.y, my_body.velocity.z);
@@ -58,42 +58,56 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             motor_parts_fl.DoFriction(deceleration);
             motor_parts_br.DoFriction(deceleration);
             motor_parts_bl.DoFriction(deceleration);
+
+
+            Vector3 angularVelocity = my_body.angularVelocity;
+            Vector3 angularDecelerationTorque = -angularVelocity.normalized * angularVelocity.magnitude * rotationalFriction_k;
+            my_body.AddTorque(angularDecelerationTorque, ForceMode.Force);
+
         }
 
-
+        public float yawForce = 0.1f;
+        public float pitchForce = 0.1f;
+        public float rollForce = 0.1f;
         public void DoControl()
         {
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
 
+#if false
             // ロール、ピッチ、ヨー、スロットルの値を取得
-            float roll = controls[0];
-            float pitch = controls[1];
-            float yaw = controls[2];
+            float roll = controls[0] * rollForce;
+            float pitch = controls[1] * pitchForce;
+            float yaw = controls[2] * yawForce;
+            yaw = 0;
             float throttle = controls[3];
 
             // モーターの出力を計算
-#if false
             float motorForceFR = throttle + roll - pitch - yaw; // 右前
             float motorForceFL = throttle + roll + pitch + yaw; // 左前
             float motorForceBR = throttle - roll - pitch + yaw; // 右後ろ
             float motorForceBL = throttle - roll + pitch - yaw; // 左後ろ
+            motor_parts_fr.AddForce(keisu * motorForceFR);
+            motor_parts_fl.AddForce(keisu * motorForceFL);
+            motor_parts_br.AddForce(keisu * motorForceBR);
+            motor_parts_bl.AddForce(keisu * motorForceBL);
 #else
-            float motorForceFR = throttle; // 右前
-            float motorForceFL = throttle; // 左前
-            float motorForceBR = throttle; // 右後ろ
-            float motorForceBL = throttle; // 左後ろ
-#endif
-            // 係数を掛ける
-            motorForceFR *= keisu;
-            motorForceFL *= keisu;
-            motorForceBR *= keisu;
-            motorForceBL *= keisu;
+            float roll = -controls[0];
+            float pitch = controls[1];
+            float yaw = controls[2];
+            float throttle = controls[3];
 
-            // 各モーターに指示を送る
-            motor_parts_fr.AddForce(motorForceFR);
-            motor_parts_bl.AddForce(motorForceBL);
-            motor_parts_fl.AddForce(motorForceFL);
-            motor_parts_br.AddForce(motorForceBR);
+            motor_parts_fr.AddForce(keisu * throttle);
+            motor_parts_fl.AddForce(keisu * throttle);
+            motor_parts_br.AddForce(keisu * throttle);
+            motor_parts_bl.AddForce(keisu * throttle);
+
+            //y axis
+            my_body.AddTorque(transform.up * yaw * yawForce);
+            //z axis
+            my_body.AddTorque(transform.right * pitch * pitchForce);
+            //x axis
+            my_body.AddTorque(transform.forward * roll * rollForce);
+#endif
 
 
             DoSpeedControl();

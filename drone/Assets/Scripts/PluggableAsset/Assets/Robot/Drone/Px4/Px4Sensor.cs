@@ -217,6 +217,30 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             UpdateHilSensor(this.pdu_writer[0].GetWriteOps().Ref(null));
             UpdateHilGps(this.pdu_writer[2].GetWriteOps().Ref(null));
         }
+        private Vector3 ConvertUnity2Mavlink(Vector3 unity_data)
+        {
+            return new Vector3(
+                unity_data.z, // mavlink.x
+                -unity_data.x, // mavlink.y
+                unity_data.y  // mavlink.z
+                );
+        }
+        private Quaternion ConvertUnity2Mavlink(Quaternion unity_data)
+        {
+            // 1. UnityのQuaternionをオイラー角に変換
+            Vector3 unityEuler = unity_data.eulerAngles;
+
+            // 2. Unityのオイラー角をMAVLinkのオイラー角に変換
+            Vector3 mavlinkEuler;
+            mavlinkEuler.x = unityEuler.z;       // UnityのZ (pitch) → MAVLinkのX (pitch)
+            mavlinkEuler.y = -unityEuler.x;       // UnityのX (roll)  → MAVLinkのY (roll)
+            mavlinkEuler.z = unityEuler.y;      // UnityのY (yaw)   → MAVLinkのZ (negative yaw)
+
+            // 3. MAVLinkのオイラー角をQuaternionに変換
+            Quaternion mavlinkQuaternion = Quaternion.Euler(mavlinkEuler);
+
+            return mavlinkQuaternion;
+        }
 
 
 
@@ -224,7 +248,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
 
 
-        private const int AVERAGE_COUNT = 1;
+        private const int AVERAGE_COUNT = 4;
         private List<Vector3> accelerationSamples = new List<Vector3>();
 
         Vector3 CalculateAverage(List<Vector3> samples)
@@ -246,19 +270,19 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             // Angular velocities in Unity's coordinate system
             Vector3 unityAngularVelocity = my_rigidbody.angularVelocity;
-
-            // Convert to MAVLink's coordinate system (NED)
-            float rollspeed = unityAngularVelocity.z;  // Unity's z becomes MAVLink's roll
-            float pitchspeed = -unityAngularVelocity.x; // Unity's x becomes MAVLink's -pitch
-            float yawspeed = unityAngularVelocity.y;    // Unity's y becomes MAVLink's yaw
+            // Convert to MAVLink's coordinate system
+            var mavlink_angular_velocity = ConvertUnity2Mavlink(unityAngularVelocity);
+            float rollspeed = mavlink_angular_velocity.x; 
+            float pitchspeed = mavlink_angular_velocity.y; 
+            float yawspeed = mavlink_angular_velocity.z; 
 
             // Linear velocities in Unity's coordinate system
             Vector3 unityVelocity = my_rigidbody.velocity;
-
             // Convert to MAVLink's coordinate system (NED)
-            short vx = (short)(unityVelocity.z * 100);  // Unity's z (前方) becomes MAVLink's x
-            short vy = (short)(-unityVelocity.x * 100); // Unity's x (右方) becomes MAVLink's -y (左方)
-            short vz = (short)(unityVelocity.y * 100);  // Unity's y (上方) becomes MAVLink's z
+            var mavlink_velocity = ConvertUnity2Mavlink(unityVelocity);
+            short vx = (short)(mavlink_velocity.x * 100);
+            short vy = (short)(mavlink_velocity.y * 100);
+            short vz = (short)(mavlink_velocity.z * 100);
 
             Vector3 unityAcceleration = (currentVelocity - lastVelocity) / deltaTime;
             //gravity element
@@ -276,22 +300,23 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             // 平均を計算
             Vector3 averageAcceleration = CalculateAverage(accelerationSamples);
-
             // MAVLinkの座標系に変換
-            short xacc = (short)(averageAcceleration.z * 1000);  // Unity's z becomes MAVLink's x
-            short yacc = (short)(-averageAcceleration.x * 1000); // Unity's x becomes MAVLink's -y
-            short zacc = (short)(averageAcceleration.y * 1000);  // Unity's y becomes MAVLink's z
+            var mavlink_acc = ConvertUnity2Mavlink(averageAcceleration);
+            short xacc = (short)(mavlink_acc.x * 1000);
+            short yacc = (short)(mavlink_acc.y * 1000);
+            short zacc = (short)(mavlink_acc.z * 1000);
 
             lastVelocity = currentVelocity;
 
             // Populate the struct
             hil_state_quaternion.time_usec = time_usec;
+            var mavlink_rotation = ConvertUnity2Mavlink(my_rigidbody.rotation);
             hil_state_quaternion.attitude_quaternion = new float[4] {
                 //order: w, x, y, z
-                my_rigidbody.rotation.w,
-                my_rigidbody.rotation.z,
-                -my_rigidbody.rotation.x,
-                my_rigidbody.rotation.y
+                mavlink_rotation.w,
+                mavlink_rotation.x,
+                mavlink_rotation.y,
+                mavlink_rotation.z
             };
             hil_state_quaternion.rollspeed = rollspeed;
             hil_state_quaternion.pitchspeed = pitchspeed;
@@ -383,14 +408,17 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         // 東京の地磁気の北方向を示すベクトル
         // ここでは強度も0.5ガウスで考慮しています
-        private Vector3 TOKYO_MAGNETIC_NORTH = new Vector3(0, 0.5f, 0);
-
+        private Vector3 TOKYO_MAGNETIC_NORTH = new Vector3(0, 0, 0.5f);
         private Vector3 CalcMAVLinkMagnet()
         {
             // センサーの現在の回転に基づいて磁場の方向と強度を調整
             Vector3 adjustedMagneticNorth = sensor.transform.rotation * TOKYO_MAGNETIC_NORTH;
+            //Debug.Log("mag=" + adjustedMagneticNorth);
+            //Vector3 adjustedMagneticNorth = sensor.transform.eulerAngles;
+            // UnityからMAVLinkへの変換
+            Vector3 mavlinkMagnet = ConvertUnity2Mavlink(adjustedMagneticNorth);
 
-            return adjustedMagneticNorth;
+            return mavlinkMagnet;
         }
 
         private void UpdateHilSensor(Pdu pdu)
@@ -402,9 +430,9 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             float yacc = hil_state_quaternion.yacc / 1000.0f;
             float zacc = hil_state_quaternion.zacc / 1000.0f;
 
-            float xgyro = hil_state_quaternion.rollspeed;  // Assuming radian/sec
-            float ygyro = hil_state_quaternion.yawspeed;
-            float zgyro = hil_state_quaternion.pitchspeed;
+            float xgyro = hil_state_quaternion.rollspeed;     // Roll speed (around x-axis)
+            float ygyro = hil_state_quaternion.pitchspeed;    // Pitch speed (around y-axis)
+            float zgyro = hil_state_quaternion.yawspeed;      // Yaw speed (around z-axis)
 
             var mag = CalcMAVLinkMagnet();
             float xmag = mag.x;
@@ -458,9 +486,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             ushort vel = (ushort)(my_rigidbody.velocity.magnitude * 100); // Convert to cm/s
 
             // GPS velocity in NED frame
-            short vn = (short)(my_rigidbody.velocity.z * 100); // Convert to cm/s (North)
-            short ve = (short)(my_rigidbody.velocity.x * 100); // Convert to cm/s (East)
-            short vd = (short)(-my_rigidbody.velocity.y * 100); // Convert to cm/s (Down)
+            var mavlink_velocity = ConvertUnity2Mavlink(my_rigidbody.velocity);
+            short vn = (short)(mavlink_velocity.x * 100); // Convert to cm/s (North)
+            short ve = (short)(mavlink_velocity.y * 100); // Convert to cm/s (East)
+            short vd = (short)(mavlink_velocity.z * 100); // Convert to cm/s (Down)
 
             // Course over ground
             ushort cog = 0; // Example value (0 degrees)
