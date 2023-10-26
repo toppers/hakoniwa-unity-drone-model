@@ -227,17 +227,25 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private Quaternion ConvertUnity2Mavlink(Quaternion unity_data)
         {
+#if false
             // 1. UnityのQuaternionをオイラー角に変換
             Vector3 unityEuler = unity_data.eulerAngles;
 
             // 2. Unityのオイラー角をMAVLinkのオイラー角に変換
             Vector3 mavlinkEuler;
-            mavlinkEuler.x = unityEuler.z;       // UnityのZ (pitch) → MAVLinkのX (pitch)
-            mavlinkEuler.y = -unityEuler.x;       // UnityのX (roll)  → MAVLinkのY (roll)
-            mavlinkEuler.z = unityEuler.y;      // UnityのY (yaw)   → MAVLinkのZ (negative yaw)
+            mavlinkEuler.x = unityEuler.x;       // UnityのZ (pitch) → MAVLinkのX (pitch)
+            mavlinkEuler.y = unityEuler.z;       // UnityのX (roll)  → MAVLinkのY (roll)
+            mavlinkEuler.z = -unityEuler.y;      // UnityのY (yaw)   → MAVLinkのZ (negative yaw)
 
             // 3. MAVLinkのオイラー角をQuaternionに変換
             Quaternion mavlinkQuaternion = Quaternion.Euler(mavlinkEuler);
+#else
+            var mavlinkQuaternion = new Quaternion();
+            mavlinkQuaternion.x = unity_data.z;
+            mavlinkQuaternion.y = -unity_data.x;
+            mavlinkQuaternion.z = unity_data.y;
+            mavlinkQuaternion.w = -unity_data.w;
+#endif
 
             return mavlinkQuaternion;
         }
@@ -248,7 +256,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
 
 
-        private const int AVERAGE_COUNT = 4;
+        private const int AVERAGE_COUNT = 2;
         private List<Vector3> accelerationSamples = new List<Vector3>();
 
         Vector3 CalculateAverage(List<Vector3> samples)
@@ -430,9 +438,9 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             float yacc = hil_state_quaternion.yacc / 1000.0f;
             float zacc = hil_state_quaternion.zacc / 1000.0f;
 
-            float xgyro = hil_state_quaternion.rollspeed;     // Roll speed (around x-axis)
-            float ygyro = hil_state_quaternion.pitchspeed;    // Pitch speed (around y-axis)
-            float zgyro = hil_state_quaternion.yawspeed;      // Yaw speed (around z-axis)
+            float xgyro = hil_state_quaternion.rollspeed;
+            float ygyro = hil_state_quaternion.pitchspeed;
+            float zgyro = hil_state_quaternion.yawspeed;
 
             var mag = CalcMAVLinkMagnet();
             float xmag = mag.x;

@@ -69,44 +69,55 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public float yawForce = 0.1f;
         public float pitchForce = 0.1f;
         public float rollForce = 0.1f;
+        public float thrust_base = 1.0f;
         public void DoControl()
         {
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
 
-#if false
-            // ロール、ピッチ、ヨー、スロットルの値を取得
-            float roll = controls[0] * rollForce;
-            float pitch = controls[1] * pitchForce;
-            float yaw = controls[2] * yawForce;
-            yaw = 0;
-            float throttle = controls[3];
+#if true
+            float fl = controls[0];
+            float fr = controls[1];
+            float bl = controls[2];
+            float br = controls[3];
 
-            // モーターの出力を計算
-            float motorForceFR = throttle + roll - pitch - yaw; // 右前
-            float motorForceFL = throttle + roll + pitch + yaw; // 左前
-            float motorForceBR = throttle - roll - pitch + yaw; // 右後ろ
-            float motorForceBL = throttle - roll + pitch - yaw; // 左後ろ
-            motor_parts_fr.AddForce(keisu * motorForceFR);
-            motor_parts_fl.AddForce(keisu * motorForceFL);
-            motor_parts_br.AddForce(keisu * motorForceBR);
-            motor_parts_bl.AddForce(keisu * motorForceBL);
-#else
-            float roll = -controls[0];
-            float pitch = controls[1];
-            float yaw = controls[2];
-            float throttle = controls[3];
+            float throttle = (keisu * ((fl + fr + bl + br)/4.0f)) + thrust_base;
 
-            motor_parts_fr.AddForce(keisu * throttle);
-            motor_parts_fl.AddForce(keisu * throttle);
-            motor_parts_br.AddForce(keisu * throttle);
-            motor_parts_bl.AddForce(keisu * throttle);
+            motor_parts_fr.AddForce(throttle);
+            motor_parts_fl.AddForce(throttle);
+            motor_parts_br.AddForce(throttle);
+            motor_parts_bl.AddForce(throttle);
 
-            //y axis
+            //unity y axis
+            float yaw = (fl + br) - (fr + bl);
             my_body.AddTorque(transform.up * yaw * yawForce);
+
+            //unity x axis
+            float pitch = (fl + fr) - (bl + br);
+            my_body.AddTorque(transform.forward * pitch * pitchForce);
+
             //z axis
-            my_body.AddTorque(transform.right * pitch * pitchForce);
+            float roll = (fr + br) - (fl + bl);
+            my_body.AddTorque(transform.right * roll * rollForce);
+#else
+            float roll = controls[0];
+            float pitch =  -controls[1];
+            float yaw = controls[2];
+            float throttle = (keisu * controls[2]) + thrust_base;
+
+            motor_parts_fr.AddForce(throttle);
+            motor_parts_fl.AddForce(throttle);
+            motor_parts_br.AddForce(throttle);
+            motor_parts_bl.AddForce(throttle);
+
+            roll = roll - 0.5f;
+            pitch = pitch - 0.5f;
+            yaw = yaw - 0.5f;
+            //y axis
+            //my_body.AddTorque(transform.up * yaw * yawForce);
+            //z axis
+            //my_body.AddTorque(transform.right * pitch * pitchForce);
             //x axis
-            my_body.AddTorque(transform.forward * roll * rollForce);
+            //my_body.AddTorque(transform.forward * roll * rollForce);
 #endif
 
 

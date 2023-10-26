@@ -9,6 +9,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
     {
         private Transform propera;
         public Rigidbody my_body;
+        public bool cw = true;
         private float force = 0;
         private Vector3 current_force;
         public Vector3 GetCurrentForce()
@@ -40,7 +41,14 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             current_force = this.force * this.my_body.transform.up;
             this.my_body.AddForce(current_force, ForceMode.Force);
             var rotationSpeed = rotation_keisu * current_force.magnitude;
-            this.propera.Rotate(0f, rotationSpeed, 0f);
+            if (cw)
+            {
+                this.propera.Rotate(0f, rotationSpeed, 0f);
+            }
+            else
+            {
+                this.propera.Rotate(0f, -rotationSpeed, 0f);
+            }
         }
 
         public void Initialize(System.Object obj)
