@@ -219,41 +219,45 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private Vector3 ConvertUnity2Mavlink(Vector3 unity_data)
         {
+#if false //mavlink
+            return new Vector3(
+                unity_data.z, // mavlink.x
+                unity_data.x, // mavlink.y
+                -unity_data.y  // mavlink.z
+                );
+#else //ros
             return new Vector3(
                 unity_data.z, // mavlink.x
                 -unity_data.x, // mavlink.y
                 unity_data.y  // mavlink.z
                 );
+#endif
         }
         private Quaternion ConvertUnity2Mavlink(Quaternion unity_data)
         {
-#if false
+#if false //mavlink
             // 1. UnityのQuaternionをオイラー角に変換
             Vector3 unityEuler = unity_data.eulerAngles;
 
             // 2. Unityのオイラー角をMAVLinkのオイラー角に変換
             Vector3 mavlinkEuler;
-            mavlinkEuler.x = unityEuler.x;       // UnityのZ (pitch) → MAVLinkのX (pitch)
-            mavlinkEuler.y = unityEuler.z;       // UnityのX (roll)  → MAVLinkのY (roll)
+            mavlinkEuler.x = unityEuler.z;       // UnityのZ (pitch) → MAVLinkのX (pitch)
+            mavlinkEuler.y = unityEuler.x;       // UnityのX (roll)  → MAVLinkのY (roll)
             mavlinkEuler.z = -unityEuler.y;      // UnityのY (yaw)   → MAVLinkのZ (negative yaw)
 
             // 3. MAVLinkのオイラー角をQuaternionに変換
             Quaternion mavlinkQuaternion = Quaternion.Euler(mavlinkEuler);
-#else
-            var mavlinkQuaternion = new Quaternion();
-            mavlinkQuaternion.x = unity_data.z;
-            mavlinkQuaternion.y = -unity_data.x;
-            mavlinkQuaternion.z = unity_data.y;
-            mavlinkQuaternion.w = -unity_data.w;
-#endif
-
             return mavlinkQuaternion;
+#else
+            //ROS
+            var rosQuaternion = new Quaternion();
+            rosQuaternion.x = unity_data.z;
+            rosQuaternion.y = -unity_data.x;
+            rosQuaternion.z = unity_data.y;
+            rosQuaternion.w = -unity_data.w;
+            return rosQuaternion;
+#endif
         }
-
-
-
-        // CalculateAltitude, CalculateLatitude, and CalculateLongitude functions remain the same as before
-
 
 
         private const int AVERAGE_COUNT = 2;

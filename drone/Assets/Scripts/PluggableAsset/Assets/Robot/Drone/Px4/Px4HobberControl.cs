@@ -74,12 +74,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         {
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
 
-#if true
-            float fl = controls[0];
-            float fr = controls[1];
-            float bl = controls[2];
+            float fr = controls[0];
+            float bl = controls[1];
+            float fl = controls[2];
             float br = controls[3];
 
+#if false
             float throttle = (keisu * ((fl + fr + bl + br)/4.0f)) + thrust_base;
 
             motor_parts_fr.AddForce(throttle);
@@ -93,35 +93,87 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             //unity x axis
             float pitch = (fl + fr) - (bl + br);
-            my_body.AddTorque(transform.forward * pitch * pitchForce);
+            my_body.AddTorque(transform.right * pitch * pitchForce);
 
             //z axis
             float roll = (fr + br) - (fl + bl);
-            my_body.AddTorque(transform.right * roll * rollForce);
+            my_body.AddTorque(transform.forward * roll * rollForce);
 #else
-            float roll = controls[0];
-            float pitch =  -controls[1];
-            float yaw = controls[2];
-            float throttle = (keisu * controls[2]) + thrust_base;
-
+            motor_parts_fr.DoUpdate(fr);
+            motor_parts_bl.DoUpdate(bl);
+            motor_parts_fl.DoUpdate(fl);
+            motor_parts_br.DoUpdate(br);
+#if true
+            this.DoThrustControl();
+#else
+            float throttle = thrust_base;
             motor_parts_fr.AddForce(throttle);
             motor_parts_fl.AddForce(throttle);
             motor_parts_br.AddForce(throttle);
             motor_parts_bl.AddForce(throttle);
-
-            roll = roll - 0.5f;
-            pitch = pitch - 0.5f;
-            yaw = yaw - 0.5f;
-            //y axis
-            //my_body.AddTorque(transform.up * yaw * yawForce);
-            //z axis
-            //my_body.AddTorque(transform.right * pitch * pitchForce);
-            //x axis
-            //my_body.AddTorque(transform.forward * roll * rollForce);
 #endif
-
-
+            this.DoTorqueControl();
+#endif
             DoSpeedControl();
+        }
+        private void DoThrustControl()
+        {
+            double thrust = 0f;
+            thrust += motor_parts_fr.getThrust();
+            thrust += motor_parts_fl.getThrust();
+            thrust += motor_parts_br.getThrust();
+            thrust += motor_parts_bl.getThrust();
+
+            float throttle = keisu * (float)thrust + thrust_base;
+            Debug.Log("thrust=" + thrust);
+            motor_parts_fr.AddForce(throttle);
+            motor_parts_fl.AddForce(throttle);
+            motor_parts_br.AddForce(throttle);
+            motor_parts_bl.AddForce(throttle);
+        }
+        private void DoTorqueControl()
+        {
+            Vector3 torque = Vector3.zero;
+            Vector3 t = Vector3.zero;
+            Vector3 m = Vector3.zero;
+            //Debug.Log("fl pos=" + motor_parts_fl.GetPosition());
+            //Debug.Log("fr pos=" + motor_parts_fr.GetPosition());
+            //Debug.Log("bl pos=" + motor_parts_bl.GetPosition());
+            //Debug.Log("br pos=" + motor_parts_br.GetPosition());
+
+            t.y = (float)motor_parts_fl.getThrust();
+            m = Vector3.Cross(motor_parts_fl.GetPosition(), t);
+            m.y = (float)motor_parts_fl.getTorque();
+            torque += m;
+
+            t.y = (float)motor_parts_fr.getThrust();
+            m = Vector3.Cross(motor_parts_fr.GetPosition(), t);
+            m.y = (float)motor_parts_fr.getTorque();
+            torque += m;
+
+
+            t.y = (float)motor_parts_bl.getThrust();
+            m = Vector3.Cross(motor_parts_bl.GetPosition(), t);
+            m.y = (float)motor_parts_bl.getTorque();
+            torque += m;
+
+            t.y = (float)motor_parts_br.getThrust();
+            m = Vector3.Cross(motor_parts_br.GetPosition(), t);
+            m.y = (float)motor_parts_br.getTorque();
+            torque += m;
+
+            //yaw: unity y axis
+            //Debug.Log("yaw: " + torque.y);
+            my_body.AddTorque(transform.up * torque.y * yawForce);
+
+            //pitch unity x axis
+            //Debug.Log("pitch: " + torque.x);
+            my_body.AddTorque(transform.right * torque.x * pitchForce);
+
+            //roll z axis
+            //Debug.Log("roll: " + torque.z);
+            my_body.AddTorque(transform.forward * torque.z * rollForce);
+
         }
 
         public void Initialize(System.Object obj)

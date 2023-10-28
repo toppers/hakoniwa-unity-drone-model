@@ -55,6 +55,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             }
             this.count = 0;
         }
+        public float fr = 0;
+        public float fl = 0;
+        public float br = 0;
+        public float bl = 0;
+
         float input_value = 0;
 
         private void Update()
@@ -82,11 +87,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts.TestDriver
             }
             this.count = 0;
             float[] values = new float[16];
-            values[0] = input_value;
-            values[1] = input_value;
-            values[2] = input_value;
-            values[3] = input_value;
-            Debug.Log("input_value=" + input_value);
+            values[0] = fr;
+            values[1] = bl;
+            values[2] = fl;
+            values[3] = br;
+            //Debug.Log("input_value=" + input_value);
             this.pdu_reader.GetWriteOps().SetData("controls", values);
         }
         public RoboPartsConfigData[] GetRoboPartsConfig()

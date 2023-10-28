@@ -80,6 +80,54 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         {
             return null;
         }
+
+
+        private double tau = 20.0;
+        public double fullThrust = 1.0;
+        public double fullTorque = 1.0;
+        private double w = 0.0;
+        private long lastTime = -1;
+        private long currentTime = 0;
+        private double control = 0.0f;
+        public void DoUpdate(double ctrl)
+        {
+            this.setControl(ctrl);
+            currentTime += 1000; //usec
+            if (lastTime >= 0)
+            {
+                double dt = (currentTime - lastTime) / 1000.0;
+                w += (control - w) * (1.0 - Math.Exp(-dt / tau));
+            }
+            lastTime = currentTime;
+        }
+        private void setControl(double ctrl)
+        {
+            this.control = ctrl;
+        }
+        public double getThrust()
+        {
+            return w * fullThrust;
+        }
+        public double getTorque()
+        {
+            if (cw)
+            {
+                return control * fullTorque;
+            }
+            else
+            {
+                return -control * fullTorque;
+            }
+        }
+        public Vector3 location = new Vector3();
+        public Vector3 GetPosition()
+        {
+            return new Vector3(
+                location.x,
+                location.y,
+                location.z
+                );
+        }
     }
 
 }
