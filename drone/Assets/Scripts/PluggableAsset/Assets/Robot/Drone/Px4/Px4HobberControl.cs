@@ -70,8 +70,18 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public float pitchForce = 0.1f;
         public float rollForce = 0.1f;
         public float thrust_base = 1.0f;
+        private long worldtime_msec = 0;
+        private int count = 0;
         public void DoControl()
         {
+            this.count++;
+            this.worldtime_msec++;
+            if (this.count < this.update_cycle)
+            {
+                return;
+            }
+            this.count = 0;
+
             float[] controls = this.pdu_reader.GetReadOps().GetDataFloat32Array("controls");
 
             float fr = controls[0];
@@ -99,10 +109,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             float roll = (fr + br) - (fl + bl);
             my_body.AddTorque(transform.forward * roll * rollForce);
 #else
-            motor_parts_fr.DoUpdate(fr);
-            motor_parts_bl.DoUpdate(bl);
-            motor_parts_fl.DoUpdate(fl);
-            motor_parts_br.DoUpdate(br);
+            motor_parts_fr.DoUpdate(fr, worldtime_msec);
+            motor_parts_bl.DoUpdate(bl, worldtime_msec);
+            motor_parts_fl.DoUpdate(fl, worldtime_msec);
+            motor_parts_br.DoUpdate(br, worldtime_msec);
 #if true
             this.DoThrustControl();
 #else

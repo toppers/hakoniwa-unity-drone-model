@@ -235,7 +235,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private Quaternion ConvertUnity2Mavlink(Quaternion unity_data)
         {
-#if false //mavlink
+#if true //mavlink
             // 1. UnityのQuaternionをオイラー角に変換
             Vector3 unityEuler = unity_data.eulerAngles;
 
