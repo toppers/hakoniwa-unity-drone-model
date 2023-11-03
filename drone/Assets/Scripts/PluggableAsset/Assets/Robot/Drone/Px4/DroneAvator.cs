@@ -82,12 +82,13 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 (float)this.pdu_reader_pos.GetReadOps().Ref("linear").GetDataFloat64("z")
              );
             Vector3 ros_angle = new Vector3(
-                (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("x"),
-                (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("y"),
-                (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("z")
+                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("x"),
+                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("y"),
+                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("z")
              );
             this.transform.position = this.ConvertRos2Unity(ros_pos);
-            this.transform.eulerAngles = this.ConvertRos2Unity(ros_angle);
+            //this.transform.eulerAngles = this.ConvertRos2Unity(ros_angle);
+            this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
         }
 
         public void Initialize(System.Object obj)
