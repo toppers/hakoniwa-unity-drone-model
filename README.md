@@ -72,10 +72,30 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 
 # シミュレーション環境の準備
 
-下図のように、Unity のシーンをダブルクリックします。
+下図のように、Unity のシーン（`Assets/Scenes/Hakoniwa`）をダブルクリックします。
 
-![スクリーンショット 2023-08-28 7 58 37](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/d60d2bb2-ee77-441c-aed8-a07a0ada17f4)
+![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/6f27b52b-7f23-4b01-9290-9b0f40cf5e18)
 
+
+## Windows の場合
+
+ヒエラルキービューの`Hakoniwa/Hakoniwa/Robot/DroneAvator`をダブルクリックしてください。
+
+![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/96ee3066-316f-42f6-adcc-bb4b283f02eb)
+
+
+`DroneAvator` のインスペクタビューを開き、`Io_method`と`Comm_method`を編集します。
+デフォルトでは、それぞれ `SHM`、`DIRECT`となっています。
+
+![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/1ef92055-667f-4660-8042-c57e8b78d2aa)
+
+これを以下のように変更してください。
+
+![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/730c83b9-be88-4197-9f53-602fc7f40275)
+
+それぞれ `RPC`、`UDP`とします。
+
+## コンフィグファイルを出力
 
 そして、`Window` -> `Hakoniwa` -> `Generate` をクリックします。
 
@@ -85,3 +105,92 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 成功すると、コンソール上にエラーログ出力がなく、下図のように json のログが出力されています。
 
 ![スクリーンショット 2023-08-28 8 00 16](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/6fa55a56-1693-4728-b0ef-091e10fb4b22)
+
+Windowsの場合、本オペレーションは、マシン再起動時に必ず再実行してください。
+
+## コンフィグファイル
+
+生成されたコンフィグファイルですが、`hakoniwa-unity-drone-model\plugin\plugin-srcs` 直下に生成されます。
+
+* [core_config.json](https://github.com/toppers/hakoniwa-document/blob/main/architecture/assets/README-unity.md#%E7%AE%B1%E5%BA%AD%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%85%A5%E5%8A%9Bcore_configjson)
+* custom.json
+
+custom.jsonの出力は以下の通りとなります。
+
+### Macの場合
+
+```json
+{
+  "robots": [
+    {
+      "name": "DroneAvator",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [
+        {
+          "type": "hako_mavlink_msgs/HakoHilActuatorControls",
+          "org_name": "drone_motor",
+          "name": "DroneAvator_drone_motor",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "channel_id": 0,
+          "pdu_size": 88,
+          "write_cycle": 1,
+          "method_type": "DIRECT"
+        },
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "drone_pos",
+          "name": "DroneAvator_drone_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "channel_id": 1,
+          "pdu_size": 48,
+          "write_cycle": 1,
+          "method_type": "DIRECT"
+        }
+      ],
+      "shm_pdu_writers": []
+    }
+  ]
+}
+```
+
+### Windowsの場合
+
+```json
+{
+  "robots": [
+    {
+      "name": "DroneAvator",
+      "rpc_pdu_readers": [
+        {
+          "type": "hako_mavlink_msgs/HakoHilActuatorControls",
+          "org_name": "drone_motor",
+          "name": "DroneAvator_drone_motor",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "channel_id": 0,
+          "pdu_size": 88,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        },
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "drone_pos",
+          "name": "DroneAvator_drone_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "channel_id": 1,
+          "pdu_size": 48,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        }
+      ],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": []
+    }
+  ]
+}
+```
