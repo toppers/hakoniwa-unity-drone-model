@@ -15,15 +15,15 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private IPduReader pdu_reader_actuator;
         private IPduReader pdu_reader_pos;
 
-        public GameObject motor_fl;
-        public GameObject motor_fr;
-        public GameObject motor_bl;
-        public GameObject motor_br;
+        public GameObject motor_0;
+        public GameObject motor_1;
+        public GameObject motor_2;
+        public GameObject motor_3;
 
-        private DroneRotor motor_parts_fl;
-        private DroneRotor motor_parts_fr;
-        private DroneRotor motor_parts_bl;
-        private DroneRotor motor_parts_br;
+        private DroneRotor motor_parts_0;
+        private DroneRotor motor_parts_1;
+        private DroneRotor motor_parts_2;
+        private DroneRotor motor_parts_3;
 
         public string[] topic_type = {
                 "hako_mavlink_msgs/HakoHilActuatorControls",
@@ -67,14 +67,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         {
             float[] controls = this.pdu_reader_actuator.GetReadOps().GetDataFloat32Array("controls");
 
-            float fr = controls[0];
-            float bl = controls[1];
-            float fl = controls[2];
-            float br = controls[3];
-            motor_parts_fr.AddForce(fr);
-            motor_parts_fl.AddForce(fl);
-            motor_parts_br.AddForce(br);
-            motor_parts_bl.AddForce(bl);
+            motor_parts_0.AddForce(controls[0]);
+            motor_parts_1.AddForce(controls[1]);
+            motor_parts_2.AddForce(controls[2]);
+            motor_parts_3.AddForce(controls[3]);
 
             Vector3 ros_pos = new Vector3(
                 (float)this.pdu_reader_pos.GetReadOps().Ref("linear").GetDataFloat64("x"),
@@ -82,10 +78,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 (float)this.pdu_reader_pos.GetReadOps().Ref("linear").GetDataFloat64("z")
              );
             Vector3 ros_angle = new Vector3(
-                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("x"),
-                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("y"),
-                -(float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("z")
+                -(180 / MathF.PI) * (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("x"),
+                -(180 / MathF.PI) * (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("y"),
+                -(180 / MathF.PI) * (float)this.pdu_reader_pos.GetReadOps().Ref("angular").GetDataFloat64("z")
              );
+            //Debug.Log("angle: " + ros_angle);
             this.transform.position = this.ConvertRos2Unity(ros_pos);
             //this.transform.eulerAngles = this.ConvertRos2Unity(ros_angle);
             this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
@@ -125,15 +122,15 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 {
                     throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
                 }
-                motor_parts_fr = motor_fr.GetComponent<DroneRotor>();
-                motor_parts_fl = motor_fl.GetComponent<DroneRotor>();
-                motor_parts_br = motor_br.GetComponent<DroneRotor>();
-                motor_parts_bl = motor_bl.GetComponent<DroneRotor>();
+                motor_parts_0 = motor_0.GetComponent<DroneRotor>();
+                motor_parts_1 = motor_1.GetComponent<DroneRotor>();
+                motor_parts_2 = motor_2.GetComponent<DroneRotor>();
+                motor_parts_3 = motor_3.GetComponent<DroneRotor>();
             }
-            motor_parts_fr.Initialize(motor_fr);
-            motor_parts_fl.Initialize(motor_fl);
-            motor_parts_br.Initialize(motor_br);
-            motor_parts_bl.Initialize(motor_bl);
+            motor_parts_0.Initialize(motor_0);
+            motor_parts_1.Initialize(motor_1);
+            motor_parts_2.Initialize(motor_2);
+            motor_parts_3.Initialize(motor_3);
         }
 
         public RosTopicMessageConfig[] getRosConfig()
