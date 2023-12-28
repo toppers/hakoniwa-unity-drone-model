@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cw: 0
-  rotation_keisu: 40
+  rotation_keisu: 8000
 --- !u!1 &1764393686267788292
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cw: 0
-  rotation_keisu: 40
+  rotation_keisu: 8000
 --- !u!1 &2175286399003429006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cw: 1
-  rotation_keisu: 40
+  rotation_keisu: 8000
 --- !u!1 &8460752185265836755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cw: 1
-  rotation_keisu: 40
+  rotation_keisu: 8000
 --- !u!1 &8472576186265616765
 GameObject:
   m_ObjectHideFlags: 0
