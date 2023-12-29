@@ -9,8 +9,61 @@
 
 - [x] Windows 10/11
 
+# 利用手順
+Unity向け箱庭ドローンモデルは、以下の２つの利用形態があります。
 
-# 前提とする環境
+1. Unityアプリを利用する場合
+2. Unityエディタを利用する場合
+
+1 については、ビルド済みのアプリケーションを利用しますので、セットアップの手間は発生しません。
+2 については、Unityエディタを利用しますので、セットアップの手間が発生します。
+
+## Unityアプリを利用する場合
+
+### Unityアプリを利用する場合の必要な環境
+
+Unity関連の環境は特に必要ありません。
+
+### Unityアプリを利用する場合のインストール方法
+
+本リポジトリを以下のようにクローンします。
+
+```
+git clone --recursive https://github.com/toppers/hakoniwa-unity-drone-model.git
+```
+
+クローンが終わったら、以下のようにディレクトリ移動します。
+
+```
+cd hakoniwa-unity-drone-model/
+```
+
+以下のサイトから、ご利用環境に応じたアプリケーションをダウンロードしてください。
+
+https://github.com/toppers/hakoniwa-unity-drone-model/releases
+
+ダウンロードしたzipファイルを `hakoniwa-unity-drone-model` の下で解凍してください。
+
+以下のディレクトリ構成になります。
+
+```
+hakoniwa-unity-drone-model/DroneApp<OS名>
+```
+
+### Unityアプリの起動方法
+
+`hakoniwa-unity-drone-model` 直下でコマンドを実行してください。
+
+```
+bash bash ./plugin/activate_app.bash DroneApp<OS名>
+```
+
+成功するとUnityアプリケーションが起動します。
+
+
+## Unityエディタを利用する場合
+
+### Unityエディタを利用する場合に必要な環境
 
 - Homebrew(Mac版のみ)
 - Unity Hub
@@ -18,7 +71,7 @@
   - 2022.3.5f1 以降
 - Python 3.10（pyenvでインストールされたものMac版のみ。）
 
-# インストール方法
+### Unityエディタを利用する場合のインストール方法
 
 本リポジトリを以下のようにクローンします。
 
@@ -39,7 +92,7 @@ bash install.bash
 ```
 
 
-# Unity起動
+### Unity起動
 
 この状態で Unity Hub で当該プロジェクトを開きましょう。
 
@@ -70,14 +123,14 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 * [gRPC のライブラリ利用箇所がエラー出力している](https://github.com/toppers/hakoniwa-document/blob/main/troubleshooting/unity/README.md#grpc-%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E5%88%A9%E7%94%A8%E7%AE%87%E6%89%80%E3%81%8C%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%BA%E5%8A%9B%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B)(Mac版のみ)
 
 
-# シミュレーション環境の準備
+### シミュレーション環境の準備
 
 下図のように、Unity のシーン（`Assets/Scenes/Hakoniwa`）をダブルクリックします。
 
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/6f27b52b-7f23-4b01-9290-9b0f40cf5e18)
 
 
-## Windows の場合
+#### Windows の場合
 
 ヒエラルキービューの`Hakoniwa/Hakoniwa/Robot/DroneAvator`をダブルクリックしてください。
 
@@ -95,7 +148,7 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 
 それぞれ `RPC`、`UDP`とします。
 
-## コンフィグファイルを出力
+#### コンフィグファイルを出力
 
 そして、`Window` -> `Hakoniwa` -> `Generate` をクリックします。
 
@@ -108,7 +161,7 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 
 Windowsの場合、本オペレーションは、マシン再起動時に必ず再実行してください。
 
-## コンフィグファイル
+#### コンフィグファイル
 
 生成されたコンフィグファイルですが、`hakoniwa-unity-drone-model\plugin\plugin-srcs` 直下に生成されます。
 
@@ -117,7 +170,7 @@ Windowsの場合、本オペレーションは、マシン再起動時に必ず�
 
 custom.jsonの出力は以下の通りとなります。
 
-### Macの場合
+##### Macの場合
 
 ```json
 {
@@ -156,7 +209,7 @@ custom.jsonの出力は以下の通りとなります。
 }
 ```
 
-### Windowsの場合
+##### Windowsの場合
 
 ```json
 {
