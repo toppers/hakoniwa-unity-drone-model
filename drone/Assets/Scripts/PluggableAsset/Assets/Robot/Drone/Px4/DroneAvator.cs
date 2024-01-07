@@ -23,16 +23,17 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         public double normal_x = 1.0;//m
         public double normal_z = 1.0;//m
-        public double normal_y = 0.1;//m
+        public double normal_y = 1.0;//m
 
-        public double scale_x = 2.5;//m
-        public double scale_y = 0.4;//m
-        public double scale_z = 2.5;//m
+        public double scale_x = 0.2;//m
+        public double scale_y = 0.2;//m
+        public double scale_z = 0.2;//m
 
 
         private Vector3 NormalizedCollisionPosition(Vector3 real_pos, Vector3 current_pos)
         {
             Vector3  pos = real_pos - current_pos;
+            Debug.Log("Unity: relative Pos: " + pos);
 
             float normalizedX = (float)((pos.x / scale_x) * normal_x);
             float normalizedY = (float)((pos.y / scale_y) * normal_y);
@@ -99,12 +100,10 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             return configs;
         }
-        // ??????????????
         private Collision lastCollision = null;
         private bool hasCollision = false;
         void OnCollisionEnter(Collision collision)
         {
-            // ???????
             this.lastCollision = collision;
             this.hasCollision = true;
             //Debug.Log("# Enter Collision");
@@ -114,37 +113,33 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.pdu_writer_collision.GetWriteOps().SetData("collision", hasCollision);
             if (hasCollision)
             {
-                // ???????????10????
                 uint contactNum = (uint)Mathf.Min(lastCollision.contactCount, 10);
                 this.pdu_writer_collision.GetWriteOps().SetData("contact_num", contactNum);
 
-                // ???????
                 Vector3 relVelocity = ConvertUnity2Ros(lastCollision.relativeVelocity);
                 this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("x", (double)relVelocity.x);
                 this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("y", (double)relVelocity.y);
                 this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("z", (double)relVelocity.z);
 
-                // ??????????
-                //Debug.Log("# Number of contact points: " + contactNum);
-                //Debug.Log("# Relative Velocity: " + relVelocity);
+                Debug.Log("# Number of contact points: " + contactNum);
+                Debug.Log("# Relative Velocity: " + relVelocity);
                 for (int i = 0; i < contactNum; i++)
                 {
                     Vector3 pos = ConvertUnity2Ros(NormalizedCollisionPosition(lastCollision.contacts[i].point, this.transform.position));
-                    //Debug.Log(string.Format("Contact point {0}: Position - {1}", i, pos));
+                    Debug.Log(string.Format("Unity: Contact point {0}: Position - {1}", i, lastCollision.contacts[i].point));
+                    Debug.Log(string.Format("ROS  : Contact point {0}: Position - {1}", i, pos));
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("x", (double)pos.x);
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("y", (double)pos.y);
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("z", (double)pos.z);
                 }
 
-                // ????????????????
-                double restitutionCoefficient = 0.2; // ???
+                double restitutionCoefficient = 0.2;
                 this.pdu_writer_collision.GetWriteOps().SetData("restitution_coefficient", restitutionCoefficient);
             }
             else
             {
                 //nothing to do
             }
-            // ?????????
             hasCollision = false;
             lastCollision = null;
         }

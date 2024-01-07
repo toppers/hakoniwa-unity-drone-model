@@ -1418,10 +1418,10 @@ GameObject:
   - component: {fileID: 1772225226999175192}
   - component: {fileID: 8520594037235788296}
   - component: {fileID: 6425102788212968084}
-  - component: {fileID: 3974304095853247490}
   - component: {fileID: 4284650724176319537}
   - component: {fileID: 8795065122706779150}
   - component: {fileID: 8482573806525506229}
+  - component: {fileID: 1137108477273928277}
   m_Layer: 0
   m_Name: DroneAvator
   m_TagString: HakoAssetRoot
@@ -1496,27 +1496,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3974304095853247490
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5683160069714108139}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.5, y: 4, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4284650724176319537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1537,12 @@ MonoBehaviour:
   motor_1: {fileID: 1525688753489362479}
   motor_2: {fileID: 8295383686617433545}
   motor_3: {fileID: 8460752185265836755}
+  normal_x: 1
+  normal_z: 1
+  normal_y: 1
+  scale_x: 0.2
+  scale_y: 0.2
+  scale_z: 0.2
   topic_type:
   - hako_mavlink_msgs/HakoHilActuatorControls
   - geometry_msgs/Twist
@@ -1569,6 +1554,27 @@ MonoBehaviour:
   update_cycle: 1
   io_method: 0
   comm_method: 2
+--- !u!135 &1137108477273928277
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683160069714108139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6135670329526552405
 GameObject:
   m_ObjectHideFlags: 0
