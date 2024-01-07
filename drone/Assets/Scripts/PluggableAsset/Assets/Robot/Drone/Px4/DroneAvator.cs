@@ -21,6 +21,27 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public GameObject motor_2;
         public GameObject motor_3;
 
+        public double normal_x = 1.0;//m
+        public double normal_z = 1.0;//m
+        public double normal_y = 0.1;//m
+
+        public double scale_x = 2.5;//m
+        public double scale_y = 0.4;//m
+        public double scale_z = 2.5;//m
+
+
+        private Vector3 NormalizedCollisionPosition(Vector3 real_pos, Vector3 current_pos)
+        {
+            Vector3  pos = real_pos - current_pos;
+
+            float normalizedX = (float)((pos.x / scale_x) * normal_x);
+            float normalizedY = (float)((pos.y / scale_y) * normal_y);
+            float normalizedZ = (float)((pos.z / scale_z) * normal_z);
+
+            return new Vector3(normalizedX, normalizedY, normalizedZ);
+        }
+
+
         private DroneRotor motor_parts_0;
         private DroneRotor motor_parts_1;
         private DroneRotor motor_parts_2;
@@ -108,7 +129,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 //Debug.Log("# Relative Velocity: " + relVelocity);
                 for (int i = 0; i < contactNum; i++)
                 {
-                    Vector3 pos = ConvertUnity2Ros(lastCollision.contacts[i].point);
+                    Vector3 pos = ConvertUnity2Ros(NormalizedCollisionPosition(lastCollision.contacts[i].point, this.transform.position));
                     //Debug.Log(string.Format("Contact point {0}: Position - {1}", i, pos));
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("x", (double)pos.x);
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("y", (double)pos.y);
