@@ -429,7 +429,6 @@ GameObject:
   - component: {fileID: 758977624414971184}
   - component: {fileID: 4056648101557940500}
   - component: {fileID: 6426412751710276265}
-  - component: {fileID: 427957765106499562}
   - component: {fileID: 5235315056397149937}
   m_Layer: 0
   m_Name: motor_1
@@ -505,27 +504,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &427957765106499562
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525688753489362479}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5235315056397149937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +612,6 @@ GameObject:
   - component: {fileID: 8234110912760956736}
   - component: {fileID: 7664844060921469192}
   - component: {fileID: 7809755228322491147}
-  - component: {fileID: 851919999616896018}
   - component: {fileID: 4083776982599395498}
   m_Layer: 0
   m_Name: motor_0
@@ -710,27 +687,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &851919999616896018
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033761392301686469}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4083776982599395498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,7 +879,6 @@ GameObject:
   - component: {fileID: 8358874421651300462}
   - component: {fileID: 7296561427177236076}
   - component: {fileID: 9023348135590255627}
-  - component: {fileID: 2559896786889409162}
   m_Layer: 0
   m_Name: motor-34
   m_TagString: Untagged
@@ -996,27 +951,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2559896786889409162
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3639169142664622400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3736416052865560657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +962,6 @@ GameObject:
   - component: {fileID: 4304705219373944479}
   - component: {fileID: 1685441713126019595}
   - component: {fileID: 4069552427720322297}
-  - component: {fileID: 3013186328313213691}
   m_Layer: 0
   m_Name: motor-12
   m_TagString: Untagged
@@ -1101,27 +1034,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3013186328313213691
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3736416052865560657}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4038681885178142394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,7 +1515,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 1, z: 0.2}
+  m_Size: {x: 2.5, y: 4, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4284650724176319537
 MonoBehaviour:
@@ -1649,9 +1561,11 @@ MonoBehaviour:
   topic_type:
   - hako_mavlink_msgs/HakoHilActuatorControls
   - geometry_msgs/Twist
+  - hako_msgs/Collision
   topic_name:
   - drone_motor
   - drone_pos
+  - drone_collision
   update_cycle: 1
   io_method: 0
   comm_method: 2
@@ -1916,7 +1830,6 @@ GameObject:
   - component: {fileID: 7726920604907788565}
   - component: {fileID: 7801397237823121528}
   - component: {fileID: 9182577294983203820}
-  - component: {fileID: 3677288982500331049}
   - component: {fileID: 3855087023928880526}
   m_Layer: 0
   m_Name: motor_2
@@ -1992,27 +1905,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3677288982500331049
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8295383686617433545}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3855087023928880526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2038,7 +1930,6 @@ GameObject:
   - component: {fileID: 4068635622925448950}
   - component: {fileID: 4663516214294873671}
   - component: {fileID: 5781809955650100850}
-  - component: {fileID: 8427530102708488477}
   - component: {fileID: 121644014995460124}
   m_Layer: 0
   m_Name: motor_3
@@ -2114,27 +2005,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8427530102708488477
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8460752185265836755}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &121644014995460124
 MonoBehaviour:
   m_ObjectHideFlags: 0

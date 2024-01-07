@@ -14,6 +14,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private PduIoConnector pdu_io;
         private IPduReader pdu_reader_actuator;
         private IPduReader pdu_reader_pos;
+        private IPduWriter pdu_writer_collision;
 
         public GameObject motor_0;
         public GameObject motor_1;
@@ -27,18 +28,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         public string[] topic_type = {
                 "hako_mavlink_msgs/HakoHilActuatorControls",
-                "geometry_msgs/Twist"
+                "geometry_msgs/Twist",
+                "hako_msgs/Collision"
         };
         public string[] topic_name = {
             "drone_motor",
-            "drone_pos"
+            "drone_pos",
+            "drone_collision"
         };
         public int update_cycle = 1;
         public IoMethod io_method = IoMethod.SHM;
         public CommMethod comm_method = CommMethod.DIRECT;
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
-            RoboPartsConfigData[] configs = new RoboPartsConfigData[2];
+            RoboPartsConfigData[] configs = new RoboPartsConfigData[3];
             configs[0] = new RoboPartsConfigData();
             configs[0].io_dir = IoDir.READ;
             configs[0].io_method = this.io_method;
@@ -60,9 +63,70 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[1].value.pdu_size = ConstantValues.Twist_pdu_size;
             configs[1].value.write_cycle = this.update_cycle;
             configs[1].value.method_type = this.comm_method.ToString();
+
+
+            configs[2] = new RoboPartsConfigData();
+            configs[2].io_dir = IoDir.WRITE;
+            configs[2].io_method = this.io_method;
+            configs[2].value.org_name = this.topic_name[2];
+            configs[2].value.type = this.topic_type[2];
+            configs[2].value.class_name = ConstantValues.pdu_writer_class;
+            configs[2].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
+            configs[2].value.pdu_size = 280;
+            configs[2].value.write_cycle = this.update_cycle;
+            configs[2].value.method_type = this.comm_method.ToString();
+
             return configs;
         }
+        // ??????????????
+        private Collision lastCollision = null;
+        private bool hasCollision = false;
+        void OnCollisionEnter(Collision collision)
+        {
+            // ???????
+            this.lastCollision = collision;
+            this.hasCollision = true;
+            //Debug.Log("# Enter Collision");
+        }
+        private void WriteCollisionData()
+        {
+            this.pdu_writer_collision.GetWriteOps().SetData("collision", hasCollision);
+            if (hasCollision)
+            {
+                // ???????????10????
+                uint contactNum = (uint)Mathf.Min(lastCollision.contactCount, 10);
+                this.pdu_writer_collision.GetWriteOps().SetData("contact_num", contactNum);
 
+                // ???????
+                Vector3 relVelocity = ConvertUnity2Ros(lastCollision.relativeVelocity);
+                this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("x", (double)relVelocity.x);
+                this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("y", (double)relVelocity.y);
+                this.pdu_writer_collision.GetWriteOps().Ref("relative_velocity").SetData("z", (double)relVelocity.z);
+
+                // ??????????
+                //Debug.Log("# Number of contact points: " + contactNum);
+                //Debug.Log("# Relative Velocity: " + relVelocity);
+                for (int i = 0; i < contactNum; i++)
+                {
+                    Vector3 pos = ConvertUnity2Ros(lastCollision.contacts[i].point);
+                    //Debug.Log(string.Format("Contact point {0}: Position - {1}", i, pos));
+                    this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("x", (double)pos.x);
+                    this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("y", (double)pos.y);
+                    this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("z", (double)pos.z);
+                }
+
+                // ????????????????
+                double restitutionCoefficient = 0.2; // ???
+                this.pdu_writer_collision.GetWriteOps().SetData("restitution_coefficient", restitutionCoefficient);
+            }
+            else
+            {
+                //nothing to do
+            }
+            // ?????????
+            hasCollision = false;
+            lastCollision = null;
+        }
         public void DoControl()
         {
             float[] controls = this.pdu_reader_actuator.GetReadOps().GetDataFloat32Array("controls");
@@ -86,6 +150,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.transform.position = this.ConvertRos2Unity(ros_pos);
             //this.transform.eulerAngles = this.ConvertRos2Unity(ros_angle);
             this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
+
+            WriteCollisionData();
         }
 
         public void Initialize(System.Object obj)
@@ -122,6 +188,13 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 {
                     throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
                 }
+                var pdu_writer_name = root_name + "_" + this.topic_name[2] + "Pdu";
+                this.pdu_writer_collision = this.pdu_io.GetWriter(pdu_writer_name);
+                if (this.pdu_writer_collision == null)
+                {
+                    throw new ArgumentException("can not found pud_writer:" + pdu_writer_name);
+                }
+
                 motor_parts_0 = motor_0.GetComponent<DroneRotor>();
                 motor_parts_1 = motor_1.GetComponent<DroneRotor>();
                 motor_parts_2 = motor_2.GetComponent<DroneRotor>();
@@ -135,7 +208,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         public RosTopicMessageConfig[] getRosConfig()
         {
-            RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[2];
+            RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[3];
             cfg[0] = new RosTopicMessageConfig();
             cfg[0].topic_message_name = this.topic_name[0];
             cfg[0].topic_type_name = this.topic_type[0];
@@ -145,6 +218,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             cfg[1].topic_message_name = this.topic_name[1];
             cfg[1].topic_type_name = this.topic_type[1];
             cfg[1].sub = true;
+
+            cfg[2] = new RosTopicMessageConfig();
+            cfg[2].topic_message_name = this.topic_name[2];
+            cfg[2].topic_type_name = this.topic_type[2];
+            cfg[2].sub = false;
             return cfg;
         }
 
@@ -156,6 +234,15 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 ros_data.x  // unity.z
                 );
         }
+        private Vector3 ConvertUnity2Ros(Vector3 unity_data)
+        {
+            return new Vector3(
+                unity_data.z, // ros.x
+                -unity_data.x, // ros.y
+                unity_data.y  // ros.z
+                );
+        }
+
     }
 
 }
