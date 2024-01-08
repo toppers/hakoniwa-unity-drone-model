@@ -106,7 +106,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         {
             this.lastCollision = collision;
             this.hasCollision = true;
-            //Debug.Log("# Enter Collision");
+            Debug.Log("# Enter Collision");
         }
         private void WriteCollisionData()
         {
