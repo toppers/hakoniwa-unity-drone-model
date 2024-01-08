@@ -102,6 +102,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private Collision lastCollision = null;
         private bool hasCollision = false;
+        public double restitutionCoefficient = 1.0;
         void OnCollisionEnter(Collision collision)
         {
             this.lastCollision = collision;
@@ -133,7 +134,6 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                     this.pdu_writer_collision.GetWriteOps().Refs("contact_position")[i].SetData("z", (double)pos.z);
                 }
 
-                double restitutionCoefficient = 0.2;
                 this.pdu_writer_collision.GetWriteOps().SetData("restitution_coefficient", restitutionCoefficient);
             }
             else

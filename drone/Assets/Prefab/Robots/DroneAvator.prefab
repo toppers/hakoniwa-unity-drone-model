@@ -1421,7 +1421,10 @@ GameObject:
   - component: {fileID: 4284650724176319537}
   - component: {fileID: 8795065122706779150}
   - component: {fileID: 8482573806525506229}
-  - component: {fileID: 4685495550121628933}
+  - component: {fileID: 5607570222739802523}
+  - component: {fileID: 7240157043893874408}
+  - component: {fileID: 6340588179126631842}
+  - component: {fileID: 3526455875501364258}
   m_Layer: 0
   m_Name: DroneAvator
   m_TagString: HakoAssetRoot
@@ -1540,9 +1543,9 @@ MonoBehaviour:
   normal_x: 1
   normal_z: 1
   normal_y: 1
-  scale_x: 2.5
-  scale_y: 2.5
-  scale_z: 0.1
+  scale_x: 0.2
+  scale_y: 0.2
+  scale_z: 0.2
   topic_type:
   - hako_mavlink_msgs/HakoHilActuatorControls
   - geometry_msgs/Twist
@@ -1554,8 +1557,9 @@ MonoBehaviour:
   update_cycle: 1
   io_method: 0
   comm_method: 2
---- !u!65 &4685495550121628933
-BoxCollider:
+  restitutionCoefficient: 1
+--- !u!135 &5607570222739802523
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1573,8 +1577,71 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 1, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: -0.7, y: 0, z: 0.7}
+--- !u!135 &7240157043893874408
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683160069714108139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0.7, y: 0, z: 0.7}
+--- !u!135 &6340588179126631842
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683160069714108139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: -0.7, y: 0, z: -0.7}
+--- !u!135 &3526455875501364258
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683160069714108139}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0.7, y: 0, z: -0.7}
 --- !u!1 &6135670329526552405
 GameObject:
   m_ObjectHideFlags: 0
