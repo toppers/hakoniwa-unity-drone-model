@@ -672,6 +672,7 @@ GameObject:
   - component: {fileID: 1518490371}
   - component: {fileID: 1518490370}
   - component: {fileID: 1518490373}
+  - component: {fileID: 1518490374}
   m_Layer: 0
   m_Name: Obstacle1
   m_TagString: Untagged
@@ -792,6 +793,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!138 &1518490374
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518490368}
+  m_ConnectedBody: {fileID: 160207956}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!224 &1532889509 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3915667477579360350, guid: 59bee6b6420d9c045bc657037e4cbf32, type: 3}
