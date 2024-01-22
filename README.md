@@ -214,7 +214,7 @@ custom.jsonの出力は以下の通りとなります。
           "channel_id": 0,
           "pdu_size": 88,
           "write_cycle": 1,
-          "method_type": "DIRECT"
+          "method_type": "SHM"
         },
         {
           "type": "geometry_msgs/Twist",
@@ -225,10 +225,22 @@ custom.jsonの出力は以下の通りとなります。
           "channel_id": 1,
           "pdu_size": 48,
           "write_cycle": 1,
-          "method_type": "DIRECT"
+          "method_type": "SHM"
         }
       ],
-      "shm_pdu_writers": []
+      "shm_pdu_writers": [
+        {
+          "type": "hako_msgs/Collision",
+          "org_name": "drone_collision",
+          "name": "DroneAvator_drone_collision",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 2,
+          "pdu_size": 280,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ]
     }
   ]
 }
