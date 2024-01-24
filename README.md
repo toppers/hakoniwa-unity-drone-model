@@ -4,6 +4,7 @@
 
 # 目次
 
+- [ドローンモデル][#ドローンモデル]
 - [PX4との連携について](#px4との連携について)
 - [サポート環境](#サポート環境)
   - [Mac環境](#mac環境)
@@ -14,6 +15,16 @@
 - [コミュニティとサポート](#コミュニティとサポート)
 - [本リポジトリの内容とライセンスについて](#本リポジトリの内容とライセンスについて)
 - [貢献ガイドライン](#貢献ガイドライン)
+
+# ドローンモデル
+
+Unityで作られたドローンモデルは、箱庭オリジナルモデルであり、クアッドコプター型でのものです（下図）。
+
+(TODO) イメージ図
+
+Unity assets of the Hakoniwa Drone Model H1 are based on data provided by Mr. Hodaka Nakamura of Ida B. Wells-Barnett High School. We want to express our deepest gratitude for his awesome contribution :D
+
+箱庭ドローンモデルH1 のUnityアセットは,  中村歩高さんより提供いただいたデータを基に作成しています．箱庭へのOSS貢献に深く感謝いたします．
 
 
 # PX4との連携について

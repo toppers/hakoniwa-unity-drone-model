@@ -12,6 +12,10 @@ cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/* \
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
     drone/Assets/Prefab/Robots/
 
+#Model
+cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
+    drone/Assets/Model/Hakoniwa/Robots/Drone/
+
 
 #hakoniwa-base
 cp hakoniwa-base/workspace/dev/ai/sample_drone.py drone/hakoniwa-base/workspace/dev/ai/
