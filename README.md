@@ -289,7 +289,19 @@ custom.jsonの出力は以下の通りとなります。
           "method_type": "UDP"
         }
       ],
-      "rpc_pdu_writers": [],
+      "rpc_pdu_writers": [
+        {
+          "type": "hako_msgs/Collision",
+          "org_name": "drone_collision",
+          "name": "DroneAvator_drone_collision",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 2,
+          "pdu_size": 280,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        }
+      ],
       "shm_pdu_readers": [],
       "shm_pdu_writers": []
     }
