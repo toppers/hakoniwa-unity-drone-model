@@ -43,7 +43,8 @@ https://github.com/toppers/hakoniwa-px4sim
 
 ## Windows 環境
 
-- [x] Windows 10/11
+- [x] Windows 10/11　WSL2
+- [X] Windows 10/11(Unity Editorのみサポート)
 
 # 利用手順
 Unity向け箱庭ドローンモデルは、以下の２つの利用形態があります。
@@ -124,8 +125,16 @@ cd hakoniwa-unity-drone-model/
 
 そして、必要な Unity モジュール類をインストールします。
 
+MacOS　および WSL2　の場合：
+
 ```
 bash install.bash 
+```
+
+Winodws　の場合：
+
+```
+bash install.bash win
 ```
 
 
@@ -167,7 +176,7 @@ Unityのバージョン違いに起因するメッセージ（"Opening Project i
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/6f27b52b-7f23-4b01-9290-9b0f40cf5e18)
 
 
-#### Windows の場合
+#### WSL2 の場合
 
 ヒエラルキービューの`Hakoniwa/Hakoniwa/Robot/DroneAvator`をダブルクリックしてください。
 
@@ -207,7 +216,7 @@ Windowsの場合、本オペレーションは、マシン再起動時に必ず�
 
 custom.jsonの出力は以下の通りとなります。
 
-##### Macの場合
+##### MacおよびWindowsの場合
 
 ```json
 {
@@ -258,7 +267,7 @@ custom.jsonの出力は以下の通りとなります。
 }
 ```
 
-##### Windowsの場合
+##### WSL2の場合
 
 ```json
 {
