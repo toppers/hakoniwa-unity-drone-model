@@ -1,5 +1,7 @@
 #!/bin/bash
 
+OPT_WIN=$1
+
 OS_TYPE=`uname`
 if [ $OS_TYPE = "Darwin" ]
 then
@@ -16,7 +18,7 @@ cp -rp drone/hakoniwa-base/* hakoniwa-base/
 
 cd plugin
 
-bash install.bash
+bash -x install.bash ${OPT_WIN}
 
 cd ..
 cp -rp drone/ros_types/* plugin/plugin-srcs/ros_types/
