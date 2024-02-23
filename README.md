@@ -44,7 +44,7 @@ https://github.com/toppers/hakoniwa-px4sim
 ## Windows 環境
 
 - [x] Windows 10/11　WSL2
-- [X] Windows 10/11(Unity Editorのみサポート)
+- [X] Windows 10/11
 
 # 利用手順
 Unity向け箱庭ドローンモデルは、以下の２つの利用形態があります。
@@ -95,6 +95,8 @@ hakoniwa-unity-drone-model/DroneApp<OS名>
 ```
 bash bash ./plugin/activate_app.bash DroneApp<OS名>
 ```
+
+Windows ネイティブアプリの場合は、`DroneWinNative/model.exe` をダブルクリックします。
 
 成功するとUnityアプリケーションが起動します。
 
