@@ -1,3 +1,4 @@
+using Hakoniwa.PluggableAsset.Assets.Environment;
 using Hakoniwa.PluggableAsset.Communication.Connector;
 using Hakoniwa.PluggableAsset.Communication.Pdu;
 using System;
@@ -7,14 +8,16 @@ using UnityEngine;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
-    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig
+    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty
     {
         private GameObject root;
+        private TemperatureColorExpression colorExpression;
         private string root_name;
         private PduIoConnector pdu_io;
         private IPduReader pdu_reader_actuator;
         private IPduReader pdu_reader_pos;
         private IPduWriter pdu_writer_collision;
+        private IPduWriter pdu_writer_disturb;
 
         public GameObject motor_0;
         public GameObject motor_1;
@@ -29,19 +32,23 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public string[] topic_type = {
                 "hako_mavlink_msgs/HakoHilActuatorControls",
                 "geometry_msgs/Twist",
-                "hako_msgs/Collision"
+                "hako_msgs/Collision",
+                "hako_msgs/ManualPosAttControl",
+                "hako_msgs/Disturbance"
         };
         public string[] topic_name = {
             "drone_motor",
             "drone_pos",
-            "drone_collision"
+            "drone_collision",
+            "drone_manual_pos_att_control",
+            "drone_disturbance"
         };
         public int update_cycle = 1;
         public IoMethod io_method = IoMethod.SHM;
         public CommMethod comm_method = CommMethod.DIRECT;
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
-            RoboPartsConfigData[] configs = new RoboPartsConfigData[3];
+            RoboPartsConfigData[] configs = new RoboPartsConfigData[5];
             configs[0] = new RoboPartsConfigData();
             configs[0].io_dir = IoDir.READ;
             configs[0].io_method = this.io_method;
@@ -75,6 +82,29 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[2].value.pdu_size = 280;
             configs[2].value.write_cycle = this.update_cycle;
             configs[2].value.method_type = this.comm_method.ToString();
+
+            configs[3] = new RoboPartsConfigData();
+            configs[3].io_dir = IoDir.READ;
+            configs[3].io_method = this.io_method;
+            configs[3].value.org_name = this.topic_name[3];
+            configs[3].value.type = this.topic_type[3];
+            configs[3].value.class_name = ConstantValues.pdu_writer_class;
+            configs[3].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
+            configs[3].value.pdu_size = 56;
+            configs[3].value.write_cycle = this.update_cycle;
+            configs[3].value.method_type = this.comm_method.ToString();
+
+            configs[4] = new RoboPartsConfigData();
+            configs[4].io_dir = IoDir.WRITE;
+            configs[4].io_method = this.io_method;
+            configs[4].value.org_name = this.topic_name[4];
+            configs[4].value.type = this.topic_type[4];
+            configs[4].value.class_name = ConstantValues.pdu_writer_class;
+            configs[4].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
+            configs[4].value.pdu_size = 8;
+            configs[4].value.write_cycle = this.update_cycle;
+            configs[4].value.method_type = this.comm_method.ToString();
+
 
             return configs;
         }
@@ -121,6 +151,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             hasCollision = false;
             lastCollision = null;
         }
+        private void WriteDisturbanceData()
+        {
+            this.pdu_writer_disturb.GetWriteOps().Ref("d_temp").SetData("value", (double)this.current_temperature);
+        }
+
         public void DoControl()
         {
             float[] controls = this.pdu_reader_actuator.GetReadOps().GetDataFloat32Array("controls");
@@ -146,7 +181,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
 
             WriteCollisionData();
+            WriteDisturbanceData();
+
+            this.colorExpression.SetTemperature(this.current_temperature);
         }
+
 
         public void Initialize(System.Object obj)
         {
@@ -170,6 +209,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 {
                     throw new ArgumentException("can not found pdu_io:" + root_name);
                 }
+                this.colorExpression = GetComponentInChildren<TemperatureColorExpression>();
+                if (this.colorExpression == null)
+                {
+                    throw new ArgumentException("can not found color expression object on " + root_name);
+                }
                 var pdu_reader_name = root_name + "_" + this.topic_name[0] + "Pdu";
                 this.pdu_reader_actuator = this.pdu_io.GetReader(pdu_reader_name);
                 if (this.pdu_reader_actuator == null)
@@ -189,6 +233,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                     throw new ArgumentException("can not found pud_writer:" + pdu_writer_name);
                 }
 
+                pdu_writer_name = root_name + "_" + this.topic_name[4] + "Pdu";
+                this.pdu_writer_disturb = this.pdu_io.GetWriter(pdu_writer_name);
+                if (this.pdu_writer_disturb == null)
+                {
+                    throw new ArgumentException("can not found pud_writer:" + pdu_writer_name);
+                }
                 motor_parts_0 = motor_0.GetComponent<DroneRotor>();
                 motor_parts_1 = motor_1.GetComponent<DroneRotor>();
                 motor_parts_2 = motor_2.GetComponent<DroneRotor>();
@@ -202,7 +252,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         public RosTopicMessageConfig[] getRosConfig()
         {
-            RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[3];
+            RosTopicMessageConfig[] cfg = new RosTopicMessageConfig[5];
             cfg[0] = new RosTopicMessageConfig();
             cfg[0].topic_message_name = this.topic_name[0];
             cfg[0].topic_type_name = this.topic_type[0];
@@ -217,6 +267,17 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             cfg[2].topic_message_name = this.topic_name[2];
             cfg[2].topic_type_name = this.topic_type[2];
             cfg[2].sub = false;
+
+            cfg[3] = new RosTopicMessageConfig();
+            cfg[3].topic_message_name = this.topic_name[3];
+            cfg[3].topic_type_name = this.topic_type[3];
+            cfg[3].sub = true;
+
+            cfg[4] = new RosTopicMessageConfig();
+            cfg[4].topic_message_name = this.topic_name[4];
+            cfg[4].topic_type_name = this.topic_type[4];
+            cfg[4].sub = false;
+
             return cfg;
         }
 
@@ -237,6 +298,16 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 );
         }
 
+        public double current_temperature;
+        public double GetTemperature()
+        {
+            return current_temperature;
+        }
+
+        public void SetTemperature(double temperature)
+        {
+            this.current_temperature = temperature;
+        }
     }
 
 }

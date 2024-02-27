@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 4817356575376772833}
   - component: {fileID: 9103642267980777454}
   - component: {fileID: 4152429642350271022}
+  - component: {fileID: 2624371463231971607}
   m_Layer: 0
   m_Name: DroneAvator
   m_TagString: HakoAssetRoot
@@ -250,14 +251,19 @@ MonoBehaviour:
   - hako_mavlink_msgs/HakoHilActuatorControls
   - geometry_msgs/Twist
   - hako_msgs/Collision
+  - hako_msgs/ManualPosAttControl
+  - hako_msgs/Disturbance
   topic_name:
   - drone_motor
   - drone_pos
   - drone_collision
+  - drone_manual_pos_att_control
+  - drone_disturbance
   update_cycle: 1
   io_method: 0
   comm_method: 2
   restitutionCoefficient: 1
+  current_temperature: 0
 --- !u!135 &713104545067035580
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -342,6 +348,23 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: -0.7, y: 0.3, z: -0.7}
+--- !u!114 &2624371463231971607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306133821981097404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f7e9956a49248ffa8b7347cdf3a40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTemp: -60
+  maxTemp: 100
+  currentTemp: 20
+  renderer:
+  - {fileID: 2323877861357213986}
 --- !u!1 &496130662469990583
 GameObject:
   m_ObjectHideFlags: 0
