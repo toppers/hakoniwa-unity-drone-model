@@ -363,6 +363,7 @@ MonoBehaviour:
   minTemp: -60
   maxTemp: 100
   currentTemp: 20
+  alpha: 1
   renderer:
   - {fileID: 2323877861357213986}
 --- !u!1 &496130662469990583

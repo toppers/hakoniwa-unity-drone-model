@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Hakoniwa.PluggableAsset.Assets.Environment
 {
     public class EnvTemperatureRegion : MonoBehaviour, IEnvironmentObject
     {
         private List<IRobotProperty> robot_properties = new List<IRobotProperty>();
-
+        private TemperatureColorExpression colorExpression;
         public double regionTemperature = 25.0;
         public double Tr = 1.0;
 
@@ -20,6 +21,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
                 OnTriggerEnter(hitColliders[i]);
                 i++;
             }
+            this.colorExpression = GetComponentInChildren<TemperatureColorExpression>();
+            if (this.colorExpression == null)
+            {
+                throw new ArgumentException("can not found color expression object on " + this.name);
+            }
+            this.colorExpression.SetTemperature(this.regionTemperature);
         }
 
         private void OnTriggerEnter(Collider collider)

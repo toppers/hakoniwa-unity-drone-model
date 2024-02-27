@@ -9,8 +9,28 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
         public float minTemp = 0f; // 低温の基準値
         public float maxTemp = 100f; // 高温の基準値
         public float currentTemp = 20f; // 現在の温度
+        public float alpha = 1.0f; // 透明度の設定（0.0から1.0の範囲）
 
         public MeshRenderer[] renderer;
+
+        private void Start()
+        {
+            for (int i = 0; i < renderer.Length; i++)
+            {
+                if (alpha != 1.0)
+                {
+                    // マテリアルが透明度をサポートするように設定
+                    renderer[i].material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    renderer[i].material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    renderer[i].material.SetInt("_ZWrite", 0);
+                    renderer[i].material.DisableKeyword("_ALPHATEST_ON");
+                    renderer[i].material.EnableKeyword("_ALPHABLEND_ON");
+                    renderer[i].material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    renderer[i].material.renderQueue = 3000;
+                }
+            }
+
+        }
 
         public void SetTemperature(double temp)
         {
@@ -28,18 +48,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
 
             for (int i = 0; i < renderer.Length; i++)
             {
-
+                Color color;
                 if (t < 0.5f) // 低温から平温へ
                 {
                     // 青から緑へ
-                    renderer[i].material.color = Color.Lerp(Color.blue, Color.green, t * 2);
+                    color = Color.Lerp(Color.blue, Color.green, t * 2);
                 }
                 else // 平温から高温へ
                 {
                     // 緑から赤へ
                     t = t - 0.5f; // スケールの調整
-                    renderer[i].material.color = Color.Lerp(Color.green, Color.red, t * 2);
+                    color = Color.Lerp(Color.green, Color.red, t * 2);
                 }
+                color.a = alpha;
+                renderer[i].material.color = color;
             }
 
         }
