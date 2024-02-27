@@ -6,9 +6,9 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
 {
     public class TemperatureColorExpression : MonoBehaviour
     {
-        public float minTemp = 0f; // 低温の基準値
-        public float maxTemp = 100f; // 高温の基準値
-        public float currentTemp = 20f; // 現在の温度
+        private float minTemp = -40f; // 低温の基準値
+        private float maxTemp = 60f; // 高温の基準値
+        private float currentTemp = 20f; // 現在の温度
         public float alpha = 1.0f; // 透明度の設定（0.0から1.0の範囲）
 
         public MeshRenderer[] renderer;

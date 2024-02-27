@@ -299,6 +299,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
 
         public double current_temperature;
+        public int temperation_region_count = 0;
         public double GetTemperature()
         {
             return current_temperature;
@@ -307,6 +308,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public void SetTemperature(double temperature)
         {
             this.current_temperature = temperature;
+        }
+
+        public void IncrementTemperatureRegion()
+        {
+            this.temperation_region_count++;
+        }
+
+        public void DecrementTemperatureRegion()
+        {
+            this.temperation_region_count--;
+        }
+        bool IRobotProperty.IsInTemeratureRegion()
+        {
+            return this.temperation_region_count > 0;
         }
     }
 
