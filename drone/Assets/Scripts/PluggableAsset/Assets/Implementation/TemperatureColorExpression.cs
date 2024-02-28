@@ -11,22 +11,22 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
         private float currentTemp = 20f; // 現在の温度
         public float alpha = 1.0f; // 透明度の設定（0.0から1.0の範囲）
 
-        public MeshRenderer[] renderer;
+        public MeshRenderer[] my_renderer;
 
         private void Start()
         {
-            for (int i = 0; i < renderer.Length; i++)
+            for (int i = 0; i < my_renderer.Length; i++)
             {
                 if (alpha != 1.0)
                 {
                     // マテリアルが透明度をサポートするように設定
-                    renderer[i].material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                    renderer[i].material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                    renderer[i].material.SetInt("_ZWrite", 0);
-                    renderer[i].material.DisableKeyword("_ALPHATEST_ON");
-                    renderer[i].material.EnableKeyword("_ALPHABLEND_ON");
-                    renderer[i].material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-                    renderer[i].material.renderQueue = 3000;
+                    my_renderer[i].material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    my_renderer[i].material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    my_renderer[i].material.SetInt("_ZWrite", 0);
+                    my_renderer[i].material.DisableKeyword("_ALPHATEST_ON");
+                    my_renderer[i].material.EnableKeyword("_ALPHABLEND_ON");
+                    my_renderer[i].material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    my_renderer[i].material.renderQueue = 3000;
                 }
             }
 
@@ -46,7 +46,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
         {
             float t = (currentTemp - minTemp) / (maxTemp - minTemp);
 
-            for (int i = 0; i < renderer.Length; i++)
+            for (int i = 0; i < my_renderer.Length; i++)
             {
                 Color color;
                 if (t < 0.5f) // 低温から平温へ
@@ -61,7 +61,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Environment
                     color = Color.Lerp(Color.green, Color.red, t * 2);
                 }
                 color.a = alpha;
-                renderer[i].material.color = color;
+                my_renderer[i].material.color = color;
             }
 
         }

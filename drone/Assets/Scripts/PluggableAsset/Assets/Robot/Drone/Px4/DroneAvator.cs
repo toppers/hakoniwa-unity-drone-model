@@ -312,12 +312,14 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
         public void IncrementTemperatureRegion()
         {
-            this.temperation_region_count++;
+            this.temperation_region_count = 1;
+            Debug.LogWarning("Exnter:count: " + this.temperation_region_count);
         }
 
         public void DecrementTemperatureRegion()
         {
-            this.temperation_region_count--;
+            this.temperation_region_count = 0;
+            Debug.LogWarning("Exit:count: " + this.temperation_region_count);
         }
         bool IRobotProperty.IsInTemeratureRegion()
         {
