@@ -13,6 +13,8 @@ cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Environment/* \
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
     drone/Assets/Prefab/Robots/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Env* \
+    drone/Assets/Prefab/Robots/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
