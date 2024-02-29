@@ -264,6 +264,7 @@ MonoBehaviour:
   comm_method: 2
   restitutionCoefficient: 1
   current_temperature: 0
+  temperation_region_count: 0
 --- !u!135 &713104545067035580
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -360,11 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f7e9956a49248ffa8b7347cdf3a40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTemp: -60
-  maxTemp: 100
-  currentTemp: 20
   alpha: 1
-  renderer:
+  my_renderer:
   - {fileID: 2323877861357213986}
 --- !u!1 &496130662469990583
 GameObject:
