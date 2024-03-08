@@ -253,12 +253,18 @@ MonoBehaviour:
   - hako_msgs/Collision
   - hako_msgs/ManualPosAttControl
   - hako_msgs/Disturbance
+  - hako_msgs/HakoDroneCmdTakeoff
+  - hako_msgs/HakoDroneCmdMove
+  - hako_msgs/HakoDroneCmdLand
   topic_name:
   - drone_motor
   - drone_pos
   - drone_collision
   - drone_manual_pos_att_control
   - drone_disturbance
+  - drone_cmd_takeoff
+  - drone_cmd_move
+  - drone_cmd_land
   update_cycle: 1
   io_method: 0
   comm_method: 2

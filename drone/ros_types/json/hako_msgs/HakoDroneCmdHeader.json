@@ -1,7 +1,11 @@
 {
   "fields": [
     {
-      "name": "has_result",
+      "name": "request",
+      "type": "bool"
+    },
+    {
+      "name": "result",
       "type": "bool"
     },
     {
