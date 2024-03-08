@@ -8,7 +8,7 @@ cp plugin/plugin-srcs/Assets/Scenes/Hakoniwa.unity* drone/Assets/Scenes/
 cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/* \
     drone/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/
 cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Environment/* \
-    drone/Assets/Scripts/PluggableAsset/Assets/
+    drone/Assets/Scripts/PluggableAsset/Assets/Environment/
 
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
