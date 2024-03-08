@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "HakoDroneCmdHeader"
+    },
+    {
+      "name": "x",
+      "type": "float64"
+    },
+    {
+      "name": "y",
+      "type": "float64"
+    },
+    {
+      "name": "speed",
+      "type": "float64"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "has_result",
+      "type": "bool"
+    },
+    {
+      "name": "result_code",
+      "type": "int32"
+    }
+  ]
+}
