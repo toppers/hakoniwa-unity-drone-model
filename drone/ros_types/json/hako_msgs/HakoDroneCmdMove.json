@@ -13,6 +13,10 @@
       "type": "float64"
     },
     {
+      "name": "z",
+      "type": "float64"
+    },
+    {
       "name": "speed",
       "type": "float64"
     }
