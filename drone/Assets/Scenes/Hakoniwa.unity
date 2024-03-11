@@ -433,7 +433,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &942819734
+--- !u!1001 &567695759
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -443,7 +443,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306133821981097404, guid: 55bb05ea30c4448c08541df2c244ee51, type: 3}
       propertyPath: m_Name
-      value: DroneFlightController
+      value: DroneAvator
       objectReference: {fileID: 0}
     - target: {fileID: 8609862147817314095, guid: 55bb05ea30c4448c08541df2c244ee51, type: 3}
       propertyPath: m_LocalPosition.x
@@ -490,10 +490,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bb05ea30c4448c08541df2c244ee51, type: 3}
---- !u!4 &942819735 stripped
+--- !u!4 &567695760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8609862147817314095, guid: 55bb05ea30c4448c08541df2c244ee51, type: 3}
-  m_PrefabInstance: {fileID: 942819734}
+  m_PrefabInstance: {fileID: 567695759}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &964080884
 GameObject:
@@ -1067,7 +1067,7 @@ PrefabInstance:
       addedObject: {fileID: 134018304}
     - targetCorrespondingSourceObject: {fileID: 1372883653411148181, guid: 88c6887277f8e3146aca9b90c00d9e74, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 942819735}
+      addedObject: {fileID: 567695760}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c6887277f8e3146aca9b90c00d9e74, type: 3}
 --- !u!1001 &1869278167701635054
