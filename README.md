@@ -109,7 +109,7 @@ Windows ネイティブアプリの場合は、`DroneWinNative/model.exe` をダ
 - Unity Hub
 - Unity（各CPUアーキテクチャに対応したもの）
   - 2022.3.5f1 以降
-- Python 3.10（pyenvでインストールされたものMac版のみ。）
+- Python 3.12（pyenvでインストールされたものMac版のみ。）
 
 ### Unityエディタを利用する場合のインストール方法
 
@@ -224,6 +224,13 @@ custom.jsonの出力は以下の通りとなります。
 {
   "robots": [
     {
+      "name": "EnvironmentEffector",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": []
+    },
+    {
       "name": "DroneAvator",
       "rpc_pdu_readers": [],
       "rpc_pdu_writers": [],
@@ -249,6 +256,50 @@ custom.jsonの出力は以下の通りとなります。
           "pdu_size": 48,
           "write_cycle": 1,
           "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/ManualPosAttControl",
+          "org_name": "drone_manual_pos_att_control",
+          "name": "DroneAvator_drone_manual_pos_att_control",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 3,
+          "pdu_size": 56,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdTakeoff",
+          "org_name": "drone_cmd_takeoff",
+          "name": "DroneAvator_drone_cmd_takeoff",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 5,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdMove",
+          "org_name": "drone_cmd_move",
+          "name": "DroneAvator_drone_cmd_move",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 6,
+          "pdu_size": 48,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdLand",
+          "org_name": "drone_cmd_land",
+          "name": "DroneAvator_drone_cmd_land",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 7,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "SHM"
         }
       ],
       "shm_pdu_writers": [
@@ -260,6 +311,17 @@ custom.jsonの出力は以下の通りとなります。
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 2,
           "pdu_size": 280,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/Disturbance",
+          "org_name": "drone_disturbance",
+          "name": "DroneAvator_drone_disturbance",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 4,
+          "pdu_size": 8,
           "write_cycle": 1,
           "method_type": "SHM"
         }
@@ -274,6 +336,13 @@ custom.jsonの出力は以下の通りとなります。
 ```json
 {
   "robots": [
+    {
+      "name": "EnvironmentEffector",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": []
+    },
     {
       "name": "DroneAvator",
       "rpc_pdu_readers": [
@@ -298,6 +367,50 @@ custom.jsonの出力は以下の通りとなります。
           "pdu_size": 48,
           "write_cycle": 1,
           "method_type": "UDP"
+        },
+        {
+          "type": "hako_msgs/ManualPosAttControl",
+          "org_name": "drone_manual_pos_att_control",
+          "name": "DroneAvator_drone_manual_pos_att_control",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 3,
+          "pdu_size": 56,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdTakeoff",
+          "org_name": "drone_cmd_takeoff",
+          "name": "DroneAvator_drone_cmd_takeoff",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 5,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdMove",
+          "org_name": "drone_cmd_move",
+          "name": "DroneAvator_drone_cmd_move",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 6,
+          "pdu_size": 48,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        },
+        {
+          "type": "hako_msgs/HakoDroneCmdLand",
+          "org_name": "drone_cmd_land",
+          "name": "DroneAvator_drone_cmd_land",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 7,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "UDP"
         }
       ],
       "rpc_pdu_writers": [
@@ -309,6 +422,17 @@ custom.jsonの出力は以下の通りとなります。
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 2,
           "pdu_size": 280,
+          "write_cycle": 1,
+          "method_type": "UDP"
+        },
+        {
+          "type": "hako_msgs/Disturbance",
+          "org_name": "drone_disturbance",
+          "name": "DroneAvator_drone_disturbance",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 4,
+          "pdu_size": 8,
           "write_cycle": 1,
           "method_type": "UDP"
         }
