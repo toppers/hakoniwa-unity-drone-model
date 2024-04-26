@@ -37,7 +37,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 "hako_msgs/Disturbance",
                 "hako_msgs/HakoDroneCmdTakeoff",
                 "hako_msgs/HakoDroneCmdMove",
-                "hako_msgs/HakoDroneCmdLand"
+                "hako_msgs/HakoDroneCmdLand",
+                "hako_msgs/GameControllerOperation"
         };
         public string[] topic_name = {
             "drone_motor",
@@ -47,14 +48,15 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             "drone_disturbance",
             "drone_cmd_takeoff",
             "drone_cmd_move",
-            "drone_cmd_land"
+            "drone_cmd_land",
+            "hako_cmd_game"
         };
         public int update_cycle = 1;
         public IoMethod io_method = IoMethod.SHM;
         public CommMethod comm_method = CommMethod.DIRECT;
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
-            RoboPartsConfigData[] configs = new RoboPartsConfigData[8];
+            RoboPartsConfigData[] configs = new RoboPartsConfigData[9];
             int i = 0;
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
@@ -143,6 +145,17 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
             configs[i].value.pdu_size = 40;
+            configs[i].value.write_cycle = this.update_cycle;
+            configs[i].value.method_type = this.comm_method.ToString();
+            i++;
+            configs[i] = new RoboPartsConfigData();
+            configs[i].io_dir = IoDir.READ;
+            configs[i].io_method = this.io_method;
+            configs[i].value.org_name = this.topic_name[i];
+            configs[i].value.type = this.topic_type[i];
+            configs[i].value.class_name = ConstantValues.pdu_writer_class;
+            configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
+            configs[i].value.pdu_size = 52;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 

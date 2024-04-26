@@ -177,12 +177,12 @@ GameObject:
   - component: {fileID: 8609862147817314095}
   - component: {fileID: 6747605715522739760}
   - component: {fileID: 5388787427256251652}
-  - component: {fileID: 5482443910932073308}
   - component: {fileID: 713104545067035580}
   - component: {fileID: 4817356575376772833}
   - component: {fileID: 9103642267980777454}
   - component: {fileID: 4152429642350271022}
   - component: {fileID: 2624371463231971607}
+  - component: {fileID: 3759550941778578697}
   m_Layer: 0
   m_Name: DroneTransporter
   m_TagString: HakoAssetRoot
@@ -233,46 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1a27297493faa4f8f35964824d02f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5482443910932073308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306133821981097404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab9fb5af7788747d6ba895c157009d69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motor_0: {fileID: 7191717565606483428}
-  motor_1: {fileID: 2943309179351353084}
-  motor_2: {fileID: 824369189656671177}
-  motor_3: {fileID: 1082311095057067130}
-  topic_type:
-  - hako_mavlink_msgs/HakoHilActuatorControls
-  - geometry_msgs/Twist
-  - hako_msgs/Collision
-  - hako_msgs/ManualPosAttControl
-  - hako_msgs/Disturbance
-  - hako_msgs/HakoDroneCmdTakeoff
-  - hako_msgs/HakoDroneCmdMove
-  - hako_msgs/HakoDroneCmdLand
-  topic_name:
-  - drone_motor
-  - drone_pos
-  - drone_collision
-  - drone_manual_pos_att_control
-  - drone_disturbance
-  - drone_cmd_takeoff
-  - drone_cmd_move
-  - drone_cmd_land
-  update_cycle: 1
-  io_method: 0
-  comm_method: 2
-  restitutionCoefficient: 1
-  current_temperature: 0
-  temperation_region_count: 0
 --- !u!135 &713104545067035580
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -372,6 +332,48 @@ MonoBehaviour:
   alpha: 1
   my_renderer:
   - {fileID: 2323877861357213986}
+--- !u!114 &3759550941778578697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306133821981097404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9fb5af7788747d6ba895c157009d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motor_0: {fileID: 7191717565606483428}
+  motor_1: {fileID: 2943309179351353084}
+  motor_2: {fileID: 824369189656671177}
+  motor_3: {fileID: 1082311095057067130}
+  topic_type:
+  - hako_mavlink_msgs/HakoHilActuatorControls
+  - geometry_msgs/Twist
+  - hako_msgs/Collision
+  - hako_msgs/ManualPosAttControl
+  - hako_msgs/Disturbance
+  - hako_msgs/HakoDroneCmdTakeoff
+  - hako_msgs/HakoDroneCmdMove
+  - hako_msgs/HakoDroneCmdLand
+  - hako_msgs/GameControllerOperation
+  topic_name:
+  - drone_motor
+  - drone_pos
+  - drone_collision
+  - drone_manual_pos_att_control
+  - drone_disturbance
+  - drone_cmd_takeoff
+  - drone_cmd_move
+  - drone_cmd_land
+  - hako_cmd_game
+  update_cycle: 1
+  io_method: 0
+  comm_method: 2
+  restitutionCoefficient: 1
+  current_temperature: 0
+  temperation_region_count: 0
 --- !u!1 &496130662469990583
 GameObject:
   m_ObjectHideFlags: 0
