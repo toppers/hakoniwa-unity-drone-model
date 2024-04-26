@@ -120,7 +120,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.type = this.topic_type[i];
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
-            configs[i].value.pdu_size = 32;
+            configs[i].value.pdu_size = 40;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
             i++;
@@ -131,7 +131,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.type = this.topic_type[i];
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
-            configs[i].value.pdu_size = 48;
+            configs[i].value.pdu_size = 56;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
             i++;
@@ -142,7 +142,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.type = this.topic_type[i];
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
-            configs[i].value.pdu_size = 32;
+            configs[i].value.pdu_size = 40;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 
