@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "request_id",
+      "type": "int32"
+    },
+    {
+      "name": "image",
+      "type": "sensor_msgs/CompressedImage"
+    }
+  ]
+}

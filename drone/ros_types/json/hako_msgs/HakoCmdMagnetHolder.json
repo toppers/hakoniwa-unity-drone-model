@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "HakoCmdHeader"
+    },
+    {
+      "name": "magnet_on",
+      "type": "bool"
+    }
+  ]
+}
