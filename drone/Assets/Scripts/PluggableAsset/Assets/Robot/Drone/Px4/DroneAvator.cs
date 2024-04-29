@@ -4,7 +4,10 @@ using Hakoniwa.PluggableAsset.Communication.Pdu;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
@@ -208,10 +211,120 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         {
             this.pdu_writer_disturb.GetWriteOps().Ref("d_temp").SetData("value", (double)this.current_temperature);
         }
+        public GameObject target_camera;
+        public string audio_filepath;
+        private double my_controls = 0;
+        public float maxDistance = 100.0f;
+        public float minDistance = 0.0f;
+        private float updateTimer = 0.0f; // Timer to track the update interval
+        private float updateInterval = 1.0f; // Interval to update (1 second)
+        private bool enabledAudio = false;
+        private void Update()
+        {
+            if (enabledAudio == false)
+            {
+                return;
+            }
+            updateTimer += Time.deltaTime;
+            if (updateTimer < updateInterval)
+            {
+                return;
+            }
+            updateTimer = 0;
 
+            // Calculate distance to the target camera
+            float distance = Vector3.Distance(target_camera.transform.position, transform.position);
+
+            // Map the distance to volume level
+            float volume = 1.0f - Mathf.Clamp01((distance - minDistance) / (maxDistance - minDistance));
+
+            if (audioSource.isPlaying == false && my_controls > 0)
+            {
+                audioSource.Play();
+            }
+            else if (audioSource.isPlaying == true && my_controls == 0)
+            {
+                audioSource.Stop();
+            }
+
+            if (audioSource.isPlaying)
+            {
+                audioSource.volume = volume;
+            }
+        }
+        IEnumerator LoadAudio(string filePath)
+        {
+            using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(filePath, AudioType.MPEG))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+                {
+                    Debug.LogError(www.error);
+                }
+                else
+                {
+                    AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
+                    audioSource.clip = clip;
+                    audioSource.Stop();
+                    enabledAudio = true;
+                }
+            }
+        }
+        private string audioPath;
+        [System.Serializable]
+        public class DroneConfig
+        {
+            // ドローンの設定を保持する辞書型プロパティ
+            public Dictionary<string, DroneDetails> drones;
+        }
+
+        [System.Serializable]
+        public class DroneDetails
+        {
+            // 各ドローンのオーディオファイルパスを保持するプロパティ
+            public string audio_rotor_path;
+        }
+
+        private void LoadDroneAudioConfig()
+        {
+            string droneName = this.root_name;
+            string filePath = "./drone_config.json";
+            Debug.Log("Looking for config file at: " + filePath);
+
+            if (File.Exists(filePath))
+            {
+                string dataAsJson = File.ReadAllText(filePath);
+                DroneConfig loadedData = JsonConvert.DeserializeObject<DroneConfig>(dataAsJson);
+
+                if (loadedData != null && loadedData.drones != null)
+                {
+                    if (loadedData.drones.ContainsKey(droneName))
+                    {
+                        audioPath = loadedData.drones[droneName].audio_rotor_path;
+                        Debug.Log("Audio Path for " + droneName + ": " + audioPath);
+                    }
+                    else
+                    {
+                        Debug.LogError("Drone configuration for " + droneName + " not found.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Drone configurations are missing or corrupt. Check JSON structure.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Cannot find drone_config.json file at: " + filePath);
+            }
+        }
         public void DoControl()
         {
             float[] controls = this.pdu_reader_actuator.GetReadOps().GetDataFloat32Array("controls");
+            //Debug.Log("controls: " + controls[0]);
+            my_controls = controls[0];
+
 
             motor_parts_0.AddForce(controls[0]);
             motor_parts_1.AddForce(controls[1]);
@@ -239,7 +352,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.colorExpression.SetTemperature(this.current_temperature);
         }
 
-
+        private AudioSource audioSource;
         public void Initialize(System.Object obj)
         {
             GameObject tmp = null;
@@ -257,6 +370,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             {
                 this.root = tmp;
                 this.root_name = string.Copy(this.root.transform.name);
+                audioSource = GetComponent<AudioSource>();
+                LoadDroneAudioConfig();
+                if (target_camera != null && audioSource != null && !string.IsNullOrEmpty(audioPath))
+                {
+                    StartCoroutine(LoadAudio(audioPath));
+                }
                 this.pdu_io = PduIoConnector.Get(root_name);
                 if (this.pdu_io == null)
                 {
@@ -370,6 +489,5 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             return this.temperation_region_count > 0;
         }
     }
-
 }
 

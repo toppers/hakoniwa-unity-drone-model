@@ -1133,6 +1133,11 @@ Transform:
   - {fileID: 734437658}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1138525521 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 306133821981097404, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+  m_PrefabInstance: {fileID: 1997213334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1197891459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,6 +1830,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneTransporter
       objectReference: {fileID: 0}
+    - target: {fileID: 3759550941778578697, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 2457905636381665599}
+    - target: {fileID: 3759550941778578697, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: target_camera
+      value: 
+      objectReference: {fileID: 2457905636381665599}
+    - target: {fileID: 3759550941778578697, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: audio_filepath
+      value: file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3
+      objectReference: {fileID: 0}
     - target: {fileID: 8609862147817314095, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1868,13 +1885,112 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 306133821981097404, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1997213344}
   m_SourcePrefab: {fileID: 100100000, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
 --- !u!4 &1997213335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8609862147817314095, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
   m_PrefabInstance: {fileID: 1997213334}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1997213344
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138525521}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2014396223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4a5f6250cd04cca84bb22d973853cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1997213335}
   smoothSpeed: 0.125
   offset: {x: -5, y: 1, z: -5}
 --- !u!1660057539 &9223372036854775807
