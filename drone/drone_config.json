@@ -1,0 +1,7 @@
+{
+    "drones": {
+        "DroneTransporter": {
+            "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3"
+        }
+    }
+}
