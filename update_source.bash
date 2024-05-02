@@ -26,7 +26,3 @@ cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
     drone/Assets/Model/Hakoniwa/Robots/Drone/
 
 
-#hakoniwa-base
-cp hakoniwa-base/workspace/dev/ai/sample_drone.py drone/hakoniwa-base/workspace/dev/ai/
-cp hakoniwa-base/workspace/dev/ai/drone_sensor.py drone/hakoniwa-base/workspace/dev/ai/
-cp hakoniwa-base/workspace/runtime/asset_def.txt drone/hakoniwa-base/workspace/runtime/

@@ -8,6 +8,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using static Hakoniwa.PluggableAsset.Assets.Robot.Parts.MagnetHolder;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
@@ -31,6 +32,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private DroneRotor motor_parts_1;
         private DroneRotor motor_parts_2;
         private DroneRotor motor_parts_3;
+
+        private List<RigidbodyInfo> targets;
 
         public string[] topic_type = {
                 "hako_mavlink_msgs/HakoHilActuatorControls",
@@ -169,6 +172,14 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public double restitutionCoefficient = 1.0;
         void OnCollisionEnter(Collision collision)
         {
+            var rb = collision.gameObject.GetComponentInChildren<Rigidbody>();
+            foreach (var info in targets)
+            {
+                if (info.Rigidbody == rb)
+                {
+                    return;
+                }
+            }
             this.lastCollision = collision;
             this.hasCollision = true;
             Debug.Log("# Enter Collision");
@@ -368,6 +379,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             if (this.root == null)
             {
+                this.targets = GetTargets();
                 this.root = tmp;
                 this.root_name = string.Copy(this.root.transform.name);
                 audioSource = GetComponent<AudioSource>();

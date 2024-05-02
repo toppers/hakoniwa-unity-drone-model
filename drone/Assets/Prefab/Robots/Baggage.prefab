@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1324347525310427370}
   m_Layer: 0
   m_Name: Baggage
-  m_TagString: Untagged
+  m_TagString: HakoAssetMagnet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6638386292427137088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.78, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 7168832765927817316}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 2.78, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -233,6 +233,10 @@ PrefabInstance:
     - target: {fileID: 2917324367684531559, guid: dd18f7d3121d44ad0b5268882320a237, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734848723936047167, guid: dd18f7d3121d44ad0b5268882320a237, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5393095436639358046, guid: dd18f7d3121d44ad0b5268882320a237, type: 3}
       propertyPath: m_Name
