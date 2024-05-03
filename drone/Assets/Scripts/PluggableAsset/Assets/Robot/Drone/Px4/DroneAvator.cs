@@ -286,18 +286,37 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         [System.Serializable]
         public class DroneConfig
         {
-            // ドローンの設定を保持する辞書型プロパティ
             public Dictionary<string, DroneDetails> drones;
         }
 
         [System.Serializable]
         public class DroneDetails
         {
-            // 各ドローンのオーディオファイルパスを保持するプロパティ
             public string audio_rotor_path;
+            public Dictionary<string, DroneLidarDetails> LiDARs;
         }
-
-        private void LoadDroneAudioConfig()
+        [System.Serializable]
+        public class DroneLidarDetails
+        {
+            public bool Enabled;
+            public int NumberOfChannels;
+            public int RotationsPerSecond;
+            public int PointsPerSecond;
+            public float VerticalFOVUpper;
+            public float VerticalFOVLower;
+            public float HorizontalFOVStart;
+            public float HorizontalFOVEnd;
+            public bool DrawDebugPoints;
+            public float MaxDistance;
+            public float X;
+            public float Y;
+            public float Z;
+            public float Roll;
+            public float Pitch;
+            public float Yaw;
+        }
+        private DroneConfig loadedData = null;
+        private void LoadDroneConfig()
         {
             string droneName = this.root_name;
             string filePath = "./drone_config.json";
@@ -306,7 +325,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             if (File.Exists(filePath))
             {
                 string dataAsJson = File.ReadAllText(filePath);
-                DroneConfig loadedData = JsonConvert.DeserializeObject<DroneConfig>(dataAsJson);
+                loadedData = JsonConvert.DeserializeObject<DroneConfig>(dataAsJson);
 
                 if (loadedData != null && loadedData.drones != null)
                 {
@@ -328,6 +347,38 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             else
             {
                 Debug.LogError("Cannot find drone_config.json file at: " + filePath);
+            }
+        }
+        private bool GetParam(string name, out LiDAR3DParams param)
+        {
+            string droneName = this.root_name;
+            param = new LiDAR3DParams();
+            if (loadedData == null)
+            {
+                return false;
+            }
+            if (loadedData.drones.ContainsKey(droneName))
+            {
+                if (loadedData.drones[droneName].LiDARs.ContainsKey(name))
+                {
+                    Debug.Log("found param: " + name);
+                    param.Enabled = loadedData.drones[droneName].LiDARs[name].Enabled;
+                    param.NumberOfChannels = loadedData.drones[droneName].LiDARs[name].NumberOfChannels;
+                    param.RotationsPerSecond = loadedData.drones[droneName].LiDARs[name].RotationsPerSecond;
+                    param.PointsPerSecond = loadedData.drones[droneName].LiDARs[name].PointsPerSecond;
+                    param.MaxDistance = loadedData.drones[droneName].LiDARs[name].MaxDistance;
+                    param.VerticalFOVUpper = loadedData.drones[droneName].LiDARs[name].VerticalFOVUpper;
+                    param.VerticalFOVLower = loadedData.drones[droneName].LiDARs[name].VerticalFOVLower;
+                    param.HorizontalFOVStart = loadedData.drones[droneName].LiDARs[name].HorizontalFOVStart;
+                    param.HorizontalFOVEnd = loadedData.drones[droneName].LiDARs[name].HorizontalFOVEnd;
+                    param.DrawDebugPoints = loadedData.drones[droneName].LiDARs[name].DrawDebugPoints;
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return false;
             }
         }
         public void DoControl()
@@ -361,9 +412,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             WriteDisturbanceData();
 
             this.colorExpression.SetTemperature(this.current_temperature);
+
         }
 
         private AudioSource audioSource;
+        private LiDAR3D[] lidars;
         public void Initialize(System.Object obj)
         {
             GameObject tmp = null;
@@ -382,8 +435,36 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 this.targets = GetTargets();
                 this.root = tmp;
                 this.root_name = string.Copy(this.root.transform.name);
+                LoadDroneConfig();
+                this.lidars = this.GetComponentsInChildren<LiDAR3D>();
+                foreach (var lidar in lidars)
+                {
+                    Debug.Log("Found Lidar: " + lidar.transform.parent.gameObject.name);
+                    LiDAR3DParams param;
+                    if (this.GetParam(lidar.transform.parent.gameObject.name, out param))
+                    {
+                        lidar.SetParams(param);
+                        //pos
+                        float x = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].X;
+                        float y = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].Y;
+                        float z = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].Z;
+                        float y_off = lidar.transform.parent.parent.position.y;
+                        Vector3 v = new Vector3(x, y, z);
+                        Vector3 v_unity = ConvertRos2Unity(v);
+                        v_unity.y += y_off;
+                        Debug.Log("v: " + v_unity);
+                        lidar.transform.parent.position = v_unity;
+                        //angle
+                        float roll = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].Roll;
+                        float pitch = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].Pitch;
+                        float yaw = loadedData.drones[this.root_name].LiDARs[lidar.transform.parent.gameObject.name].Yaw;
+                        Vector3 euler_angle = new Vector3(roll, pitch, yaw);
+                        Vector3 euler_angle_unity = - ConvertRos2Unity(euler_angle);
+                        Debug.Log("euler_angle: " + euler_angle_unity);
+                        lidar.transform.parent.eulerAngles = euler_angle_unity;
+                    }
+                }
                 audioSource = GetComponent<AudioSource>();
-                LoadDroneAudioConfig();
                 if (target_camera != null && audioSource != null && !string.IsNullOrEmpty(audioPath))
                 {
                     StartCoroutine(LoadAudio(audioPath));

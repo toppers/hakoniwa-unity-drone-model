@@ -1,1 +1,0 @@
-dev/ai/sample_drone.py:mqtt

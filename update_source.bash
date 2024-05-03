@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #Scene
-cp -rp plugin/plugin-srcs/Assets/Scenes/Drone* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/Hakoniwa.unity* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/MultiDrones.unity* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/GyroDemo.unity* drone/Assets/Scenes/
@@ -19,6 +18,10 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Baggage* \
     drone/Assets/Prefab/Robots/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Env* \
+    drone/Assets/Prefab/Robots/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Transporter* \
+    drone/Assets/Prefab/Robots/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/LiDAR* \
     drone/Assets/Prefab/Robots/
 
 #Model
