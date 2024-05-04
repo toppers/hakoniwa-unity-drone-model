@@ -4,17 +4,17 @@
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
-                    "Enabled": true,
+                    "Enabled": false,
                     "NumberOfChannels": 16,
                     "RotationsPerSecond": 10,
                     "PointsPerSecond": 10000,
                     "MaxDistance": 10,
                     "X": 0.45, "Y": 0, "Z": -0.3,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
-                    "VerticalFOVUpper": 25,
-                    "VerticalFOVLower": -25,
-                    "HorizontalFOVStart": -20,
-                    "HorizontalFOVEnd": 20,
+                    "VerticalFOVUpper": 5,
+                    "VerticalFOVLower": -5,
+                    "HorizontalFOVStart": -5,
+                    "HorizontalFOVEnd": 5,
                     "DrawDebugPoints": true
                 }
             }

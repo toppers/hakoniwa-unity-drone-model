@@ -28,4 +28,5 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/LiDAR* \
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
     drone/Assets/Model/Hakoniwa/Robots/Drone/
 
-
+#drone config
+cp plugin/plugin-srcs/drone_config.json drone/
