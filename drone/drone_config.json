@@ -4,7 +4,7 @@
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
-                    "Enabled": false,
+                    "Enabled": true,
                     "NumberOfChannels": 16,
                     "RotationsPerSecond": 10,
                     "PointsPerSecond": 10000,
