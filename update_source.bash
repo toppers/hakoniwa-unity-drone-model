@@ -24,6 +24,8 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Transporter* \
     drone/Assets/Prefab/Robots/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/LiDAR* \
     drone/Assets/Prefab/Robots/
+cp -rp plugin/plugin-srcs/Assets/Prefab/GUI/Drone* \
+    drone/Assets/Prefab/GUI/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
