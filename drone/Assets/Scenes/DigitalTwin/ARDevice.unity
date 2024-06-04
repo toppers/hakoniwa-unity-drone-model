@@ -192,11 +192,11 @@ MonoBehaviour:
   - {fileID: 6308970534271416517}
   - {fileID: 3079078034496402467}
   - {fileID: 2085082144}
-  server_ipaddr: 192.168.11.5
+  server_ipaddr: 192.168.11.7
   server_portno: 54002
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.11.3
+  client_ipaddr: 192.168.11.2
   client_portno: 54001
 --- !u!4 &451478411
 Transform:
@@ -941,7 +941,7 @@ Transform:
   m_GameObject: {fileID: 6039587791852829368}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.419, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 10000, y: 1, z: 10000}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1129,6 +1129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 215065099}
     m_Modifications:
+    - target: {fileID: 452735986788760750, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: initial_pos
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2030715118851984367, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
