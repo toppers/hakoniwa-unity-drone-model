@@ -16,6 +16,6 @@ public class DroneRoll : MonoBehaviour
 
     float GetDroneRoll()
     {
-        return drone.transform.eulerAngles.z;
+        return -drone.transform.eulerAngles.z;
     }
 }

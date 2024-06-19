@@ -20,7 +20,7 @@ public class DronePitch : MonoBehaviour
             dronePitch -= 360f;
         }
         // ピッチ角に応じたY座標の変化量を計算
-        float yChange = -(dronePitch / 5) * deg_5;
+        float yChange = (dronePitch / 5) * deg_5;
         // ピッチ画像のY座標を変更
         pitchpicture.anchoredPosition = new Vector2(pitchpicture.anchoredPosition.x, yChange);
 
