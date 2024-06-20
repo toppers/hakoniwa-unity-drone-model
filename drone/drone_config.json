@@ -9,7 +9,7 @@
                     "RotationsPerSecond": 10,
                     "PointsPerSecond": 10000,
                     "MaxDistance": 10,
-                    "X": 0.112, "Y": 0, "Z": -0.075,
+                    "X": 0.4401, "Y": 0, "Z": -0.1365,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
                     "VerticalFOVUpper": 5,
                     "VerticalFOVLower": -5,
@@ -19,7 +19,7 @@
                 }
             }
         },
-        "ChatGPT3_5": {
+        "DroneAvator1": {
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
@@ -38,7 +38,7 @@
                 }
             }
         },
-        "ChatGPT4": {
+        "DroneAvator2": {
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
@@ -57,7 +57,7 @@
                 }
             }
         },
-        "Gemini": {
+        "DroneAvator3": {
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
@@ -76,7 +76,7 @@
                 }
             }
         },
-        "DroneAvator": {
+        "DroneAvator0": {
             "audio_rotor_path": "file:///Users/tmori/Downloads/spo_ge_doron_tobi_r01.mp3",
             "LiDARs": {
                 "LiDAR": {
