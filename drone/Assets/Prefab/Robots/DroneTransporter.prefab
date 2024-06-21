@@ -2977,19 +2977,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
       propertyPath: topic_name.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
       propertyPath: topic_type.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
       propertyPath: topic_name.Array.data[2]
       value: hako_cmd_camera_move
       objectReference: {fileID: 0}
     - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
+      propertyPath: topic_name.Array.data[3]
+      value: hako_cmd_camera_info
+      objectReference: {fileID: 0}
+    - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
       propertyPath: topic_type.Array.data[2]
       value: hako_msgs/HakoCmdCameraMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
+      propertyPath: topic_type.Array.data[3]
+      value: hako_msgs/HakoCameraInfo
       objectReference: {fileID: 0}
     - target: {fileID: 828110571326675960, guid: c307c3c158ff94d469865f86a42d02d8, type: 3}
       propertyPath: game_ops_camera_move_up_index
