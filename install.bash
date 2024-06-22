@@ -11,11 +11,15 @@ then
 		exit 1
 	fi
 fi
+TB3_VERSION=v2.0.0
+wget https://github.com/toppers/hakoniwa-unity-tb3model/releases/download/${TB3_VERSION}/tb3_models.zip
+unzip tb3_models.zip
+bash -x install_tb3.bash
+rm -f tb3_models.zip
 
 cp drone/drone_config.json plugin/plugin-srcs/
 cp drone/hakoniwa_path.json plugin/plugin-srcs/
 cp -rp drone/Assets/* plugin/plugin-srcs/Assets/
-cp -rp drone/hakoniwa-base/* hakoniwa-base/
 
 cd plugin
 
