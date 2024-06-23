@@ -1,4 +1,0 @@
-single:primitive:time_usec:uint64:0:8
-array:primitive:controls:float32:8:64:16
-single:primitive:mode:uint8:72:1
-single:primitive:flags:uint64:80:8

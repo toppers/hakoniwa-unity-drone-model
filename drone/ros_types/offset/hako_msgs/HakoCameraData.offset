@@ -1,2 +1,0 @@
-single:primitive:request_id:int32:0:4
-single:struct:image:sensor_msgs/CompressedImage:4:102664

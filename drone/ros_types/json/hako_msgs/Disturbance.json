@@ -1,8 +1,0 @@
-{
-  "fields": [
-    {
-      "name": "d_temp",
-      "type": "hako_msgs/DisturbanceTemperature"
-    }
-  ]
-}

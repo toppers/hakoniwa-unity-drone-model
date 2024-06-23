@@ -1,3 +1,0 @@
-single:struct:header:HakoCmdHeader:0:12
-single:primitive:request_id:int32:12:4
-single:primitive:encode_type:int32:16:4
