@@ -31,6 +31,8 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/Drone/* \
     drone/Assets/Prefab/Robots/AR/Drone/
 cp -rp  plugin/plugin-srcs/Assets/Prefab/Robots/Twin/MiniRobotAvator* \
     drone/Assets/Prefab/Robots/Twin/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/TB3RoboAvatar* \
+    drone/Assets/Prefab/Robots/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
