@@ -13,6 +13,8 @@ cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/* \
     drone/Assets/Scripts/PluggableAsset/Assets/Robot/Drone/
 cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Environment/* \
     drone/Assets/Scripts/PluggableAsset/Assets/Environment/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/VirtualPlayerSignalController.cs* \
+    drone/Assets/Plugin/src/Unity/AR/Assets/
 
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
@@ -31,6 +33,8 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/Drone/* \
     drone/Assets/Prefab/Robots/AR/Drone/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/TB3RoboAvatar* \
     drone/Assets/Prefab/Robots/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/VirtualSignalPlayer.prefab* \
+    drone/Assets/Prefab/Robots/AR/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
