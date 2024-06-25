@@ -163,7 +163,105 @@ Pythonアプリを実行して箱庭ドローンシミュレーションを実�
 
 # 参考：Unity アプリケーションの作成手順
 
-Unityエディタ上で `ApiDemo` シーンを編集して、Unityアプリケーション化したい場合は、以下のサイトに手順があります。
+Unityエディタ上で `ApiDemo` シーンのUnityアプリケーションを作成するための手順です。
+
+1. Unity の Editor/Project Settings/Quality でアプリケーションの設定をする
+2. Unity の Editor/Project Settings/Player でアプリケーションの設定をする
+3. Unity アプリケーションをビルドする
+4. 箱庭の各種設定ファイルをコピーする
 
 
-* [Unityアプリケーションの作成方法](https://github.com/toppers/hakoniwa-px4sim/tree/main/tools/win#unity%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E4%BD%9C%E6%88%90)
+## 前提
+
+事前に、Unityエディタの箱庭シーンから、箱庭のコンフィグファイルを `Generate` してください。
+
+Generateすると、`plugin-srcs` 直下に、以下のファイルが出力されます。
+
+```
+HakoniwaSimTime.json
+LoginRobot.json
+RosTopics.json
+core_config.json
+custom.json
+hakoniwa_path.json
+inside_assets.json
+pdu_channel_connector.json
+pdu_configs.json
+pdu_readers.json
+pdu_writers.json
+reader_connector.json
+rpc_methods.json
+shm_methods.json
+writer_connector.json
+```
+
+## Unity の Editor/Project Settings/Quality でアプリケーションの設定をする
+
+Quality の設定は、デフォルトですと、`Ultra` になっています。
+
+![image](https://github.com/toppers/hakoniwa-unity-simasset-plugin/assets/164193/ac3fef95-2c93-4c97-839b-73dea55d2f98)
+
+パソコンの性能が気になる方は、`Very Low` だけ残して、その他は削除することをお勧めします。
+
+![image](https://github.com/toppers/hakoniwa-unity-simasset-plugin/assets/164193/1d46619a-2819-4d1c-83ea-d5389fcf3318)
+
+## Unity の Editor/Project Settings/Player でアプリケーションの設定をする
+
+Player の設定は、デフォルトですと、下図のようになっています。
+
+![image](https://github.com/toppers/hakoniwa-unity-simasset-plugin/assets/164193/097d8559-a666-479a-a6b5-3e9eb657e65e)
+
+以下の項目を変更しましょう。
+
+* Fullscreen Mode
+  * Windowed に変更して、Width と Height をお好みの値にしてください。
+    * ここでは、1024x640 にします。 
+* Resizable Window
+  * この項目をチェックすることで、Windowサイズを調整できるようになります。
+
+![image](https://github.com/toppers/hakoniwa-unity-simasset-plugin/assets/164193/f5f53c1c-027e-41f2-b5bd-723d12206a21)
+
+## Unity アプリケーションをビルドする
+
+File/Build Settings を開き、Add Open Scenes でアプリケーション化したいシーンを選択します。
+
+デフォルトですと、TB3Workが選択されていますので、削除して、ApiDemoを選択します。
+
+その後、Build ボタンをクリックします。
+
+下図のようにダイアログがポップアップされますので、ビルドした結果を格納するディレクトリを選択します。ディレクトリ名は、DroneAppWinとしてください。
+
+成功すると、下図のようにアプリケーションの実行ファイル(model.exe)が生成されます。
+
+![image](https://github.com/toppers/hakoniwa-px4sim/blob/main/tools/win/images/unity_build_result.png?raw=true)
+
+## 箱庭の各種設定ファイルをコピーする
+
+前提とする操作で `Generate` した各種設定ファイル（jsonファイル）一式を、ビルドした結果を格納しているディレクトリにコピー配置しましょう。
+
+次に、`plugin-srcs` 配下にある `ros_types` ディレクトリを同様にコピー配置しましょう。
+
+![image](https://github.com/toppers/hakoniwa-unity-simasset-plugin/assets/164193/a19b60a7-7ab9-4b8d-97c0-be50ee895864)
+
+## Unityアプリケーションを利用したシミュレーション実行手順
+
+Unityアプリケーションでシミュレーション実行するために、事前に以下を実施ください。
+
+1. Windowsエクスプローラで、`hakoniwa-px4-win/hakoniwa/bin/` を開きます。
+2. 別のWindowsエクスプローラで、`hakoniwa-px4-win/hakoniwa/apps` を開きます。
+3. 別のWindowsエクスプローラで、`DroneAppWin` を開きます。
+
+
+### シミュレーション実行方法
+
+1. `hakoniwa/bin/run-api2.bat`をダブルクリックします。
+2. `DroneAppWin`の `model.exe` をダブルクリックし、アプリケーションを起動させ、`START`ボタンをクリックします。
+3. `hakoniwa/apps/run-sample.bat` をダブルクリックすると、以下の黒画面が出力され、箱庭ドローンが動き出します。
+
+### シミュレーション停止方法
+
+シミュレーションを終了するには、以下の手順で停止してください。
+
+1. Unityアプリケーションを閉じます。
+2. `hakoniwa/apps/run-sample.bat`の黒画面を閉じます。
+3. `hakoniwa/bin/run-api2.bat`の黒画面を閉じます。
