@@ -21,7 +21,6 @@ namespace Hakoniwa.AR.Assets
 
         private int signal_state = 0;
         private float timer = 0.0f;
-        private bool isBlinking = false;
 
         // 信号の各状態の持続時間（秒）
         private float redDuration = 10.0f; // 赤信号の時間
@@ -89,7 +88,6 @@ namespace Hakoniwa.AR.Assets
                     redLight.enabled = true;
                     yellowLight.enabled = false;
                     blueLight.enabled = false;
-                    isBlinking = false;
                     break;
                 case 1:
                     this.signal_red.material = reds[0];
@@ -98,7 +96,6 @@ namespace Hakoniwa.AR.Assets
                     redLight.enabled = false;
                     yellowLight.enabled = true;
                     blueLight.enabled = false;
-                    isBlinking = false;
                     break;
                 case 2:
                     this.signal_red.material = reds[0];
@@ -107,12 +104,10 @@ namespace Hakoniwa.AR.Assets
                     redLight.enabled = false;
                     yellowLight.enabled = false;
                     blueLight.enabled = true;
-                    isBlinking = false;
                     break;
                 case 3: // 青信号点滅
                     redLight.enabled = false;
                     yellowLight.enabled = false;
-                    isBlinking = true;
                     break;
             }
         }
@@ -133,7 +128,24 @@ namespace Hakoniwa.AR.Assets
 
         public int GetState()
         {
-            return this.signal_state;
+            int state = 0x0;
+            if (this.signal_state >= 2)
+            {
+                if (blueLight.enabled)
+                {
+                    state |= (0x1 << 0);
+                }
+            }
+            if (this.signal_state == 1)
+            {
+                state |= (0x1 << 1);
+            }
+            if (this.signal_state == 0)
+            {
+                state |= (0x1 << 2);
+            }
+            //Debug.Log("sate: " + state + " signal_sate:" + signal_state);
+            return state;
         }
     }
 }
