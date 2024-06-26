@@ -2557,6 +2557,10 @@ PrefabInstance:
       propertyPath: drone
       value: 
       objectReference: {fileID: 3354543953005277798}
+    - target: {fileID: 3690261878916051261, guid: dd339d0fb5817485cad3b2faee3c07a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -81.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4984543276331651722, guid: dd339d0fb5817485cad3b2faee3c07a8, type: 3}
       propertyPath: drone
       value: 
