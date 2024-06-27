@@ -15,6 +15,9 @@
 - Unity
 - RAM Disk
 - Python
+  - Python3.12を前提としています。もし、別のバージョンのPythonを利用されている場合は、競合を回避してPython3.12の環境を構築してください。
+- Python ライブラリ
+  - numpy
 
 `Git for Windows` のインストールおよび利用方法については、公式サイトを参照ください。
 
@@ -46,6 +49,8 @@ Git Gui で、`Clone Existing Repository` をクリックします。
 * Target Directory: E:/project/hakoniwa-unity-drone-model
 
 上記のように設定して、`Clone` をクリックします。
+
+この際、必ず `Recursively clone submodules too` のチェックを入れてください。
 
 成功すると、下図のようにGit管理用の画面に変わります。
 
