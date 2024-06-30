@@ -165,9 +165,7 @@ namespace Hakoniwa.AR.Assets
         public void UpdateSensorValues()
         {
             uint pdu_data = GetPduSignalState();
-            Debug.Log("Write before: " + pdu_data);
             this.pdu_writer.GetWriteOps().SetData("data", pdu_data);
-            Debug.Log("Write after: " + pdu_data);
         }
 
         private GameObject root;
