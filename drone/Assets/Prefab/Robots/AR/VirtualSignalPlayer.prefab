@@ -1279,9 +1279,11 @@ GameObject:
   - component: {fileID: 5879986362315745203}
   - component: {fileID: 5762567439229476190}
   - component: {fileID: 7477655984080162315}
+  - component: {fileID: 7772720443847983352}
+  - component: {fileID: 626310621839509921}
   m_Layer: 0
   m_Name: VirtualSignalPlayer
-  m_TagString: Untagged
+  m_TagString: HakoAssetRoot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1344,6 +1346,36 @@ MonoBehaviour:
   redLight: {fileID: 2647194875850957916}
   yellowLight: {fileID: 2056573842956397993}
   blueLight: {fileID: 4265166571482327145}
+  topic_type: std_msgs/UInt32
+  topic_name: signal_data
+  io_method: 0
+  comm_method: 2
+  update_cycle: 1
+--- !u!114 &7772720443847983352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558225791704953831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b572d175f3c4a9e964455c01824fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on: 1
+--- !u!114 &626310621839509921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558225791704953831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1a27297493faa4f8f35964824d02f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2593747123010161378
 GameObject:
   m_ObjectHideFlags: 0
