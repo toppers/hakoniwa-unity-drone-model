@@ -300,7 +300,7 @@ MonoBehaviour:
   server_portno: 54001
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.11.7
+  client_ipaddr: 192.168.11.2
   client_portno: 54002
 --- !u!4 &85763833
 Transform:
@@ -555,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1826046047967688911, guid: e23a8a496cfa14939ba7421a6fbf29f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.527
+      value: 0.611
       objectReference: {fileID: 0}
     - target: {fileID: 1826046047967688911, guid: e23a8a496cfa14939ba7421a6fbf29f7, type: 3}
       propertyPath: m_LocalRotation.w
