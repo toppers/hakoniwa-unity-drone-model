@@ -167,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451478411}
-  - component: {fileID: 451478410}
+  - component: {fileID: 451478412}
   m_Layer: 0
   m_Name: AR
   m_TagString: Untagged
@@ -175,31 +175,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &451478410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451478409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8204ead616c254f4f88e730ca323d240, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players:
-  - {fileID: 454941329}
-  avators:
-  - {fileID: 6308970534271416517}
-  - {fileID: 3079078034496402467}
-  - {fileID: 2085082144}
-  - {fileID: 1352053990}
-  server_ipaddr: 192.168.11.7
-  server_portno: 54002
-  timeout_sec: 1
-  scale: 1
-  client_ipaddr: 192.168.11.2
-  client_portno: 54001
 --- !u!4 &451478411
 Transform:
   m_ObjectHideFlags: 0
@@ -217,6 +192,27 @@ Transform:
   - {fileID: 1425082801}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &451478412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451478409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5b35e611a9140a7825b9fa8fde4733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 454941329}
+  avators:
+  - {fileID: 6308970534271416517}
+  - {fileID: 3079078034496402467}
+  - {fileID: 2085082144}
+  - {fileID: 1352053990}
+  timeout_sec: 1
+  scale: 1
 --- !u!1 &454941329
 GameObject:
   m_ObjectHideFlags: 0
