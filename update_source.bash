@@ -15,6 +15,8 @@ cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Environment/* \
     drone/Assets/Scripts/PluggableAsset/Assets/Environment/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/Virtual*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/OriginSetter.cs* \
+    drone/Assets/Plugin/src/Unity/AR/GUI/
 
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
@@ -34,6 +36,12 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/Drone/* \
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/TB3RoboAvatar* \
     drone/Assets/Prefab/Robots/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/VirtualSignal* \
+    drone/Assets/Prefab/Robots/AR/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/Cube* \
+    drone/Assets/Prefab/Robots/AR/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ReferenceImageLibrary* \
+    drone/Assets/Prefab/Robots/AR/
+cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ar.png* \
     drone/Assets/Prefab/Robots/AR/
 
 #Model
