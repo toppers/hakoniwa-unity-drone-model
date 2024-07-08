@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_IOS
 using Unity.XR.CoreUtils;
+#endif
 
 public class OriginSetter : MonoBehaviour
 {
+#if UNITY_IOS
     public XROrigin arSessionOrigin;
     void Start()
     {
@@ -26,5 +29,5 @@ public class OriginSetter : MonoBehaviour
         arSessionOrigin.transform.position = new Vector3(pos_x, pos_y, pos_z);
         arSessionOrigin.transform.rotation = Quaternion.Euler(rot_x, rot_y, rot_z);
     }
-
+#endif
 }
