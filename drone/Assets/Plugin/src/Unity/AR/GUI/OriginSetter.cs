@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_IOS
+using UnityEngine.XR.ARFoundation;
 using Unity.XR.CoreUtils;
 #endif
 
@@ -10,24 +11,63 @@ public class OriginSetter : MonoBehaviour
 {
 #if UNITY_IOS
     public XROrigin arSessionOrigin;
-    void Start()
+    private ARSession arSession;
+
+    void Awake()
     {
-        string pos_text = PlayerPrefs.GetString("session_savedPos", "0,0,0");
-        float pos_x = float.Parse(pos_text.Split(",")[0].Trim());
-        float pos_y = float.Parse(pos_text.Split(",")[1].Trim());
-        float pos_z = float.Parse(pos_text.Split(",")[2].Trim());
+        arSession = FindObjectOfType<ARSession>();
 
-        Debug.Log("pos_x : " + pos_x + " pos_y:" + pos_y + " pos_z:" + pos_z);
+        // ARセッションをリセット
+        if (arSession != null)
+        {
+            StartCoroutine(ResetARSession());
+        }
+    }
+    private IEnumerator ResetARSession()
+    {
+        arSession.Reset();
+        yield return null;
+        // 位置データの取得
+        string pos_text = PlayerPrefs.GetString(OriginUI.session_savedPosKey, "0,0,0");
+        Vector3 position = ParseVector3(pos_text);
+        Debug.Log("Position: " + position);
 
-        string rot_text = PlayerPrefs.GetString("session_savedRot", "0,0,0");
-        float rot_x = float.Parse(rot_text.Split(",")[0].Trim());
-        float rot_y = float.Parse(rot_text.Split(",")[1].Trim());
-        float rot_z = float.Parse(rot_text.Split(",")[2].Trim());
+        // 回転データの取得
+        string rot_text = PlayerPrefs.GetString(OriginUI.session_savedRotKey, "0,0,0");
+        Vector3 rotation = ParseVector3(rot_text);
+        Debug.Log("Rotation: " + rotation);
 
-        Debug.Log("rot_x : " + rot_x + " rot_y:" + rot_y + " rot_z:" + rot_z);
+        Debug.Log("BEFORE: arSessionOrigin position: " + arSessionOrigin.transform.position);
 
-        arSessionOrigin.transform.position = new Vector3(pos_x, pos_y, pos_z);
-        arSessionOrigin.transform.rotation = Quaternion.Euler(rot_x, rot_y, rot_z);
+        // 位置と回転の設定
+        arSessionOrigin.transform.position = position;
+        //Vector3 newRotation = arSessionOrigin.transform.eulerAngles;
+        //newRotation.y = rotation.y;
+        //arSessionOrigin.transform.rotation = Quaternion.Euler(newRotation);
+        Debug.Log("After: arSessionOrigin position: " + arSessionOrigin.transform.position);
+    }
+    // ベクトル3を解析するヘルパーメソッド
+    private Vector3 ParseVector3(string vectorString)
+    {
+        string[] values = vectorString.Split(',');
+        if (values.Length != 3)
+        {
+            Debug.LogError("Invalid vector format: " + vectorString);
+            return Vector3.zero;
+        }
+
+        try
+        {
+            float x = float.Parse(values[0].Trim());
+            float y = float.Parse(values[1].Trim());
+            float z = float.Parse(values[2].Trim());
+            return new Vector3(x, y, z);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error parsing vector: " + vectorString + " Exception: " + e);
+            return Vector3.zero;
+        }
     }
 #endif
 }
