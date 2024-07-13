@@ -180,10 +180,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                     return;
                 }
             }
+            // 衝突オブジェクトが地面かどうかをタグで判定
+            if (collision.gameObject.CompareTag("HakoAsset"))
+            {
+                this.restitutionCoefficient = 0.0;
+            }
+            else
+            {
+                this.restitutionCoefficient = 1.0;
+            }
             this.lastCollision = collision;
             this.hasCollision = true;
             Debug.Log("# Enter Collision");
         }
+
         private void WriteCollisionData()
         {
             this.pdu_writer_collision.GetWriteOps().SetData("collision", hasCollision);
