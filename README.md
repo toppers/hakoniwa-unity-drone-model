@@ -1,305 +1,313 @@
-このリポジトリは、PX4と連携可能なUnityで作られたドローンシミュレータです。
+English ｜ [日本語](README-ja.md)
 
-このシミュレータは、リアルタイムでのドローン飛行のシミュレーションや、飛行制御アルゴリズムのテストなどに使用できます。
+Here is the English version of your GitHub README:
 
-ネイティブWindowsで箱庭ドローンシミュレータを利用されたい方は、[こちら](README-win.md)を参照ください。
+---
 
-# 目次
+This repository contains a drone simulator created with Unity that is compatible with PX4.
 
-- [箱庭ドローンモデル](#箱庭ドローンモデル)
-- [PX4との連携について](#px4との連携について)
-- [サポート環境](#サポート環境)
-  - [Mac環境](#mac環境)
-  - [Windows環境](#windows-環境)
-- [利用手順](#利用手順)
-  - [Unityアプリを利用する場合](#unityアプリを利用する場合)
-  - [Unityエディタを利用する場合](#unityエディタを利用する場合)
-- [コミュニティとサポート](#コミュニティとサポート)
-- [本リポジトリの内容とライセンスについて](#本リポジトリの内容とライセンスについて)
-- [貢献ガイドライン](#貢献ガイドライン)
+The simulator can be used for real-time drone flight simulation and testing flight control algorithms.
 
-# 箱庭ドローンモデル
+For those who want to use the Hakoniwa Drone Simulator on native Windows, please refer to [this](README-win.md).
 
-Unityで作られたドローンモデルは、箱庭オリジナルモデルであり、クアッドコプター型でのものです（下図）。
+# Table of Contents
 
-![スクリーンショット 2024-01-24 12 34 24](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/201fce8f-5f8c-43de-9d19-26870348624f)
+- [Hakoniwa Drone Model](#hakoniwa-drone-model)
+- [Integration with PX4](#integration-with-px4)
+- [Supported Environments](#supported-environments)
+  - [Mac Environment](#mac-environment)
+  - [Windows Environment](#windows-environment)
+- [Usage Instructions](#usage-instructions)
+  - [Using the Unity Application](#using-the-unity-application)
+  - [Using the Unity Editor](#using-the-unity-editor)
+- [Community and Support](#community-and-support)
+- [Repository Contents and License](#repository-contents-and-license)
+- [Contribution Guidelines](#contribution-guidelines)
 
+# Hakoniwa Drone Model
+
+The drone model created in Unity is an original Hakoniwa model and is a quadcopter type (as shown below).
+
+![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/201fce8f-5f8c-43de-9d19-26870348624f)
 
 Unity assets of the Hakoniwa Drone Model H1 are based on data provided by Mr. Hodaka Nakamura of Ida B. Wells-Barnett High School. We want to express our deepest gratitude for his awesome contribution :D
 
-箱庭ドローンモデルH1 のUnityアセットは,  中村歩高さんより提供いただいたデータを基に作成しています．箱庭へのOSS貢献に深く感謝いたします．
+# Integration with PX4
 
-
-# PX4との連携について
-
-このドローンシミュレータをPX4と連携させるには、別途 hakoniwa-px4sim リポジトリが必要です。PX4との連携方法については、以下のリンク先に詳細な説明がありますので、ご一読ください。
+To integrate this drone simulator with PX4, the hakoniwa-px4sim repository is required. For detailed instructions on how to integrate with PX4, please read the documentation at the following link:
 
 https://github.com/toppers/hakoniwa-px4sim
 
-# サポート環境
+# Supported Environments
 
-## Mac環境
-
-- [ ] Intel系 Mac
-- [x] Arm系 Mac
-
-## Windows 環境
-
-- [x] Windows 10/11　WSL2
+- [ ] Intel-based Mac
+- [X] Arm-based Mac
+- [X] Ubuntu
 - [X] Windows 10/11
 
-# 利用手順
-Unity向け箱庭ドローンモデルは、以下の２つの利用形態があります。
+# Usage Instructions
 
-1. Unityアプリを利用する場合
-2. Unityエディタを利用する場合
+The Hakoniwa Drone Model for Unity can be used in two ways:
 
-1 については、ビルド済みのアプリケーションを利用しますので、セットアップの手間は発生しません。
+1. Using the Unity Application
+2. Using the Unity Editor
 
-2 については、Unityエディタを利用しますので、セットアップの手間が発生します。
+For the first method, there is no setup hassle as you use a pre-built application.
 
-## Unityアプリを利用する場合
+For the second method, you will use the Unity Editor, which requires some setup.
 
-### Unityアプリを利用する場合の必要な環境
+## Using the Unity Application
 
-Unity関連の環境は特に必要ありません。
+### Required Environment for Using the Unity Application
 
-### Unityアプリを利用する場合のインストール方法
+No specific Unity environment is required.
 
-本リポジトリを以下のようにクローンします。
+### Installation Instructions for Using the Unity Application
+
+Clone the repository as follows:
 
 ```
 git clone --recursive https://github.com/toppers/hakoniwa-unity-drone-model.git
 ```
 
-クローンが終わったら、以下のようにディレクトリ移動します。
+Once the cloning is complete, navigate to the directory as follows:
 
 ```
 cd hakoniwa-unity-drone-model/
 ```
 
-以下のサイトから、ご利用環境に応じたアプリケーションをダウンロードしてください。
+Download the application suitable for your environment from the following site:
 
 https://github.com/toppers/hakoniwa-unity-drone-model/releases
 
-ダウンロードしたzipファイルを `hakoniwa-unity-drone-model` の下で解凍してください。
+Unzip the downloaded file under the `hakoniwa-unity-drone-model` directory.
 
-以下のディレクトリ構成になります。
-
-```
-hakoniwa-unity-drone-model/DroneApp<OS名>
-```
-
-### Unityアプリの起動方法
-
-`hakoniwa-unity-drone-model` 直下でコマンドを実行してください。
+The directory structure will be as follows:
 
 ```
-bash bash ./plugin/activate_app.bash DroneApp<OS名>
+hakoniwa-unity-drone-model/DroneApp<OS>
 ```
 
-Windows ネイティブアプリの場合は、`DroneWinNative/model.exe` をダブルクリックします。
+### Launching the Unity Application
 
-成功するとUnityアプリケーションが起動します。
+Run the following command directly under the `hakoniwa-unity-drone-model` directory:
 
+```
+bash ./plugin/activate_app.bash DroneApp<OS>
+```
 
-## Unityエディタを利用する場合
+For the Windows native app, double-click `DroneWinNative/model.exe`.
 
-### Unityエディタを利用する場合に必要な環境
+If successful, the Unity application will launch.
 
-- Homebrew(Mac版のみ)
+## Using the Unity Editor
+
+### Required Environment for Using the Unity Editor
+
+- Homebrew (Mac only)
 - Unity Hub
-- Unity（各CPUアーキテクチャに対応したもの）
-  - 2022.3.5f1 以降
-- Python 3.12（pyenvでインストールされたものMac版のみ。）
+- Unity (compatible with your CPU architecture)
+  - Version 2022.3.5f1 or later
 
-### Unityエディタを利用する場合のインストール方法
+### Installation Instructions for Using the Unity Editor
 
-本リポジトリを以下のようにクローンします。
+Clone the repository as follows:
 
 ```
 git clone --recursive https://github.com/toppers/hakoniwa-unity-drone-model.git
 ```
 
-クローンが終わったら、以下のようにディレクトリ移動します。
+Once the cloning is complete, navigate to the directory as follows:
 
 ```
 cd hakoniwa-unity-drone-model/
 ```
 
-そして、必要な Unity モジュール類をインストールします。
+Then, install the necessary Unity modules.
 
-MacOS　および WSL2　の場合：
+For MacOS/Ubuntu and WSL2:
 
 ```
 bash install.bash 
 ```
 
-Winodws　の場合：
+For Windows:
 
 ```
 bash install.bash win
 ```
 
+### Launching Unity
 
-### Unity起動
+Open the project in Unity Hub.
 
-この状態で Unity Hub で当該プロジェクトを開きましょう。
+Note: Ensure that the Unity Editor version matches your CPU architecture.
 
-注意：Unityエディタは、当該CPUアーキテクチャに対応したものをインストールしてご利用ください。
+Target folder: `hakoniwa-unity-drone-model\plugin\plugin-srcs`
 
-対象フォルダ：hakoniwa-unity-drone-model\plugin\plugin-srcs
+If a message about "Opening Project in Non-Matching Editor Installation" appears, click "Continue."
 
-Unityのバージョン違いに起因するメッセージ（"Opening Project in Non-Matching Editor Installation"）が出る場合は、「Continue」として問題ありません。
-
-以下のダイアログが出ますが、`Continue` してください。
+In the following dialog, click `Continue`.
 
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/e1fbc477-4edc-4e39-ab15-ccd6f0707f33)
 
-
-次に、以下のダイアログが出ますので、`Ignore` してください。
+Next, ignore the following dialog.
 
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/7c03ae41-f988-44cb-9ac1-2263507d254d)
 
-
-成功するとこうなります。
+If successful, you will see this.
 
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/50398cfa-f6fc-4eef-9679-5442bbd9de76)
 
-起動直後の状態ですと、コンソール上にたくさんエラーが出ています。原因は以下の２点です。
-リンク先を参照して、順番に対応してください。
+Upon initial launch, there may be many errors in the console due to the following reasons. Please follow the links to address them sequentially:
 
-* [Newtonsoft.Json が不足している](https://github.com/toppers/hakoniwa-document/tree/main/troubleshooting/unity#unity%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%ABnewtonsoftjson%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E5%87%BA%E3%82%8B)
-* [gRPC のライブラリ利用箇所がエラー出力している](https://github.com/toppers/hakoniwa-document/blob/main/troubleshooting/unity/README.md#grpc-%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E5%88%A9%E7%94%A8%E7%AE%87%E6%89%80%E3%81%8C%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%BA%E5%8A%9B%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B)(Mac版のみ)
+* [Missing Newtonsoft.Json](https://github.com/toppers/hakoniwa-document/tree/main/troubleshooting/unity#unity%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%ABnewtonsoftjson%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E5%87%BA%E3%82%8B)
+* [Error with gRPC library usage](https://github.com/toppers/hakoniwa-document/blob/main/troubleshooting/unity/README.md#grpc-%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E5%88%A9%E7%94%A8%E7%AE%87%E6%89%80%E3%81%8C%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%BA%E5%8A%9B%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B) (Mac only)
 
+### Preparing the Simulation Environment
 
-### シミュレーション環境の準備
+Double-click the Unity scene (`Assets/Scenes/ApiDemo`) as shown below.
 
-下図のように、Unity のシーン（`Assets/Scenes/Hakoniwa`）をダブルクリックします。
+![image](images/ProjectApiDemoScene.png)
 
-![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/6f27b52b-7f23-4b01-9290-9b0f40cf5e18)
+#### Generating Configuration Files
 
+Click `Window` -> `Hakoniwa` -> `Generate`.
 
-#### WSL2 の場合
+![Screenshot](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/85ab96b7-fd8b-4547-a4a3-c386d0a35813)
 
-ヒエラルキービューの`Hakoniwa/Hakoniwa/Robot/DroneAvator`をダブルクリックしてください。
+If successful, you will see JSON logs in the console without any error logs.
 
-![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/96ee3066-316f-42f6-adcc-bb4b283f02eb)
+![Screenshot](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/6fa55a56-1693-4728-b0ef-091e10fb4b22)
 
+For Windows, this operation must be repeated after every machine reboot.
 
-`DroneAvator` のインスペクタビューを開き、`Io_method`と`Comm_method`を編集します。
-デフォルトでは、それぞれ `SHM`、`DIRECT`となっています。
+#### Configuration Files
 
-![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/1ef92055-667f-4660-8042-c57e8b78d2aa)
-
-これを以下のように変更してください。
-
-![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/730c83b9-be88-4197-9f53-602fc7f40275)
-
-それぞれ `RPC`、`UDP`とします。
-
-#### コンフィグファイルを出力
-
-そして、`Window` -> `Hakoniwa` -> `Generate` をクリックします。
-
-![スクリーンショット 2023-08-28 7 59 45](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/85ab96b7-fd8b-4547-a4a3-c386d0a35813)
-
-
-成功すると、コンソール上にエラーログ出力がなく、下図のように json のログが出力されています。
-
-![スクリーンショット 2023-08-28 8 00 16](https://github.com/toppers/hakoniwa-unity-picomodel/assets/164193/6fa55a56-1693-4728-b0ef-091e10fb4b22)
-
-Windowsの場合、本オペレーションは、マシン再起動時に必ず再実行してください。
-
-#### コンフィグファイル
-
-生成されたコンフィグファイルですが、`hakoniwa-unity-drone-model\plugin\plugin-srcs` 直下に生成されます。
+The generated configuration files will be located directly under `hakoniwa-unity-drone-model\plugin\plugin-srcs`.
 
 * [core_config.json](https://github.com/toppers/hakoniwa-document/blob/main/architecture/assets/README-unity.md#%E7%AE%B1%E5%BA%AD%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%85%A5%E5%8A%9Bcore_configjson)
 * custom.json
 
-custom.jsonの出力は以下の通りとなります。
-
-##### MacおよびWindowsの場合
+The output of custom.json is as follows:
 
 ```json
 {
   "robots": [
     {
-      "name": "EnvironmentEffector",
-      "rpc_pdu_readers": [],
-      "rpc_pdu_writers": [],
-      "shm_pdu_readers": [],
-      "shm_pdu_writers": []
-    },
-    {
-      "name": "DroneAvator",
+      "name": "DroneTransporter",
       "rpc_pdu_readers": [],
       "rpc_pdu_writers": [],
       "shm_pdu_readers": [
         {
           "type": "hako_mavlink_msgs/HakoHilActuatorControls",
           "org_name": "drone_motor",
-          "name": "DroneAvator_drone_motor",
+          "name": "DroneTransporter_drone_motor",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
           "channel_id": 0,
-          "pdu_size": 88,
+          "pdu_size": 112,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "geometry_msgs/Twist",
           "org_name": "drone_pos",
-          "name": "DroneAvator_drone_pos",
+          "name": "DroneTransporter_drone_pos",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
           "channel_id": 1,
-          "pdu_size": 48,
+          "pdu_size":
+
+ 72,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "hako_msgs/ManualPosAttControl",
           "org_name": "drone_manual_pos_att_control",
-          "name": "DroneAvator_drone_manual_pos_att_control",
+          "name": "DroneTransporter_drone_manual_pos_att_control",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 3,
-          "pdu_size": 56,
+          "pdu_size": 80,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "hako_msgs/HakoDroneCmdTakeoff",
           "org_name": "drone_cmd_takeoff",
-          "name": "DroneAvator_drone_cmd_takeoff",
+          "name": "DroneTransporter_drone_cmd_takeoff",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 5,
-          "pdu_size": 32,
+          "pdu_size": 64,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "hako_msgs/HakoDroneCmdMove",
           "org_name": "drone_cmd_move",
-          "name": "DroneAvator_drone_cmd_move",
+          "name": "DroneTransporter_drone_cmd_move",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 6,
-          "pdu_size": 48,
+          "pdu_size": 80,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "hako_msgs/HakoDroneCmdLand",
           "org_name": "drone_cmd_land",
-          "name": "DroneAvator_drone_cmd_land",
+          "name": "DroneTransporter_drone_cmd_land",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 7,
-          "pdu_size": 32,
+          "pdu_size": 64,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/GameControllerOperation",
+          "org_name": "hako_cmd_game",
+          "name": "DroneTransporter_hako_cmd_game",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 8,
+          "pdu_size": 136,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoCmdCamera",
+          "org_name": "hako_cmd_camera",
+          "name": "DroneTransporter_hako_cmd_camera",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 9,
+          "pdu_size": 44,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoCmdCameraMove",
+          "org_name": "hako_cmd_camera_move",
+          "name": "DroneTransporter_hako_cmd_camera_move",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 11,
+          "pdu_size": 64,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoCmdMagnetHolder",
+          "org_name": "hako_cmd_magnet_holder",
+          "name": "DroneTransporter_hako_cmd_magnet_holder",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 13,
+          "pdu_size": 40,
           "write_cycle": 1,
           "method_type": "SHM"
         }
@@ -308,23 +316,78 @@ custom.jsonの出力は以下の通りとなります。
         {
           "type": "hako_msgs/Collision",
           "org_name": "drone_collision",
-          "name": "DroneAvator_drone_collision",
+          "name": "DroneTransporter_drone_collision",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 2,
-          "pdu_size": 280,
+          "pdu_size": 304,
           "write_cycle": 1,
           "method_type": "SHM"
         },
         {
           "type": "hako_msgs/Disturbance",
           "org_name": "drone_disturbance",
-          "name": "DroneAvator_drone_disturbance",
+          "name": "DroneTransporter_drone_disturbance",
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 4,
-          "pdu_size": 8,
+          "pdu_size": 32,
           "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoCameraData",
+          "org_name": "hako_camera_data",
+          "name": "DroneTransporter_hako_camera_data",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 10,
+          "pdu_size": 102968,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoCameraInfo",
+          "org_name": "hako_cmd_camera_info",
+          "name": "DroneTransporter_hako_cmd_camera_info",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 12,
+          "pdu_size": 56,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "hako_msgs/HakoStatusMagnetHolder",
+          "org_name": "hako_status_magnet_holder",
+          "name": "DroneTransporter_hako_status_magnet_holder",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 14,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        },
+        {
+          "type": "sensor_msgs/PointCloud2",
+          "org_name": "lidar_points",
+          "name": "DroneTransporter_lidar_points",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 15,
+          "pdu_size": 177400,
+          "write_cycle": 5,
+          "method_type": "SHM"
+        },
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "lidar_pos",
+          "name": "DroneTransporter_lidar_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 16,
+          "pdu_size": 72,
+          "write_cycle": 5,
           "method_type": "SHM"
         }
       ]
@@ -333,153 +396,45 @@ custom.jsonの出力は以下の通りとなります。
 }
 ```
 
-##### WSL2の場合
+# Community and Support
 
-```json
-{
-  "robots": [
-    {
-      "name": "EnvironmentEffector",
-      "rpc_pdu_readers": [],
-      "rpc_pdu_writers": [],
-      "shm_pdu_readers": [],
-      "shm_pdu_writers": []
-    },
-    {
-      "name": "DroneAvator",
-      "rpc_pdu_readers": [
-        {
-          "type": "hako_mavlink_msgs/HakoHilActuatorControls",
-          "org_name": "drone_motor",
-          "name": "DroneAvator_drone_motor",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
-          "channel_id": 0,
-          "pdu_size": 88,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "geometry_msgs/Twist",
-          "org_name": "drone_pos",
-          "name": "DroneAvator_drone_pos",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
-          "channel_id": 1,
-          "pdu_size": 48,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "hako_msgs/ManualPosAttControl",
-          "org_name": "drone_manual_pos_att_control",
-          "name": "DroneAvator_drone_manual_pos_att_control",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 3,
-          "pdu_size": 56,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "hako_msgs/HakoDroneCmdTakeoff",
-          "org_name": "drone_cmd_takeoff",
-          "name": "DroneAvator_drone_cmd_takeoff",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 5,
-          "pdu_size": 32,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "hako_msgs/HakoDroneCmdMove",
-          "org_name": "drone_cmd_move",
-          "name": "DroneAvator_drone_cmd_move",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 6,
-          "pdu_size": 48,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "hako_msgs/HakoDroneCmdLand",
-          "org_name": "drone_cmd_land",
-          "name": "DroneAvator_drone_cmd_land",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 7,
-          "pdu_size": 32,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        }
-      ],
-      "rpc_pdu_writers": [
-        {
-          "type": "hako_msgs/Collision",
-          "org_name": "drone_collision",
-          "name": "DroneAvator_drone_collision",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 2,
-          "pdu_size": 280,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        },
-        {
-          "type": "hako_msgs/Disturbance",
-          "org_name": "drone_disturbance",
-          "name": "DroneAvator_drone_disturbance",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 4,
-          "pdu_size": 8,
-          "write_cycle": 1,
-          "method_type": "UDP"
-        }
-      ],
-      "shm_pdu_readers": [],
-      "shm_pdu_writers": []
-    }
-  ]
-}
-```
+Questions and discussions about this project are conducted on the [Hakoniwa Community Forum](https://github.com/toppers/hakoniwa/discussions). Here, you can resolve doubts about the project, share ideas, and provide feedback. The latest information and updates about the project are also shared here.
 
-# コミュニティとサポート
+If you have questions, suggestions, or want to discuss issues faced by other users, feel free to post [here](https://github.com/toppers/hakoniwa/discussions).
 
-このプロジェクトに関する質問やディスカッションは、[箱庭コミュニティフォーラム](https://github.com/toppers/hakoniwa/discussions)で行われています。ここでは、プロジェクトに関する疑問の解消、アイデアの共有、フィードバックの提供ができます。また、プロジェクトの最新情報やアップデートについても、ここで情報共有されます。
+# Repository Contents and License
 
-プロジェクトに関する質問や提案がある場合、または同じ問題に直面している他のユーザーと意見交換をしたい場合は、遠慮なく[こちら](https://github.com/toppers/hakoniwa/discussions)に投稿してください。
+Regarding the content
 
+ of this repository, if the license is specified in each file, follow that license. For content that is not explicitly mentioned, it is published under the [TOPPERS License](https://www.toppers.jp/license.html).
 
-# 本リポジトリの内容とライセンスについて
+The TOPPERS License is an open-source license for projects, outlining conditions for software use, modification, and distribution. For details, refer to the link above.
 
-本リポジトリのコンテンツに関しては、各ファイルにライセンスが明記されている場合、そのライセンスに従います。特に明記されていないコンテンツについては、[TOPPERSライセンス](https://www.toppers.jp/license.html) に基づいて公開されています。
+# Contribution Guidelines
 
-TOPPERSライセンスは、オープンソースプロジェクトのためのライセンスであり、ソフトウェアの使用、変更、配布に関する条件を定めています。ライセンスの詳細については、上記リンクを参照してください。
+Thank you for your interest in contributing to this project. Various forms of contributions are welcome. Below are guidelines on how to contribute to the project.
 
-# 貢献ガイドライン
+## Reporting Issues
 
-本プロジェクトへの貢献に興味を持っていただき、ありがとうございます。様々な形での貢献を歓迎しています。以下に、プロジェクトへの貢献方法についてのガイドラインを示します。
+- Report bugs and propose new features through GitHub Issues.
+- Before creating an issue, check if a similar issue already exists.
+- Provide as much information as possible when creating an issue. This includes reproduction steps, expected behavior, actual behavior, and the environment used.
 
-## イシューの報告
+## Pull Requests
 
-- バグの報告や新機能の提案などは、GitHubのIssuesを通じて行ってください。
-- issue を作成する前に、同様の issue が既に存在しないかを確認してください。
-- issue を作成する際は、できるだけ多くの情報を提供してください。再現手順、期待される挙動、実際の挙動、使用している環境などが含まれます。
+- Contribute code changes such as feature additions and bug fixes through pull requests.
+- For major changes or new features, it is recommended to discuss them in a related issue beforehand.
+- Ensure consistent coding style and conventions by following the existing code style.
 
-## プルリクエスト
+## Communication
 
-- 機能追加やバグ修正など、コードに関する貢献はプルリクエストを通じて行ってください。
-- 新機能の追加や大きな変更の場合は、事前に関連する issue  で議論を行うことを推奨します。
-- コードのスタイルやコーディング規約に一貫性を持たせるため、既存のコードスタイルに従ってください。
+- Discuss and ask questions about the project in [Discussions](https://github.com/toppers/hakoniwa/discussions).
+- Communicate respectfully with other contributors.
 
-## コミュニケーション
+## Other Contributions
 
-- プロジェクトに関するディスカッションや質問は、[Discussions](https://github.com/toppers/hakoniwa/discussions)で行ってください。
-- 他の貢献者とのコミュニケーションは、敬意を持って行ってください。
+- Improvements to documentation and translations, among other non-code contributions, are also welcome.
 
-## その他の貢献
+---
 
-- ドキュメントの改善や翻訳など、コード以外の貢献も歓迎します。
+Feel free to ask if you need further adjustments or additions.
