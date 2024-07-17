@@ -434,7 +434,3 @@ Thank you for your interest in contributing to this project. Various forms of co
 ## Other Contributions
 
 - Improvements to documentation and translations, among other non-code contributions, are also welcome.
-
----
-
-Feel free to ask if you need further adjustments or additions.
