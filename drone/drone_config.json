@@ -9,7 +9,7 @@
                     "RotationsPerSecond": 10,
                     "PointsPerSecond": 10000,
                     "MaxDistance": 10,
-                    "X": 0.4401, "Y": 0, "Z": -0.1365,
+                    "X": 0.110025, "Y": 0, "Z": -0.034125,
                     "Roll": 0, "Pitch": 0, "Yaw" : 0,
                     "VerticalFOVUpper": 5,
                     "VerticalFOVLower": -5,

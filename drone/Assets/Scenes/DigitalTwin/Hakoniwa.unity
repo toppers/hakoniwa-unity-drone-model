@@ -296,11 +296,11 @@ MonoBehaviour:
   - {fileID: 7647908284097684874}
   avators:
   - {fileID: 1593280746}
-  server_ipaddr: 192.168.11.2
+  server_ipaddr: 192.168.1.2
   server_portno: 54001
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.11.57
+  client_ipaddr: 192.168.1.6
   client_portno: 54002
 --- !u!4 &85763833
 Transform:
@@ -2087,15 +2087,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879986362315745203, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.294
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 5879986362315745203, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.411
+      value: 1.342
       objectReference: {fileID: 0}
     - target: {fileID: 5879986362315745203, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.211
       objectReference: {fileID: 0}
     - target: {fileID: 5879986362315745203, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
       propertyPath: m_LocalRotation.w

@@ -41,9 +41,9 @@ public class OriginSetter : MonoBehaviour
 
         // 位置と回転の設定
         arSessionOrigin.transform.position = position;
-        //Vector3 newRotation = arSessionOrigin.transform.eulerAngles;
-        //newRotation.y = rotation.y;
-        //arSessionOrigin.transform.rotation = Quaternion.Euler(newRotation);
+        Vector3 newRotation = arSessionOrigin.transform.eulerAngles;
+        newRotation.y = rotation.y;
+        arSessionOrigin.transform.rotation = Quaternion.Euler(newRotation);
         Debug.Log("After: arSessionOrigin position: " + arSessionOrigin.transform.position);
     }
     // ベクトル3を解析するヘルパーメソッド
