@@ -13,6 +13,8 @@ public class IPManager : MonoBehaviour
     public Button adjustButton;
     public Button startButton;
     public GameObject savePopupPanel;
+    public string main_scene = "ARDevice";
+    public string adjust_scene = "ARAdjust";
     private string server_savedIPKey = "server_savedIP";
     private string client_savedIPKey = "client_savedIP";
 
@@ -29,7 +31,10 @@ public class IPManager : MonoBehaviour
         // ボタンのクリックイベントにメソッドを登録
         saveButton.onClick.AddListener(SaveIP);
         startButton.onClick.AddListener(StartSim);
-        adjustButton.onClick.AddListener(Adjust);
+        if (adjustButton)
+        {
+            adjustButton.onClick.AddListener(Adjust);
+        }
 
         // ポップアップパネルを非表示に設定
         savePopupPanel.SetActive(false);
@@ -79,10 +84,10 @@ public class IPManager : MonoBehaviour
     }
     void StartSim()
     {
-        SceneManager.LoadScene("ARDevice");
+        SceneManager.LoadScene(main_scene);
     }
     void Adjust()
     {
-        SceneManager.LoadScene("ARAdjust");
+        SceneManager.LoadScene(adjust_scene);
     }
 }
