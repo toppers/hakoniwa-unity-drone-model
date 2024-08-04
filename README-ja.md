@@ -90,7 +90,7 @@ hakoniwa-unity-drone-model/DroneApp<OS>
 `hakoniwa-unity-drone-model` 直下でコマンドを実行してください。
 
 ```
-bash bash ./plugin/activate_app.bash DroneApp<OS>
+bash ./plugin/activate_app.bash DroneApp<OS>
 ```
 
 Windows ネイティブアプリの場合は、`DroneWinNative/model.exe` をダブルクリックします。
