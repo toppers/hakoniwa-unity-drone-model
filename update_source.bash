@@ -16,6 +16,10 @@ cp -rp plugin/plugin-srcs/Assets/Scripts/PluggableAsset/Assets/Environment/* \
     drone/Assets/Scripts/PluggableAsset/Assets/Environment/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/Virtual*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoObject*.cs* \
+    drone/Assets/Plugin/src/Unity/AR/Assets/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoXrParam*.cs* \
+    drone/Assets/Plugin/src/Unity/AR/Assets/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/Origin* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
 cp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/IPManager.cs* \
