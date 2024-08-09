@@ -111,6 +111,22 @@ namespace Hakoniwa.AR.Core
             }
             else if (isInitialized)
             {
+                var ap = this.paramServer.GetAdjustmentParams();
+                if (ap != null)
+                {
+                    /*
+                     * Position Setting
+                     */
+                    var cp = player.transform.position;
+                    player.transform.position = new Vector3(cp.x + ap.position[0], cp.y + ap.position[1], cp.z + ap.position[2]);
+                    /*
+                     * Rotation Setting
+                     */
+                    Vector3 newRotation = player.transform.eulerAngles;
+                    newRotation.y += ap.rotation[1];
+                    player.transform.rotation = Quaternion.Euler(newRotation);
+                }
+
                 var data = this.server.RecvData();
                 if (data != null)
                 {
