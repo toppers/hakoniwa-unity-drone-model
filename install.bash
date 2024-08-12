@@ -26,7 +26,6 @@ cd plugin
 bash -x install.bash ${OPT_WIN}
 
 cd ..
-cp -rp drone/ros_types/* plugin/plugin-srcs/ros_types/
 
 if [ $OS_TYPE = "Darwin" ]
 then
