@@ -79,6 +79,7 @@ if __name__ == "__main__":
             input_handler = JoystickInputHandler(initial_position, initial_rotation, send_udp_message, save_to_json, ip, port)
 
         input_handler.handle_input()
+        print("DONE")
     except Exception as e:
         print(f"ERROR: An unexpected error occurred during input handling: {e}")
         sys.exit(1)
