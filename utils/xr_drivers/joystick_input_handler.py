@@ -1,6 +1,7 @@
 import pygame
-from input_handler import InputHandler
+from .input_handler import InputHandler
 import json
+import time
 
 class JoystickInputHandler(InputHandler):
     # 定数の定義（PS4コントローラの設定に基づく）
@@ -62,30 +63,45 @@ class JoystickInputHandler(InputHandler):
 
     def handle_input(self):
         running = True
+        last_sent_time = 0
+        send_interval = 0.1  # 100msごとに送信
+
         while running:
-            for event in pygame.event.get():
+            current_time = time.time()  # ループの先頭で時間を取得
+            pygame.event.pump()  # イベントキューを更新
+            for event in pygame.event.get([pygame.JOYAXISMOTION, pygame.JOYBUTTONDOWN]):  # 必要なイベントのみ取得
                 if event.type == pygame.JOYAXISMOTION:
-                    temp_position = [0, 0, 0]
-                    temp_rotation = [0, 0, 0]
+                    if current_time - last_sent_time >= send_interval:
+                        temp_position = [0, 0, 0]
+                        temp_rotation = [0, 0, 0]
 
-                    # 左スティック：Yaw角と上下調整
-                    temp_rotation[1] = self.get_stick_value(self.STICK_TURN_LR) * 1.0  # yaw: 左右回転
-                    temp_position[1] = self.get_stick_value(self.STICK_UP_DOWN) * 0.01  # y: 上下
+                        # 左スティック：Yaw角と上下調整
+                        yaw_value = self.get_stick_value(self.STICK_TURN_LR) * 1.0
+                        vertical_value = self.get_stick_value(self.STICK_UP_DOWN) * 0.1
 
-                    # 右スティック：左右と前後調整
-                    temp_position[0] = self.get_stick_value(self.STICK_MOVE_LR) * 0.01  # x: 左右移動
-                    temp_position[2] = self.get_stick_value(self.STICK_MOVE_FB) * 0.01  # z: 前後移動
+                        # 右スティック：左右と前後調整
+                        horizontal_value = self.get_stick_value(self.STICK_MOVE_LR) * 0.1
+                        forward_backward_value = self.get_stick_value(self.STICK_MOVE_FB) * 0.1
 
-                    self.position[0] += temp_position[0]
-                    self.position[1] += temp_position[1]
-                    self.position[2] += temp_position[2]
-                    self.rotation[1] += temp_rotation[1]
+                        # スティックの値が変わった場合のみ更新
+                        if yaw_value != 0 or vertical_value != 0 or horizontal_value != 0 or forward_backward_value != 0:
+                            temp_rotation[1] = yaw_value
+                            temp_position[1] = vertical_value
+                            temp_position[0] = horizontal_value
+                            temp_position[2] = forward_backward_value
 
-                    updated_parameters = {"position": temp_position, "rotation": temp_rotation}
-                    message = json.dumps(updated_parameters)
-                    self.send_udp_message(message, self.ip, self.port)
-                    print(f"Updated position: {temp_position}, rotation: {temp_rotation}")
-                    self.save_to_json(self.position, self.rotation)
+                            self.position[0] += temp_position[0]
+                            self.position[1] += temp_position[1]
+                            self.position[2] += temp_position[2]
+                            self.rotation[1] += temp_rotation[1]
+
+                            updated_parameters = {"position": temp_position, "rotation": temp_rotation}
+                            message = json.dumps(updated_parameters)
+                            self.send_udp_message(message, self.ip, self.port)
+                            print(f"{current_time} Updated position: {temp_position}, rotation: {temp_rotation}")
+                            self.save_to_json(self.position, self.rotation)
+
+                            last_sent_time = current_time  # 最後に送信した時間を更新
 
                 elif event.type == pygame.JOYBUTTONDOWN:
                     if self.joystick.get_button(self.SWITCH_CIRCLE):  # 確認ボタン

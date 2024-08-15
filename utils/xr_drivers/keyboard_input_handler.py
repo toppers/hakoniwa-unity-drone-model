@@ -1,5 +1,5 @@
 from pynput import keyboard
-from input_handler import InputHandler
+from .input_handler import InputHandler
 import json
 
 class KeyboardInputHandler(InputHandler):
