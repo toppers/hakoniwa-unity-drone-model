@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
+using Hakoniwa.AR.Core;
 
-public class DroneAvatorRotors : MonoBehaviour
+public class DroneAvatorRotors : MonoBehaviour, IHakoAvatorState
 {
     private AudioSource audioSource;
     public Camera target_camera;
@@ -43,27 +44,14 @@ public class DroneAvatorRotors : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.y > initial_pos)
+        foreach (var rotor in rotors)
         {
-            foreach (var rotor in rotors)
-            {
-                my_controls = 0.5f;
-                rotor.AddForce(0.5f);
-            }
-        }
-        else
-        {
-            foreach (var rotor in rotors)
-            {
-                my_controls = 0.0f;
-                rotor.AddForce(0.0f);
-            }
+            rotor.AddForce(my_controls);
         }
         if (enableAudio == false)
         {
             return;
         }
-
         // Calculate distance to the target camera
         float distance = Vector3.Distance(target_camera.transform.position, transform.position);
 
@@ -83,5 +71,10 @@ public class DroneAvatorRotors : MonoBehaviour
         {
             audioSource.volume = volume;
         }
+    }
+
+    public void SetState(int state)
+    {
+        my_controls = ( ((float)(state)) / 100.0f );
     }
 }
