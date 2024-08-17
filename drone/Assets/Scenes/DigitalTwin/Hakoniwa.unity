@@ -297,11 +297,11 @@ MonoBehaviour:
   - {fileID: 250847330}
   avators:
   - {fileID: 8670355835160044923}
-  server_ipaddr: 192.168.12.3
+  server_ipaddr: 192.168.2.100
   server_portno: 54001
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.12.4
+  client_ipaddr: 192.168.2.101
   client_portno: 54002
 --- !u!4 &85763833
 Transform:
