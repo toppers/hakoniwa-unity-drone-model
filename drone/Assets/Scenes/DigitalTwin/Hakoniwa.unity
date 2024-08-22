@@ -309,7 +309,7 @@ MonoBehaviour:
   server_portno: 54001
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.2.106
+  client_ipaddr: 192.168.2.108
   client_portno: 54002
   send_cycle: 3
 --- !u!4 &85763833

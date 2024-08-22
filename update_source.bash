@@ -18,6 +18,8 @@ cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/Virtual*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoObject*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Core/HakoObjectSynchronizer.cs \
+    drone/Assets/Plugin/src/Core/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoXrParam*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/Origin* \
