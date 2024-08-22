@@ -163,6 +163,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 143520714}
     m_Modifications:
+    - target: {fileID: 2134957801076689282, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: distance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134957801076689282, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: forceMagnitude
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3247601036897931212, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
       propertyPath: m_Name
       value: DroneTransporter
@@ -297,12 +305,13 @@ MonoBehaviour:
   - {fileID: 250847330}
   avators:
   - {fileID: 8670355835160044923}
-  server_ipaddr: 192.168.2.100
+  server_ipaddr: 192.168.2.107
   server_portno: 54001
   timeout_sec: 1
   scale: 1
-  client_ipaddr: 192.168.2.101
+  client_ipaddr: 192.168.2.106
   client_portno: 54002
+  send_cycle: 3
 --- !u!4 &85763833
 Transform:
   m_ObjectHideFlags: 0
@@ -1375,7 +1384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1324347525310427370, guid: 392b1cb1af0c64438b0f98565c1d1a76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.378
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1324347525310427370, guid: 392b1cb1af0c64438b0f98565c1d1a76, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1383,7 +1392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1324347525310427370, guid: 392b1cb1af0c64438b0f98565c1d1a76, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.159
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1324347525310427370, guid: 392b1cb1af0c64438b0f98565c1d1a76, type: 3}
       propertyPath: m_LocalRotation.w
