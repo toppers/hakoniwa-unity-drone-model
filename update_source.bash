@@ -26,6 +26,8 @@ cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/Origin* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
 cp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/IPManager.cs* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/WebGL/* \
+    drone/Assets/Plugin/src/Unity/WebGL/
 
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
