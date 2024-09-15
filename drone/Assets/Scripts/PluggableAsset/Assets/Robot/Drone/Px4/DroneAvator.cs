@@ -9,10 +9,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using static Hakoniwa.PluggableAsset.Assets.Robot.Parts.MagnetHolder;
+using Hakoniwa.AR.Core;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
-    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty
+    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState
     {
         private GameObject root;
         private TemperatureColorExpression colorExpression;
@@ -589,6 +590,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         bool IRobotProperty.IsInTemeratureRegion()
         {
             return this.temperation_region_count > 0;
+        }
+
+        public int GetState()
+        {
+            return (int)(this.my_controls * 100.0);
         }
     }
 }

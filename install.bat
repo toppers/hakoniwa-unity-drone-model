@@ -10,8 +10,8 @@ copy /Y drone\hakoniwa_path.json plugin\plugin-srcs\
 echo Copying Assets to plugin-srcs\Assets
 xcopy /E /I /Y drone\Assets\* plugin\plugin-srcs\Assets\
 
-echo Copying hakoniwa-base to hakoniwa-base
-xcopy /E /I /Y drone\hakoniwa-base\* hakoniwa-base\
+echo Copying Packages 
+xcopy /E /I /Y drone\Packages\* plugin\plugin-srcs\Packages\
 
 cd plugin
 

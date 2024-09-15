@@ -97,9 +97,15 @@ namespace Hakoniwa.AR.Core
             }
             paramServer.DestroyObjects();
         }
-
+        public int send_cycle = 5;
+        int count;
         async void FixedUpdate()
         {
+            count++;
+            if ((count % send_cycle) != 0)
+            {
+                return;
+            }
             if (!startInitialization)
             {
                 this.param = paramServer.GetHakoXrParams();
