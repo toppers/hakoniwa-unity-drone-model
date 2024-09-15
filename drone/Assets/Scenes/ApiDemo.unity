@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276788, g: 0.21589147, b: 0.29782534, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2652,9 +2651,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3e5be1218eee42a1d6b857cc96b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 5393690125922138184}
+  currentMode: 1
   wheelSpeed: 8
   moveSpeed: 8
   rotateSpeed: 1
+  useGimbal: 1
+  gimbalSmoothSpeed: 2
+  fixedDistance: {x: 0, y: 2, z: -7}
+  fixedAngle: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
