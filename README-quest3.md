@@ -48,6 +48,22 @@ Android のAPIレベルを下図のようにしてください。
 ![image](./images/quest3/APILevel.png)
 
 
+XR Plug-in Management を選択し、`Oculus` にチェックを入れます。
+
+![image](./images/quest3/XRPlugin.png)
+
+
+XR Plug-in Management/Oculus を選択し、`Quest3` にチェックを入れます。
+
+![image](./images/quest3/OculusQuest3.png)
+
+
+XR Plug-in Management/Project Validationを選択し、ErrorとWarningがいくつか出ていますので、それぞれ`Fix`します。
+ただし、以下のエラーは残りますが、問題ありません。
+
+![image](./images/quest3/Validation.png)
+
+
 ## QUEST3向けの Unity パッケージのインストール
 
 Window/Package Manager をクリックして、Unity Assetsから、Oculus Integration を選択し、インポートします。
@@ -93,3 +109,7 @@ QUEST3のデバイスIDが表示されない場合は、以下を確認してく
 - QUEST3のQuest Linkが有効になっているか
 - QUEST3をUSB接続したときに許可しているか
 - Reflesh ボタンをクリックしてみる
+
+上記でもダメな場合は、Unityエディタの再起動、QUEST3の再起動を試してみてください。
+
+ちなみに、ビルドは時間がかかりますので、気長に待ちましょう（遅いと３０分くらい）。
