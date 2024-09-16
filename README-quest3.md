@@ -70,6 +70,8 @@ https://kabaunity.com/ar-art/
 
 まず、File/Build Settings... をクリックして、下図のように、Sceneを`Quest3-Demo`に変更します。
 
+![image](./images/quest3/BuildSettingApl.png)
+
 次に、`Build`ボタンをクリックすると、ビルド対象ディレクトリとファイル名を聞かれます。
 
 ディレクトリは、`hakoniwa-unity-drone-model`直下に`Build`を作成して、ここにビルドファイルを配置しましょう。
