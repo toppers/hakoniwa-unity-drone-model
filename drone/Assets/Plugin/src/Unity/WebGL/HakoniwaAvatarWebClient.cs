@@ -1,3 +1,4 @@
+#if UNITY_WEBGL
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -380,3 +381,5 @@ namespace Hakoniwa.Web.Core
         }
     }
 }
+
+#endif
