@@ -54,7 +54,7 @@ QUEST3と箱庭用PCは互いにUDP通信するため、設定ファイルにて
 箱庭ドローン位置調整スクリプトの実行方法は以下の通りです。
 
 ```bash
-python utils/xr_origin_tuning.py --input joystick ./plugin/plugin-srcs/xr_config.json <QUEST3のIPアドレス>:3852
+python utils/xr_origin_tuning.py --input joystick ./plugin/plugin-srcs/xr_config.json <QUEST3のIPアドレス>:38528
 ```
 
 `hakoniwa-unity-drone-model`直下で実行してください。
