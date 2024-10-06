@@ -40,7 +40,7 @@ https://github.com/toppers/hakoniwa-px4sim
 
 # Supported Environments
 
-- [ ] Intel-based Mac
+- [X] Intel-based Mac
 - [X] Arm-based Mac
 - [X] Ubuntu
 - [X] Windows 10/11

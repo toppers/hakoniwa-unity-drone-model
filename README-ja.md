@@ -38,7 +38,7 @@ https://github.com/toppers/hakoniwa-px4sim
 
 # サポート環境
 
-- [ ] Intel系 Mac
+- [X] Intel系 Mac
 - [X] Arm系 Mac
 - [X] Ubuntu
 - [X] Windows 10/11
