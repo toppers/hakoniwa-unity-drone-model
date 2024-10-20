@@ -54,6 +54,8 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ReferenceImageLibrary* \
     drone/Assets/Prefab/Robots/AR/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ar.png* \
     drone/Assets/Prefab/Robots/AR/
+cp plugin/plugin-srcs/Assets/Scenes/DigitalTwin/CenterEyeAnchor.prefab* \
+    drone/Assets/Scenes/DigitalTwin/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
