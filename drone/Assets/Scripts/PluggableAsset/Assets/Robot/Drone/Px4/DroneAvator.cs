@@ -419,7 +419,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
 
             WriteCollisionData();
-            WriteDisturbanceData();
+            //WriteDisturbanceData();
 
             this.colorExpression.SetTemperature(this.current_temperature);
 
