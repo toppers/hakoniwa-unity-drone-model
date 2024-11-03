@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "geometry_msgs/Vector3", 
+      "name": "magnetic_field"
+    }, 
+    {
+      "type": "float64[9]", 
+      "name": "magnetic_field_covariance"
+    }
+  ]
+}

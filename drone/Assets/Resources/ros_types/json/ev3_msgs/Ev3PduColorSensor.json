@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "color",
+      "type": "uint32"
+    },
+    {
+      "name": "reflect",
+      "type": "uint32"
+    },
+    {
+      "name": "rgb_r",
+      "type": "uint32"
+    },
+    {
+      "name": "rgb_g",
+      "type": "uint32"
+    },
+    {
+      "name": "rgb_b",
+      "type": "uint32"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+single:struct:stamp:builtin_interfaces/Time:0:8
+single:primitive:frame_id:string:8:128

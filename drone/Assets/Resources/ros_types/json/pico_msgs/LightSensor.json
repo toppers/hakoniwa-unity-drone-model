@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "forward_r",
+      "type": "int16"
+    },
+    {
+      "name": "forward_l",
+      "type": "int16"
+    },
+    {
+      "name": "left",
+      "type": "int16"
+    },
+    {
+      "name": "right",
+      "type": "int16"
+    }
+  ]
+}

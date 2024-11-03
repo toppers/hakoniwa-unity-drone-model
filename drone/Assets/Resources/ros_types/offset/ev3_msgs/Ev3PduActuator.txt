@@ -1,0 +1,4 @@
+single:struct:head:Ev3PduActuatorHeader:0:152
+array:primitive:leds:uint8:152:1:1
+array:struct:motors:Ev3PduMotor:156:36:3
+single:primitive:gyro_reset:uint32:192:4

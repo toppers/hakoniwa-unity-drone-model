@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Vector3", 
+      "name": "force"
+    }, 
+    {
+      "type": "Vector3", 
+      "name": "torque"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "builtin_interfaces/Time", 
+      "name": "time_ref"
+    }, 
+    {
+      "type": "string", 
+      "name": "source"
+    }
+  ]
+}

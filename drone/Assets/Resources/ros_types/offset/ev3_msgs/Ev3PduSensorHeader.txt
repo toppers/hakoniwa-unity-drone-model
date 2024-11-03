@@ -1,0 +1,5 @@
+single:primitive:name:string:0:128
+single:primitive:version:uint32:128:4
+single:primitive:hakoniwa_time:int64:136:8
+single:primitive:ext_off:uint32:144:4
+single:primitive:ext_size:uint32:148:4

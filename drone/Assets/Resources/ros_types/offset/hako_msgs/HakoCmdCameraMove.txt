@@ -1,0 +1,3 @@
+single:struct:header:HakoCmdHeader:0:12
+single:primitive:request_id:int32:12:4
+single:struct:angle:geometry_msgs/Vector3:16:24

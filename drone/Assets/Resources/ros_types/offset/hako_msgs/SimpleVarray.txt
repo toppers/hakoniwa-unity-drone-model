@@ -1,0 +1,3 @@
+varray:primitive:data:int8:0:1:8
+array:primitive:fixed_array:int8:8:10:10
+single:primitive:p_mem1:int32:20:4

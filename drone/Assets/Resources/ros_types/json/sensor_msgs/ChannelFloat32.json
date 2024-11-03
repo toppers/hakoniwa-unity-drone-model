@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "string", 
+      "name": "name"
+    }, 
+    {
+      "type": "float32[]", 
+      "name": "values"
+    }
+  ]
+}

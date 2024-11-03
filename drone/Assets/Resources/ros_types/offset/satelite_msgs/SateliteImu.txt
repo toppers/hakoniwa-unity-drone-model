@@ -1,0 +1,3 @@
+single:struct:acc:geometry_msgs/Vector3:0:24
+single:struct:gyro:geometry_msgs/Vector3:24:24
+single:struct:mag:geometry_msgs/Vector3:48:24

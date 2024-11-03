@@ -1,0 +1,2 @@
+single:struct:layout:MultiArrayLayout:0:12
+varray:primitive:data:int8:12:1:8

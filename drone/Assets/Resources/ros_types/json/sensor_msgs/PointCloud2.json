@@ -1,0 +1,40 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "std_msgs/Header"
+    },
+    {
+      "name": "height",
+      "type": "uint32"
+    },
+    {
+      "name": "width",
+      "type": "uint32"
+    },
+    {
+      "name": "fields",
+      "type": "PointField[]"
+    },
+    {
+      "name": "is_bigendian",
+      "type": "bool"
+    },
+    {
+      "name": "point_step",
+      "type": "uint32"
+    },
+    {
+      "name": "row_step",
+      "type": "uint32"
+    },
+    {
+      "name": "data",
+      "type": "uint8[]"
+    },
+    {
+      "name": "is_dense",
+      "type": "bool"
+    }
+  ]
+}

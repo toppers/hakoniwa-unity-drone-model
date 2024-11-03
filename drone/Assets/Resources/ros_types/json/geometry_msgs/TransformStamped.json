@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "std_msgs/Header"
+    },
+    {
+      "name": "child_frame_id",
+      "type": "string"
+    },
+    {
+      "name": "transform",
+      "type": "Transform"
+    }
+  ]
+}

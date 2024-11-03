@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "type": "float32[]", 
+      "name": "echoes"
+    }
+  ]
+}

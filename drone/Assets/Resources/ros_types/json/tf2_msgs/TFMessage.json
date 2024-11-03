@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "name": "transforms",
+      "type": "geometry_msgs/TransformStamped[]"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "type": "bool[]", 
+      "name": "is_touch"
+    }
+  ]
+}

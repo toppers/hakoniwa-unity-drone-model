@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "string[]", 
+      "name": "joint_names"
+    }, 
+    {
+      "type": "geometry_msgs/Transform[]", 
+      "name": "transforms"
+    }, 
+    {
+      "type": "geometry_msgs/Twist[]", 
+      "name": "twist"
+    }, 
+    {
+      "type": "geometry_msgs/Wrench[]", 
+      "name": "wrench"
+    }
+  ]
+}

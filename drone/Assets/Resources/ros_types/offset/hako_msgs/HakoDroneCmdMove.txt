@@ -1,0 +1,6 @@
+single:struct:header:HakoDroneCmdHeader:0:12
+single:primitive:x:float64:16:8
+single:primitive:y:float64:24:8
+single:primitive:z:float64:32:8
+single:primitive:speed:float64:40:8
+single:primitive:yaw_deg:float64:48:8

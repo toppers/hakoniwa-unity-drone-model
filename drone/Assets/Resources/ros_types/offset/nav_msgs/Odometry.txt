@@ -1,0 +1,4 @@
+single:struct:header:std_msgs/Header:0:136
+single:primitive:child_frame_id:string:136:128
+single:struct:pose:geometry_msgs/PoseWithCovariance:264:344
+single:struct:twist:geometry_msgs/TwistWithCovariance:608:336

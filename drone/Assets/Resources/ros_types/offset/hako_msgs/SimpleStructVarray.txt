@@ -1,0 +1,5 @@
+single:primitive:aaa:int32:0:4
+array:primitive:fixed_str:string:4:256:2
+varray:primitive:varray_str:string:260:128:8
+array:struct:fixed_array:SimpleVarray:268:120:5
+varray:struct:data:SimpleVarray:388:24:8

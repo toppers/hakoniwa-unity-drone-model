@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "Vector3", 
+      "name": "vector"
+    }
+  ]
+}

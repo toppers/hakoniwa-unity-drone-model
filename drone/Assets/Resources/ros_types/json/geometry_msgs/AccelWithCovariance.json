@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Accel", 
+      "name": "accel"
+    }, 
+    {
+      "type": "float64[36]", 
+      "name": "covariance"
+    }
+  ]
+}

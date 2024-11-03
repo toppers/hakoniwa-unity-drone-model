@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "MapMetaData", 
+      "name": "info"
+    }, 
+    {
+      "type": "int8[]", 
+      "name": "data"
+    }
+  ]
+}

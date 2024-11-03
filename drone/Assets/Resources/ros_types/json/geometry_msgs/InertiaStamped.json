@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "Inertia", 
+      "name": "inertia"
+    }
+  ]
+}

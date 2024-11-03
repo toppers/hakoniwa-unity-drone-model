@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "ULTRASOUND=0"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "INFRARED=1"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "radiation_type"
+    }, 
+    {
+      "type": "float32", 
+      "name": "field_of_view"
+    }, 
+    {
+      "type": "float32", 
+      "name": "min_range"
+    }, 
+    {
+      "type": "float32", 
+      "name": "max_range"
+    }, 
+    {
+      "type": "float32", 
+      "name": "range"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "offset",
+      "type": "uint32"
+    },
+    {
+      "name": "datatype",
+      "type": "uint8"
+    },
+    {
+      "name": "count",
+      "type": "uint32"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "fields": [
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_STATUS_UNKNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_STATUS_CHARGING"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_STATUS_DISCHARGING"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_STATUS_NOT_CHARGING"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_STATUS_FULL"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_UNKNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_GOOD"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_OVERHEAT"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_DEAD"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_OVERVOLTAGE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_UNSPEC_FAILURE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_COLD"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_WATCHDOG_TIMER_EXPIRE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_HEALTH_SAFETY_TIMER_EXPIRE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_UNKNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_NIMH"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_LION"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_LIPO"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_LIFE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_NICD"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "POWER_SUPPLY_TECHNOLOGY_LIMN"
+    }, 
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float32", 
+      "name": "voltage"
+    }, 
+    {
+      "type": "float32", 
+      "name": "temperature"
+    }, 
+    {
+      "type": "float32", 
+      "name": "current"
+    }, 
+    {
+      "type": "float32", 
+      "name": "charge"
+    }, 
+    {
+      "type": "float32", 
+      "name": "capacity"
+    }, 
+    {
+      "type": "float32", 
+      "name": "design_capacity"
+    }, 
+    {
+      "type": "float32", 
+      "name": "percentage"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "power_supply_status"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "power_supply_health"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "power_supply_technology"
+    }, 
+    {
+      "type": "bool", 
+      "name": "present"
+    }, 
+    {
+      "type": "float32[]", 
+      "name": "cell_voltage"
+    }, 
+    {
+      "type": "float32[]", 
+      "name": "cell_temperature"
+    }, 
+    {
+      "type": "string", 
+      "name": "location"
+    }, 
+    {
+      "type": "string", 
+      "name": "serial_number"
+    }
+  ]
+}

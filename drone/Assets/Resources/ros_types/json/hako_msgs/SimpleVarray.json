@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "data",
+      "type": "int8[]"
+    },
+    {
+      "name": "fixed_array",
+      "type": "int8[10]"
+    },
+    {
+      "name": "p_mem1",
+      "type": "int32"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "fields": [
+    {
+      "type": "JoyFeedback[]", 
+      "name": "array"
+    }
+  ]
+}

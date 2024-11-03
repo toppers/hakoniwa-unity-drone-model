@@ -1,0 +1,2 @@
+single:struct:linear:Vector3:0:24
+single:struct:angular:Vector3:24:24

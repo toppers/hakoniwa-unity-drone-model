@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "NavSatStatus", 
+      "name": "status"
+    }, 
+    {
+      "type": "float64", 
+      "name": "latitude"
+    }, 
+    {
+      "type": "float64", 
+      "name": "longitude"
+    }, 
+    {
+      "type": "float64", 
+      "name": "altitude"
+    }, 
+    {
+      "type": "float64[9]", 
+      "name": "position_covariance"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "COVARIANCE_TYPE_UNKNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "COVARIANCE_TYPE_APPROXIMATED"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "COVARIANCE_TYPE_DIAGONAL_KNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "COVARIANCE_TYPE_KNOWN"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "position_covariance_type"
+    }
+  ]
+}

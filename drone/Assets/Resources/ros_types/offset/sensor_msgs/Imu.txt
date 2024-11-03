@@ -1,0 +1,7 @@
+single:struct:header:std_msgs/Header:0:136
+single:struct:orientation:geometry_msgs/Quaternion:136:32
+array:primitive:orientation_covariance:float64:168:72:9
+single:struct:angular_velocity:geometry_msgs/Vector3:240:24
+array:primitive:angular_velocity_covariance:float64:264:72:9
+single:struct:linear_acceleration:geometry_msgs/Vector3:336:24
+array:primitive:linear_acceleration_covariance:float64:360:72:9

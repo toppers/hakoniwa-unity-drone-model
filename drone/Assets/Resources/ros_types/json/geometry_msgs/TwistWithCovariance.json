@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "twist",
+      "type": "Twist"
+    },
+    {
+      "name": "covariance",
+      "type": "float64[36]"
+    }
+  ]
+}

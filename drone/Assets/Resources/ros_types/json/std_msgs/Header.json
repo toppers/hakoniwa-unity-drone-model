@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "stamp",
+      "type": "builtin_interfaces/Time"
+    },
+    {
+      "name": "frame_id",
+      "type": "string"
+    }
+  ]
+}

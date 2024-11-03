@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float32[]", 
+      "name": "axes"
+    }, 
+    {
+      "type": "int32[]", 
+      "name": "buttons"
+    }
+  ]
+}

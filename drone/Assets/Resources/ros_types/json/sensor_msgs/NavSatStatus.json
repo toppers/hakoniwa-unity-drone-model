@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "type": "int8", 
+      "name": "STATUS_NO_FIX"
+    }, 
+    {
+      "type": "int8", 
+      "name": "STATUS_FIX"
+    }, 
+    {
+      "type": "int8", 
+      "name": "STATUS_SBAS_FIX"
+    }, 
+    {
+      "type": "int8", 
+      "name": "STATUS_GBAS_FIX"
+    }, 
+    {
+      "type": "int8", 
+      "name": "status"
+    }, 
+    {
+      "type": "uint16", 
+      "name": "SERVICE_GPS"
+    }, 
+    {
+      "type": "uint16", 
+      "name": "SERVICE_GLONASS"
+    }, 
+    {
+      "type": "uint16", 
+      "name": "SERVICE_COMPASS"
+    }, 
+    {
+      "type": "uint16", 
+      "name": "SERVICE_GALILEO"
+    }, 
+    {
+      "type": "uint16", 
+      "name": "service"
+    }
+  ]
+}

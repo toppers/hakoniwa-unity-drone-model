@@ -1,0 +1,5 @@
+single:primitive:color:uint32:0:4
+single:primitive:reflect:uint32:4:4
+single:primitive:rgb_r:uint32:8:4
+single:primitive:rgb_g:uint32:12:4
+single:primitive:rgb_b:uint32:16:4
