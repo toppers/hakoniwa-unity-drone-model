@@ -168,16 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08b13ddf78d64e32b1ebe0d8a20f322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_buffer_size: 10485760
-  avatars:
-  - pdu:
-    - name: DroneTransporter_drone_pos
-      type: geometry_msgs/Twist
-    - name: DroneTransporter_drone_motor
-      type: hako_mavlink_msgs/HakoHilActuatorControls
-    avatar: {fileID: 2094033617}
-    state: 0
-  websocket_url: ws://localhost:8765
+  avatar: {fileID: 2094033617}
+  rotors: {fileID: 2094033622}
 --- !u!1 &301557849
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +608,17 @@ MonoBehaviour:
   width: 640
   height: 480
   displayImage: {fileID: 1533492606976749261}
+--- !u!114 &2094033622 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6332856257667670627, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+  m_PrefabInstance: {fileID: 2094033616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384244059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431c89a9618be42a2b2db3239b81828f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &140524201312324328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2809,9 +2812,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3e5be1218eee42a1d6b857cc96b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  currentMode: 0
   wheelSpeed: 8
   moveSpeed: 8
   rotateSpeed: 1
+  useGimbal: 1
+  gimbalSmoothSpeed: 2
+  fixedDistance: {x: 0, y: 2, z: -7}
+  fixedAngle: {x: 0, y: 0, z: 0}
 --- !u!114 &8389039740873267513
 MonoBehaviour:
   m_ObjectHideFlags: 0
