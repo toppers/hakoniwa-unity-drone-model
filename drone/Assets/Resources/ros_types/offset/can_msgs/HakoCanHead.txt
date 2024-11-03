@@ -1,0 +1,5 @@
+single:primitive:channel:uint32:0:4
+single:primitive:ide:uint32:4:4
+single:primitive:rtr:uint32:8:4
+single:primitive:dlc:uint32:12:4
+single:primitive:canid:uint32:16:4

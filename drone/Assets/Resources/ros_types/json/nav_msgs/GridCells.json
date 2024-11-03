@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float32", 
+      "name": "cell_width"
+    }, 
+    {
+      "type": "float32", 
+      "name": "cell_height"
+    }, 
+    {
+      "type": "geometry_msgs/Point[]", 
+      "name": "cells"
+    }
+  ]
+}

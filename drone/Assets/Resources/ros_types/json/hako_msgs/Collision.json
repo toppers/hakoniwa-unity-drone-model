@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "collision",
+      "type": "bool"
+    },
+    {
+      "name": "contact_num",
+      "type": "uint32"
+    },
+    {
+      "name": "relative_velocity",
+      "type": "geometry_msgs/Vector3"
+    },
+    {
+      "name": "contact_position",
+      "type": "geometry_msgs/Point[10]"
+    },
+    {
+      "name": "restitution_coefficient",
+      "type": "float64"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+single:struct:head:HakoCanHead:0:20
+single:struct:body:HakoCanBody:20:8

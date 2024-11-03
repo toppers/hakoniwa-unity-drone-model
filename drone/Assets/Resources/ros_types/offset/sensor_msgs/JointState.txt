@@ -1,0 +1,5 @@
+single:struct:header:std_msgs/Header:0:136
+varray:primitive:name:string:136:128:8
+varray:primitive:position:float64:144:8:8
+varray:primitive:velocity:float64:152:8:8
+varray:primitive:effort:float64:160:8:8

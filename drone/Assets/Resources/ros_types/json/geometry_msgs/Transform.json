@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "translation",
+      "type": "Vector3"
+    },
+    {
+      "name": "rotation",
+      "type": "Quaternion"
+    }
+  ]
+}

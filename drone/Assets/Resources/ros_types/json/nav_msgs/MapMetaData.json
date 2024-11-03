@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "type": "builtin_interfaces/Time", 
+      "name": "map_load_time"
+    }, 
+    {
+      "type": "float32", 
+      "name": "resolution"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "width"
+    }, 
+    {
+      "type": "uint32", 
+      "name": "height"
+    }, 
+    {
+      "type": "geometry_msgs/Pose", 
+      "name": "origin"
+    }
+  ]
+}

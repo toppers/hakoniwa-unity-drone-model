@@ -1,0 +1,64 @@
+{
+  "fields": [
+    {
+      "name": "time_usec",
+      "type": "uint64"
+    },
+    {
+      "name": "lat",
+      "type": "int32"
+    },
+    {
+      "name": "lon",
+      "type": "int32"
+    },
+    {
+      "name": "alt",
+      "type": "int32"
+    },
+    {
+      "name": "eph",
+      "type": "uint16"
+    },
+    {
+      "name": "epv",
+      "type": "uint16"
+    },
+    {
+      "name": "vel",
+      "type": "uint16"
+    },
+    {
+      "name": "vn",
+      "type": "int16"
+    },
+    {
+      "name": "ve",
+      "type": "int16"
+    },
+    {
+      "name": "vd",
+      "type": "int16"
+    },
+    {
+      "name": "cog",
+      "type": "uint16"
+    },
+    {
+      "name": "satellites_visible",
+      "type": "uint8"
+    },
+    {
+      "name": "id",
+      "type": "uint8"
+    },
+    {
+      "name": "yaw",
+      "type": "uint8"
+    },
+    {
+      "name": "fix_type",
+      "type": "uint8"
+    }
+  ]
+}

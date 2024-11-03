@@ -1,0 +1,5 @@
+single:primitive:collision:bool:0:4
+single:primitive:contact_num:uint32:4:4
+single:struct:relative_velocity:geometry_msgs/Vector3:8:24
+array:struct:contact_position:geometry_msgs/Point:32:240:10
+single:primitive:restitution_coefficient:float64:272:8

@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "x",
+      "type": "float64"
+    },
+    {
+      "name": "y",
+      "type": "float64"
+    },
+    {
+      "name": "z",
+      "type": "float64"
+    },
+    {
+      "name": "w",
+      "type": "float64"
+    }
+  ]
+}

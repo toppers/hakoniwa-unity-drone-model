@@ -1,0 +1,9 @@
+single:struct:header:std_msgs/Header:0:136
+single:primitive:height:uint32:136:4
+single:primitive:width:uint32:140:4
+varray:struct:fields:PointField:144:140:8
+single:primitive:is_bigendian:bool:152:4
+single:primitive:point_step:uint32:156:4
+single:primitive:row_step:uint32:160:4
+varray:primitive:data:uint8:164:1:8
+single:primitive:is_dense:bool:172:4

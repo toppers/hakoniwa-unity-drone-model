@@ -1,0 +1,4 @@
+single:primitive:forward_r:int16:0:2
+single:primitive:forward_l:int16:2:2
+single:primitive:left:int16:4:2
+single:primitive:right:int16:6:2

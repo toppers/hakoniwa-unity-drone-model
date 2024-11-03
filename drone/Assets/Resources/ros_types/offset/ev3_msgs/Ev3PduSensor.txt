@@ -1,0 +1,10 @@
+single:struct:head:Ev3PduSensorHeader:0:152
+array:primitive:buttons:uint8:152:1:1
+array:struct:color_sensors:Ev3PduColorSensor:156:40:2
+array:struct:touch_sensors:Ev3PduTouchSensor:196:8:2
+array:primitive:motor_angle:uint32:204:12:3
+single:primitive:gyro_degree:int32:216:4
+single:primitive:gyro_degree_rate:int32:220:4
+single:primitive:sensor_ultrasonic:uint32:224:4
+single:primitive:gps_lat:float64:232:8
+single:primitive:gps_lon:float64:240:8

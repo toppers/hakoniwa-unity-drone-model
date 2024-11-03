@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "float32", 
+      "name": "x"
+    }, 
+    {
+      "type": "float32", 
+      "name": "y"
+    }, 
+    {
+      "type": "float32", 
+      "name": "z"
+    }
+  ]
+}

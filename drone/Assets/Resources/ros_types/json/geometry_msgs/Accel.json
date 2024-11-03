@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "type": "Vector3", 
+      "name": "linear"
+    }, 
+    {
+      "type": "Vector3", 
+      "name": "angular"
+    }
+  ]
+}

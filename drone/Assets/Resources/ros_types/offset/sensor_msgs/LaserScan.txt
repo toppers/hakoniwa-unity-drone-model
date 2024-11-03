@@ -1,0 +1,10 @@
+single:struct:header:std_msgs/Header:0:136
+single:primitive:angle_min:float32:136:4
+single:primitive:angle_max:float32:140:4
+single:primitive:angle_increment:float32:144:4
+single:primitive:time_increment:float32:148:4
+single:primitive:scan_time:float32:152:4
+single:primitive:range_min:float32:156:4
+single:primitive:range_max:float32:160:4
+varray:primitive:ranges:float32:164:4:8
+varray:primitive:intensities:float32:172:4:8

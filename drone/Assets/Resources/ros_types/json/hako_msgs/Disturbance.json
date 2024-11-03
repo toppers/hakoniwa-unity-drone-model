@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "d_temp",
+      "type": "hako_msgs/DisturbanceTemperature"
+    },
+    {
+      "name": "d_wind",
+      "type": "hako_msgs/DisturbanceWind"
+    }
+  ]
+}

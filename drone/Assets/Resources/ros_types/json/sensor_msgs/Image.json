@@ -1,0 +1,32 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "std_msgs/Header"
+    },
+    {
+      "name": "height",
+      "type": "uint32"
+    },
+    {
+      "name": "width",
+      "type": "uint32"
+    },
+    {
+      "name": "encoding",
+      "type": "string"
+    },
+    {
+      "name": "is_bigendian",
+      "type": "uint8"
+    },
+    {
+      "name": "step",
+      "type": "uint32"
+    },
+    {
+      "name": "data",
+      "type": "uint8[]"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+single:primitive:detect_f:bool:0:4
+single:primitive:detect_r:bool:4:4
+single:primitive:detect_l:bool:8:4
+single:primitive:detect_b:bool:12:4

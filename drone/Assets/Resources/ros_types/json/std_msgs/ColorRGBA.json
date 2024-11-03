@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "r",
+      "type": "float32"
+    },
+    {
+      "name": "g",
+      "type": "float32"
+    },
+    {
+      "name": "b",
+      "type": "float32"
+    },
+    {
+      "name": "a",
+      "type": "float32"
+    }
+  ]
+}

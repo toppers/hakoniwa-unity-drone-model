@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float64", 
+      "name": "fluid_pressure"
+    }, 
+    {
+      "type": "float64", 
+      "name": "variance"
+    }
+  ]
+}

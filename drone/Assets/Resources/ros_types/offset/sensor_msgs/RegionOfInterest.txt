@@ -1,0 +1,5 @@
+single:primitive:x_offset:uint32:0:4
+single:primitive:y_offset:uint32:4:4
+single:primitive:height:uint32:8:4
+single:primitive:width:uint32:12:4
+single:primitive:do_rectify:bool:16:4

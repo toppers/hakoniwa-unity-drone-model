@@ -1,0 +1,3 @@
+single:primitive:x:float64:0:8
+single:primitive:y:float64:8:8
+single:primitive:z:float64:16:8

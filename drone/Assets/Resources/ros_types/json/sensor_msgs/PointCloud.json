@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "geometry_msgs/Point32[]", 
+      "name": "points"
+    }, 
+    {
+      "type": "ChannelFloat32[]", 
+      "name": "channels"
+    }
+  ]
+}

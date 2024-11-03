@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "type": "float64", 
+      "name": "m"
+    }, 
+    {
+      "type": "geometry_msgs/Vector3", 
+      "name": "com"
+    }, 
+    {
+      "type": "float64", 
+      "name": "ixx"
+    }, 
+    {
+      "type": "float64", 
+      "name": "ixy"
+    }, 
+    {
+      "type": "float64", 
+      "name": "ixz"
+    }, 
+    {
+      "type": "float64", 
+      "name": "iyy"
+    }, 
+    {
+      "type": "float64", 
+      "name": "iyz"
+    }, 
+    {
+      "type": "float64", 
+      "name": "izz"
+    }
+  ]
+}

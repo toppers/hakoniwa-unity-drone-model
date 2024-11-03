@@ -1,0 +1,2 @@
+single:primitive:sec:int32:0:4
+single:primitive:nanosec:uint32:4:4

@@ -1,0 +1,4 @@
+single:primitive:r:float32:0:4
+single:primitive:g:float32:4:4
+single:primitive:b:float32:8:4
+single:primitive:a:float32:12:4

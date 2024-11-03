@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "acc",
+      "type": "geometry_msgs/Vector3"
+    },
+    {
+      "name": "gyro",
+      "type": "geometry_msgs/Vector3"
+    },
+    {
+      "name": "mag",
+      "type": "geometry_msgs/Vector3"
+    }
+  ]
+}

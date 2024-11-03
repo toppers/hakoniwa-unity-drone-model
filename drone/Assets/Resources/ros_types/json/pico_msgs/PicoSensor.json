@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "name": "detect_f",
+      "type": "bool"
+    },
+    {
+      "name": "detect_r",
+      "type": "bool"
+    },
+    {
+      "name": "detect_l",
+      "type": "bool"
+    },
+    {
+      "name": "detect_b",
+      "type": "bool"
+    }
+  ]
+}

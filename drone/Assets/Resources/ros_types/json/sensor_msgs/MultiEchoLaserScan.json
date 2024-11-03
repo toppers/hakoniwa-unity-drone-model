@@ -1,0 +1,44 @@
+{
+  "fields": [
+    {
+      "type": "std_msgs/Header", 
+      "name": "header"
+    }, 
+    {
+      "type": "float32", 
+      "name": "angle_min"
+    }, 
+    {
+      "type": "float32", 
+      "name": "angle_max"
+    }, 
+    {
+      "type": "float32", 
+      "name": "angle_increment"
+    }, 
+    {
+      "type": "float32", 
+      "name": "time_increment"
+    }, 
+    {
+      "type": "float32", 
+      "name": "scan_time"
+    }, 
+    {
+      "type": "float32", 
+      "name": "range_min"
+    }, 
+    {
+      "type": "float32", 
+      "name": "range_max"
+    }, 
+    {
+      "type": "LaserEcho[]", 
+      "name": "ranges"
+    }, 
+    {
+      "type": "LaserEcho[]", 
+      "name": "intensities"
+    }
+  ]
+}

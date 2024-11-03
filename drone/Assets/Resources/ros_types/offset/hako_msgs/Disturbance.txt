@@ -1,0 +1,2 @@
+single:struct:d_temp:hako_msgs/DisturbanceTemperature:0:8
+single:struct:d_wind:hako_msgs/DisturbanceWind:8:24

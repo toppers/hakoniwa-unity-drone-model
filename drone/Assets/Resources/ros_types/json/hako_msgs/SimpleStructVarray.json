@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "aaa",
+      "type": "int32"
+    },
+    {
+      "name": "fixed_str",
+      "type": "string[2]"
+    },
+    {
+      "name": "varray_str",
+      "type": "string[]"
+    },
+    {
+      "name": "fixed_array",
+      "type": "SimpleVarray[5]"
+    },
+    {
+      "name": "data",
+      "type": "SimpleVarray[]"
+    }
+  ]
+}

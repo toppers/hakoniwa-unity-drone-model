@@ -1,0 +1,2 @@
+single:struct:position:Point:0:24
+single:struct:orientation:Quaternion:24:32

@@ -1,0 +1,10 @@
+{
+    "udp": {
+        "localPort": 54001,
+        "remotePort": 54002,
+        "remoteIPAddress": "127.0.0.1"
+    },
+    "websocket": {
+        "serverURI": "ws://localhost:8765"
+    }
+}

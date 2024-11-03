@@ -1,0 +1,28 @@
+{
+  "fields": [
+    {
+      "type": "uint8", 
+      "name": "TYPE_LED"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "TYPE_RUMBLE"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "TYPE_BUZZER"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "type"
+    }, 
+    {
+      "type": "uint8", 
+      "name": "id"
+    }, 
+    {
+      "type": "float32", 
+      "name": "intensity"
+    }
+  ]
+}

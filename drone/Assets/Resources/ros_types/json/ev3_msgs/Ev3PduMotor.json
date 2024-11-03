@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "power",
+      "type": "int32"
+    },
+    {
+      "name": "stop",
+      "type": "uint32"
+    },
+    {
+      "name": "reset_angle",
+      "type": "uint32"
+    }
+  ]
+}

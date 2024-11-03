@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "header",
+      "type": "HakoCmdHeader"
+    },
+    {
+      "name": "request_id",
+      "type": "int32"
+    },
+    {
+      "name": "angle",
+      "type": "geometry_msgs/Vector3"
+    }
+  ]
+}
