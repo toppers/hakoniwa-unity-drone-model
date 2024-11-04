@@ -40,22 +40,20 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private string root_name;
         private PduIoConnector pdu_io;
         private IPduWriter pdu_writer;
+        public Rigidbody rd = null;
 
         public void DoControl()
         {
             //this.transform.position;
-            Vector3 unity_pos = new Vector3(
-                transform.position.x,
-                transform.position.y,
-                transform.position.z
-            );
+            Vector3 unity_pos = rd.transform.position;
+            //Debug.Log($"{this.root.name}: {rd.transform.position}");
             Vector3 ros_pos = ConvertUnity2Ros(unity_pos);
             pdu_writer.GetWriteOps().Ref("linear").SetData("x", (double)ros_pos.x);
             pdu_writer.GetWriteOps().Ref("linear").SetData("y", (double)ros_pos.y);
             pdu_writer.GetWriteOps().Ref("linear").SetData("z", (double)ros_pos.z);
 
             // Unityの回転をROSの回転に変換
-            Quaternion unity_rot = transform.rotation;
+            Quaternion unity_rot = rd.transform.rotation;
             Vector3 unity_euler = unity_rot.eulerAngles;
 
             // オイラー角をラジアンに変換し、座標系に合わせてROSへ変換
