@@ -9,7 +9,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
     public class ObjectSyncher : MonoBehaviour, IRobotPartsController, IRobotPartsConfig
     {
-        private Vector3 ConvertUnity2Ros(Vector3 unity_data)
+        public static Vector3 ConvertUnity2Ros(Vector3 unity_data)
         {
             return new Vector3(
                 unity_data.z, // ros.x
@@ -18,7 +18,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 );
         }
 
-        Vector3 ConvertUnity2RosRotation(Vector3 unityEulerAngles)
+        public static Vector3 ConvertUnity2RosRotation(Vector3 unityEulerAngles)
         {
             // 座標系変換とラジアン変換：Unity (x, y, z) -> ROS (z, -x, y), 度 -> ラジアン
             return new Vector3(
@@ -27,7 +27,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 Mathf.Deg2Rad * unityEulerAngles.y
             );
         }
-        private Vector3 ConvertRos2Unity(Vector3 ros_data)
+        public static  Vector3 ConvertRos2Unity(Vector3 ros_data)
         {
             return new Vector3(
                 -ros_data.y, // unity.x
@@ -89,8 +89,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                     -(180 / MathF.PI) * (float)this.pdu_reader.GetReadOps().Ref("angular").GetDataFloat64("z")
                  );
                 //Debug.Log("angle: " + ros_angle);
-                this.my_transform.position = this.ConvertRos2Unity(ros_pos);
-                this.my_transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
+                this.my_transform.position = ConvertRos2Unity(ros_pos);
+                this.my_transform.rotation = Quaternion.Euler(ConvertRos2Unity(ros_angle));
             }
         }
 

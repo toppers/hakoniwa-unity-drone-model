@@ -1778,6 +1778,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_name.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_type.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_name.Array.data[0]
+      value: pos
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_name.Array.data[1]
+      value: signal_data
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_type.Array.data[0]
+      value: geometry_msgs/Twist
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477655984080162315, guid: 55c337602610b4a3082f3c8b4c03aed8, type: 3}
+      propertyPath: topic_type.Array.data[1]
+      value: std_msgs/UInt32
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
