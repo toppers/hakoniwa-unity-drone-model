@@ -158,13 +158,9 @@ namespace Hakoniwa.AR.Assets
             return false;
         }
 
-        private uint GetPduSignalState()
-        {
-            return (uint)this.signal_state;
-        }
         public void UpdateSensorValues()
         {
-            uint pdu_data = GetPduSignalState();
+            uint pdu_data = (uint)GetState();
             this.pdu_writer_state.GetWriteOps().SetData("data", pdu_data);
 
 
