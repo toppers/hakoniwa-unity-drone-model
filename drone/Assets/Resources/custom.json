@@ -1,6 +1,37 @@
 {
   "robots": [
     {
+      "name": "TB3RoboAvatar",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "cmd_pos",
+          "name": "TB3RoboAvatar_cmd_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 0,
+          "pdu_size": 72,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ],
+      "shm_pdu_writers": [
+        {
+          "type": "std_msgs/Bool",
+          "org_name": "baggage_sensor",
+          "name": "TB3RoboAvatar_baggage_sensor",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 1,
+          "pdu_size": 28,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ]
+    },
+    {
       "name": "DroneTransporter",
       "rpc_pdu_readers": [],
       "rpc_pdu_writers": [],
@@ -146,7 +177,7 @@
           "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
           "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
           "channel_id": 10,
-          "pdu_size": 1002968,
+          "pdu_size": 102968,
           "write_cycle": 1,
           "method_type": "SHM"
         },
@@ -195,6 +226,82 @@
           "method_type": "SHM"
         }
       ]
+    },
+    {
+      "name": "Baggage2",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": [
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "pos",
+          "name": "Baggage2_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 0,
+          "pdu_size": 112,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ]
+    },
+    {
+      "name": "Baggage1",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": [
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "pos",
+          "name": "Baggage1_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 0,
+          "pdu_size": 112,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ]
+    },
+    {
+      "name": "VirtualSignal",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": [
+        {
+          "type": "std_msgs/UInt32",
+          "org_name": "signal_data",
+          "name": "VirtualSignal_signal_data",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 0,
+          "pdu_size": 32,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ]
+    },
+    {
+      "name": "CenterEyeAnchor",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "pos",
+          "name": "CenterEyeAnchor_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReader",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduReaderConverter",
+          "channel_id": 0,
+          "pdu_size": 112,
+          "write_cycle": 1,
+          "method_type": "SHM"
+        }
+      ],
+      "shm_pdu_writers": []
     }
   ]
 }

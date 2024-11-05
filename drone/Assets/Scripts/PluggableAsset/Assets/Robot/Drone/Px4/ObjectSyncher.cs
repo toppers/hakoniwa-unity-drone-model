@@ -64,6 +64,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 pdu_writer.GetWriteOps().Ref("linear").SetData("x", (double)ros_pos.x);
                 pdu_writer.GetWriteOps().Ref("linear").SetData("y", (double)ros_pos.y);
                 pdu_writer.GetWriteOps().Ref("linear").SetData("z", (double)ros_pos.z);
+                //Debug.Log("name: " + this.root.name + " pos: " + this.my_transform.position);
 
                 // Unityの回転をROSの回転に変換
                 Quaternion unity_rot = my_transform.rotation;

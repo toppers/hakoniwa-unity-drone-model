@@ -35,7 +35,10 @@ namespace Hakoniwa.Web.Core
             {
 #if UNITY_EDITOR
                 WebGLSocketCommunicationService srv = service.GetCommunication() as WebGLSocketCommunicationService;
-                srv.GetWebSocket().DispatchMessageQueue();
+                if (srv != null)
+                {
+                    srv.GetWebSocket().DispatchMessageQueue();
+                }
 #endif
                 //Debug.Log("Twist: " + twist);
                 foreach (var baggage in baggages)
