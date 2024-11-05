@@ -23,7 +23,7 @@ namespace Hakoniwa.AR.Core
 
         async void Start()
         {
-            service = EnvironmentServiceFactory.Create("websocket_unity", "unity", ".");
+            service = EnvironmentServiceFactory.Create("websocket_dotnet", "unity", ".");
             Debug.Log($"Loaded WebSocket Server URI (WebGL): {service.GetCommunication().GetServerUri()}");
             mgr = new PduManager(service, ".");
             await mgr.StartService();
