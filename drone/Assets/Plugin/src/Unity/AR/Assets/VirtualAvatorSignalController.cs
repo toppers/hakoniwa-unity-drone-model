@@ -25,7 +25,7 @@ namespace Hakoniwa.AR.Assets
             this.signal_yellow.material = yellow[0];
             this.signal_blue.material = blue[0];
         }
-        int signal_state = 0;
+        public int signal_state = 0;
         void FixedUpdate()
         {
             if ((signal_state & (0x1 << 0)) != 0)
