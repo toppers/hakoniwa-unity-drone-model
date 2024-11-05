@@ -24,7 +24,7 @@ namespace Hakoniwa.AR.Assets
         public Light yellowLight; // 黄色信号用ライト
         public Light blueLight; // 青信号用ライト
 
-        private int signal_state = 0;
+        public int signal_state = 0;
         private float timer = 0.0f;
 
         // 信号の各状態の持続時間（秒）
