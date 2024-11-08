@@ -251,6 +251,8 @@
       "rpc_pdu_readers": [],
       "rpc_pdu_writers": [],
       "shm_pdu_readers": [
+      ],
+      "shm_pdu_writers": [
         {
           "type": "geometry_msgs/Twist",
           "org_name": "pos",
@@ -262,8 +264,7 @@
           "write_cycle": 1,
           "method_type": "SHM"
         }
-      ],
-      "shm_pdu_writers": []
+      ]
     },
     {
       "name": "Baggage2",

@@ -54,12 +54,13 @@ namespace Hakoniwa.AR.Core
             IPdu player_pdu = mgr.CreatePdu(robo_name, pdu_name);
             if (player_pdu != null)
             {
+
                 player_pdu.GetData<IPdu>("linear").SetData<double>("x", (double)player.transform.position.z);
                 player_pdu.GetData<IPdu>("linear").SetData<double>("y", -(double)player.transform.position.x);
                 player_pdu.GetData<IPdu>("linear").SetData<double>("z", (double)player.transform.position.y);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("x", -(double)player.transform.position.z);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("y", (double)player.transform.position.x);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("z", -(double)player.transform.position.y);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("x", -(double)player.transform.eulerAngles.z * MathF.PI/180.0);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("y", (double)player.transform.eulerAngles.x * MathF.PI / 180.0);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("z", -(double)player.transform.eulerAngles.y * MathF.PI / 180.0);
                 mgr.WritePdu(robo_name, player_pdu);
                 mgr.FlushPdu(robo_name, pdu_name);
             }

@@ -358,6 +358,7 @@ MonoBehaviour:
   - {fileID: 2085082146}
   tb3: {fileID: 201944214}
   signal: {fileID: 1352053992}
+  player: {fileID: 2010261028}
 --- !u!1 &613787589
 GameObject:
   m_ObjectHideFlags: 0
