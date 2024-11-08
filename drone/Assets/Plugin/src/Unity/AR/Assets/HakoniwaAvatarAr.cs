@@ -47,9 +47,28 @@ namespace Hakoniwa.AR.Core
             return true;
         }
 
+        private void WritePlayer()
+        {
+            string robo_name = "CenterEyeAnchor";
+            string pdu_name = "pos";
+            IPdu player_pdu = mgr.CreatePdu(robo_name, pdu_name);
+            if (player_pdu != null)
+            {
+                player_pdu.GetData<IPdu>("linear").SetData<double>("x", (double)player.transform.position.z);
+                player_pdu.GetData<IPdu>("linear").SetData<double>("y", -(double)player.transform.position.x);
+                player_pdu.GetData<IPdu>("linear").SetData<double>("z", (double)player.transform.position.y);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("x", -(double)player.transform.position.z);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("y", (double)player.transform.position.x);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("z", -(double)player.transform.position.y);
+                mgr.WritePdu(robo_name, player_pdu);
+                mgr.FlushPdu(robo_name, pdu_name);
+            }
+
+        }
+
         public void UpdatePosition(HakoVector3 position, HakoVector3 rotation)
         {
-            Debug.Log($"pos:  {position.X} {position.Y} {position.Z}");
+            //Debug.Log($"pos:  {position.X} {position.Y} {position.Z}");
             player.transform.position = new Vector3(position.X, position.Y, position.Z);
             Vector3 newRotation = player.transform.eulerAngles;
             newRotation.y = rotation.Y;
@@ -65,6 +84,8 @@ namespace Hakoniwa.AR.Core
 
         public void UpdateAvatars()
         {
+            //AVATARS
+
             //Debug.Log("Update Avatars");
             //Debug.Log("Twist: " + twist);
             foreach (var baggage in baggages)
@@ -78,6 +99,10 @@ namespace Hakoniwa.AR.Core
             //Debug.Log("Twist data: " + twist);
             IPdu controls = mgr.ReadPdu(robotName, "drone_motor");
             UpdateDroneAvatar(twist, controls);
+
+
+            //Players
+            WritePlayer();
         }
 
         void Start()
