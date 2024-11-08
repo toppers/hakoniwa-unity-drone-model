@@ -30,6 +30,8 @@ cp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/IPManager.cs* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/WebGL/* \
     drone/Assets/Plugin/src/Unity/WebGL/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Bridge \
+    drone/Assets/Plugin/src/Unity/AR/Bridge
 
 #Packages
 cp plugin/plugin-srcs/Packages/*  drone/Packages/

@@ -6,28 +6,87 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using hakoniwa.ar.bridge;
+using System.Threading.Tasks;
 
 namespace Hakoniwa.AR.Core
 {
-    public class HakoniwaAvatarAr : MonoBehaviour
+    public class HakoniwaAvatarAr : MonoBehaviour, IHakoniwaArBridgePlayer
     {
         public HakoAvatorObject drone_avatar;
         public DroneAvatorRotors drone_rotors;
         public HakoAvatorObject[] baggages;
         public HakoAvatorObject tb3;
         public HakoAvatorObject signal;
+        public GameObject player;
         IEnvironmentService service;
+        private HakoniwaArBridge bridge;
+        private Vector3 initial_position;
+        private Quaternion initial_rotation;
 
         private IPduManager mgr;
         string robotName = "DroneTransporter";
 
-        async void Start()
+
+        public Task<bool> StartService(string serverUri)
         {
             service = EnvironmentServiceFactory.Create("websocket_dotnet", "unity", ".");
-            Debug.Log($"Loaded WebSocket Server URI (WebGL): {service.GetCommunication().GetServerUri()}");
+            Debug.Log($"Loaded WebSocket Server URI1: {service.GetCommunication().GetServerUri()}");
             mgr = new PduManager(service, ".");
-            await mgr.StartService();
+            var ret = mgr.StartService(serverUri);
+            Debug.Log($"Loaded WebSocket Server URI2: {service.GetCommunication().GetServerUri()}");
+            return ret;
+        }
 
+        public bool StopService()
+        {
+            if (mgr != null)
+            {
+                mgr.StopService();
+            }
+            return true;
+        }
+
+        public void UpdatePosition(HakoVector3 position, HakoVector3 rotation)
+        {
+            Debug.Log($"pos:  {position.X} {position.Y} {position.Z}");
+            player.transform.position = new Vector3(position.X, position.Y, position.Z);
+            Vector3 newRotation = player.transform.eulerAngles;
+            newRotation.y = rotation.Y;
+            player.transform.rotation = Quaternion.Euler(newRotation);
+        }
+
+        public void ResetPostion()
+        {
+            Debug.Log("Reset position");
+            player.transform.position = initial_position;
+            player.transform.rotation = initial_rotation;
+        }
+
+        public void UpdateAvatars()
+        {
+            //Debug.Log("Update Avatars");
+            //Debug.Log("Twist: " + twist);
+            foreach (var baggage in baggages)
+            {
+                //Debug.Log("baggage name: " + baggage.name);
+                update_avatar_pos_rot(baggage.name, "pos", baggage, 0);
+            }
+            update_avatar_pos_rot(tb3.name, "pos", tb3, 0);
+            update_signal();
+            IPdu twist = mgr.ReadPdu(robotName, "drone_pos");
+            //Debug.Log("Twist data: " + twist);
+            IPdu controls = mgr.ReadPdu(robotName, "drone_motor");
+            UpdateDroneAvatar(twist, controls);
+        }
+
+        void Start()
+        {
+            initial_position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+            initial_rotation = new Quaternion(player.transform.rotation.x, player.transform.rotation.y, player.transform.rotation.z, player.transform.rotation.w);
+            bridge = new HakoniwaArBridge();
+            bridge.Register(this);
+            bridge.Start();
         }
         void update_avatar_pos_rot(string robot_name, string pdu_name, HakoAvatorObject avatar, int state)
         {
@@ -63,20 +122,7 @@ namespace Hakoniwa.AR.Core
 
         void FixedUpdate()
         {
-            if (mgr != null)
-            {
-                //Debug.Log("Twist: " + twist);
-                foreach (var baggage in baggages)
-                {
-                    //Debug.Log("baggage name: " + baggage.name);
-                    update_avatar_pos_rot(baggage.name, "pos", baggage, 0);
-                }
-                update_avatar_pos_rot(tb3.name, "pos", tb3, 0);
-                update_signal();
-                IPdu twist = mgr.ReadPdu(robotName, "drone_pos");
-                IPdu controls = mgr.ReadPdu(robotName, "drone_motor");
-                UpdateDroneAvatar(twist, controls);
-            }
+            bridge.Run();
         }
         private void UpdateDroneAvatar(IPdu twist, IPdu controls)
         {
@@ -103,11 +149,9 @@ namespace Hakoniwa.AR.Core
         }
         private void OnApplicationQuit()
         {
-            if (mgr != null)
-            {
-                mgr.StopService();
-            }
+            bridge.Stop();
         }
+
     }
 
 }
