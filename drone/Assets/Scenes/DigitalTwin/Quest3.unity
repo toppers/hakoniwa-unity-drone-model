@@ -1082,14 +1082,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneTransporter
       objectReference: {fileID: 0}
+    - target: {fileID: 4443102125820805113, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: rotation_keisu
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566738505483872618, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: rotation_keisu
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251251467972222794, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: rotation_keisu
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6332856257667670627, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
       propertyPath: audio_path
       value: drone
       objectReference: {fileID: 0}
     - target: {fileID: 6332856257667670627, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: maxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332856257667670627, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
       propertyPath: target_camera
       value: 
       objectReference: {fileID: 1770114187}
+    - target: {fileID: 7347404138698599424, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
+      propertyPath: rotation_keisu
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7655610759400593712, guid: 9977382c3cc2041ba80c2d93f1a38f06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

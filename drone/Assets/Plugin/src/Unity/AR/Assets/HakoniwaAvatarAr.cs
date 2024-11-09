@@ -180,8 +180,8 @@ namespace Hakoniwa.AR.Core
             }
             if (controls != null)
             {
-                float c = (float)controls.GetDataArray<float>("controls")[0];
-                drone_rotors.SetState((int)(c * 100.0));
+                float[] cs = controls.GetDataArray<float>("controls");
+                drone_rotors.SetControls(cs);
             }
         }
         private void OnApplicationQuit()
