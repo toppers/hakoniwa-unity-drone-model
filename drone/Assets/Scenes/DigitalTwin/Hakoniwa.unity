@@ -163,6 +163,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 143520714}
     m_Modifications:
+    - target: {fileID: 342345688706759242, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 342345688706759242, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 342345688706759242, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1019149104933512887, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.735
@@ -201,6 +213,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1019149104933512887, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429345938116059101, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4998903634777979797, guid: a45ec8901fa442241b132bdbe49b8b6f, type: 3}
@@ -2084,7 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 73165409}
-  currentMode: 1
+  currentMode: 0
   wheelSpeed: 8
   moveSpeed: 8
   rotateSpeed: 1
