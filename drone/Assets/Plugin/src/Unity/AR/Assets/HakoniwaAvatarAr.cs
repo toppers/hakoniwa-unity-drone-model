@@ -18,7 +18,15 @@ namespace Hakoniwa.AR.Core
         public HakoAvatorObject[] baggages;
         public HakoAvatorObject tb3;
         public HakoAvatorObject signal;
+        /*
+         * Quest3 moving object and this object's position can not be changed!!
+         * Readonly, so Hakoniwa avatar's position is calculated from player and playerBase. 
+         */ 
         public GameObject player;
+        /*
+         * Camera position Adjusment object.
+         */ 
+        public GameObject playerBase;
         IEnvironmentService service;
         private HakoniwaArBridge bridge;
         private Vector3 initial_position;
@@ -54,13 +62,16 @@ namespace Hakoniwa.AR.Core
             IPdu player_pdu = mgr.CreatePdu(robo_name, pdu_name);
             if (player_pdu != null)
             {
+                Vector3 player_pos = player.transform.position + playerBase.transform.position;
+                Vector3 player_rot = player.transform.eulerAngles;
+                player_rot.y += playerBase.transform.eulerAngles.y;
 
-                player_pdu.GetData<IPdu>("linear").SetData<double>("x", (double)player.transform.position.z);
-                player_pdu.GetData<IPdu>("linear").SetData<double>("y", -(double)player.transform.position.x);
-                player_pdu.GetData<IPdu>("linear").SetData<double>("z", (double)player.transform.position.y);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("x", -(double)player.transform.eulerAngles.z * MathF.PI/180.0);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("y", (double)player.transform.eulerAngles.x * MathF.PI / 180.0);
-                player_pdu.GetData<IPdu>("angular").SetData<double>("z", -(double)player.transform.eulerAngles.y * MathF.PI / 180.0);
+                player_pdu.GetData<IPdu>("linear").SetData<double>("x", (double)player_pos.z);
+                player_pdu.GetData<IPdu>("linear").SetData<double>("y", -(double)player_pos.x);
+                player_pdu.GetData<IPdu>("linear").SetData<double>("z", (double)player_pos.y);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("x", -(double)player_rot.z * MathF.PI/180.0);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("y", (double)player_rot.x * MathF.PI / 180.0);
+                player_pdu.GetData<IPdu>("angular").SetData<double>("z", -(double)player_rot.y * MathF.PI / 180.0);
                 mgr.WritePdu(robo_name, player_pdu);
                 mgr.FlushPdu(robo_name, pdu_name);
             }
@@ -70,17 +81,17 @@ namespace Hakoniwa.AR.Core
         public void UpdatePosition(HakoVector3 position, HakoVector3 rotation)
         {
             //Debug.Log($"pos:  {position.X} {position.Y} {position.Z}");
-            player.transform.position = new Vector3(position.X, position.Y, position.Z);
-            Vector3 newRotation = player.transform.eulerAngles;
+            playerBase.transform.position = new Vector3(position.X, position.Y, position.Z);
+            Vector3 newRotation = playerBase.transform.eulerAngles;
             newRotation.y = rotation.Y;
-            player.transform.rotation = Quaternion.Euler(newRotation);
+            playerBase.transform.rotation = Quaternion.Euler(newRotation);
         }
 
         public void ResetPostion()
         {
             Debug.Log("Reset position");
-            player.transform.position = initial_position;
-            player.transform.rotation = initial_rotation;
+            //player.transform.position = initial_position;
+            //player.transform.rotation = initial_rotation;
         }
 
         public void UpdateAvatars()
