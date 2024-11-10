@@ -22,12 +22,16 @@ cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Core/HakoObjectSynchronizer
     drone/Assets/Plugin/src/Unity/AR/Core/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoXrParam*.cs* \
     drone/Assets/Plugin/src/Unity/AR/Assets/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Assets/HakoniwaAvatarAr*.cs* \
+    drone/Assets/Plugin/src/Unity/AR/Assets/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/Origin* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
 cp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/GUI/IPManager.cs* \
     drone/Assets/Plugin/src/Unity/AR/GUI/
 cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/WebGL/* \
     drone/Assets/Plugin/src/Unity/WebGL/
+cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Bridge \
+    drone/Assets/Plugin/src/Unity/AR
 
 #Packages
 cp plugin/plugin-srcs/Packages/*  drone/Packages/
@@ -57,8 +61,6 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ReferenceImageLibrary* \
     drone/Assets/Prefab/Robots/AR/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/ar.png* \
     drone/Assets/Prefab/Robots/AR/
-cp plugin/plugin-srcs/Assets/Scenes/DigitalTwin/CenterEyeAnchor.prefab* \
-    drone/Assets/Scenes/DigitalTwin/
 
 #Model
 cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \

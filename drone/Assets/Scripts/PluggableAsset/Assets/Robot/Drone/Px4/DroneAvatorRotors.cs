@@ -10,6 +10,7 @@ public class DroneAvatorRotors : MonoBehaviour, IHakoAvatorState
     public string audio_path;
     private bool enableAudio = false;
     private DroneRotor[] rotors;
+    private float[] controls = null;
     public float initial_pos = -0.61f;
     private float my_controls = 0;
     // Use this for initialization
@@ -41,12 +42,33 @@ public class DroneAvatorRotors : MonoBehaviour, IHakoAvatorState
     public float maxDistance = 100.0f;
     public float minDistance = 0.0f;
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateDefaultRotors()
     {
         foreach (var rotor in rotors)
         {
             rotor.AddForce(my_controls);
+        }
+    }
+    private void UpdateRotors()
+    {
+        int i = 0;
+        foreach (var rotor in rotors)
+        {
+            rotor.AddForce(controls[i]);
+            i++;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (controls == null)
+        {
+            UpdateDefaultRotors();
+        }
+        else
+        {
+            UpdateRotors();
         }
         if (enableAudio == false)
         {
@@ -76,5 +98,10 @@ public class DroneAvatorRotors : MonoBehaviour, IHakoAvatorState
     public void SetState(int state)
     {
         my_controls = ( ((float)(state)) / 100.0f );
+    }
+    public void SetControls(float[] cs)
+    {
+        this.controls = cs;
+        this.my_controls = cs[0];
     }
 }
