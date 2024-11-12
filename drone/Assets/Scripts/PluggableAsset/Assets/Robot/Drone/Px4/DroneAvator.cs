@@ -13,7 +13,15 @@ using Hakoniwa.AR.Core;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
-    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState
+    public interface IDroneBatteryStatus
+    {
+        public double get_full_voltage();
+        public double get_curr_voltage();
+        public uint get_status();
+        public uint get_cycles();
+    }
+
+    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState, IDroneBatteryStatus
     {
         private GameObject root;
         private TemperatureColorExpression colorExpression;
@@ -23,6 +31,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private IPduReader pdu_reader_pos;
         private IPduWriter pdu_writer_collision;
         private IPduWriter pdu_writer_disturb;
+        private IPduReader pdu_reader_battery;
 
         public GameObject motor_0;
         public GameObject motor_1;
@@ -45,7 +54,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 "hako_msgs/HakoDroneCmdTakeoff",
                 "hako_msgs/HakoDroneCmdMove",
                 "hako_msgs/HakoDroneCmdLand",
-                "hako_msgs/GameControllerOperation"
+                "hako_msgs/GameControllerOperation",
+                "hako_msgs/HakoBatteryStatus"
         };
         public string[] topic_name = {
             "drone_motor",
@@ -56,14 +66,16 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             "drone_cmd_takeoff",
             "drone_cmd_move",
             "drone_cmd_land",
-            "hako_cmd_game"
+            "hako_cmd_game",
+            "hako_battery"
         };
         public int update_cycle = 1;
         public IoMethod io_method = IoMethod.SHM;
         public CommMethod comm_method = CommMethod.DIRECT;
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
-            RoboPartsConfigData[] configs = new RoboPartsConfigData[9];
+            Debug.Log("topic len: " + topic_name.Length);
+            RoboPartsConfigData[] configs = new RoboPartsConfigData[topic_name.Length];
             int i = 0;
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
@@ -163,6 +175,19 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
             configs[i].value.pdu_size = 112 + ConstantValues.PduMetaDataSize;
+            configs[i].value.write_cycle = this.update_cycle;
+            configs[i].value.method_type = this.comm_method.ToString();
+
+            i++;
+            Debug.Log("index: " + i);
+            configs[i] = new RoboPartsConfigData();
+            configs[i].io_dir = IoDir.READ;
+            configs[i].io_method = this.io_method;
+            configs[i].value.org_name = this.topic_name[i];
+            configs[i].value.type = this.topic_type[i];
+            configs[i].value.class_name = ConstantValues.pdu_reader_class;
+            configs[i].value.conv_class_name = ConstantValues.conv_pdu_reader_class;
+            configs[i].value.pdu_size = 24 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 
@@ -423,6 +448,21 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 
             this.colorExpression.SetTemperature(this.current_temperature);
 
+            DoReadBatteryStatus();
+
+        }
+        private double full_voltage;
+        private double curr_voltage;
+        private uint status;
+        private uint cycles;
+        private void DoReadBatteryStatus()
+        {
+            full_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("full_voltage");
+            curr_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("curr_voltage");
+            status = pdu_reader_battery.GetReadOps().GetDataUInt32("status");
+            cycles = pdu_reader_battery.GetReadOps().GetDataUInt32("cycles");
+            //Debug.Log("full_voltage: " + full_voltage);
+            //Debug.Log("curr_voltage: " + curr_voltage);
         }
 
         private AudioSource audioSource;
@@ -498,6 +538,12 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 pdu_reader_name = root_name + "_" + this.topic_name[1] + "Pdu";
                 this.pdu_reader_pos = this.pdu_io.GetReader(pdu_reader_name);
                 if (this.pdu_reader_pos == null)
+                {
+                    throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
+                }
+                pdu_reader_name = root_name + "_" + this.topic_name[9] + "Pdu";
+                this.pdu_reader_battery = this.pdu_io.GetReader(pdu_reader_name);
+                if (this.pdu_reader_battery == null)
                 {
                     throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
                 }
@@ -595,6 +641,26 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public int GetState()
         {
             return (int)(this.my_controls * 100.0);
+        }
+
+        public double get_full_voltage()
+        {
+            return full_voltage;
+        }
+
+        public double get_curr_voltage()
+        {
+            return curr_voltage;
+        }
+
+        public uint get_status()
+        {
+            return status;
+        }
+
+        public uint get_cycles()
+        {
+            return cycles;
         }
     }
 }
