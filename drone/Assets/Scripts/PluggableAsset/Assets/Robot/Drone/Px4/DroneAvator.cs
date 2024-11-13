@@ -19,6 +19,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public double get_curr_voltage();
         public uint get_status();
         public uint get_cycles();
+        public double get_temperature();
     }
 
     public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState, IDroneBatteryStatus
@@ -187,7 +188,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.type = this.topic_type[i];
             configs[i].value.class_name = ConstantValues.pdu_reader_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_reader_class;
-            configs[i].value.pdu_size = 24 + ConstantValues.PduMetaDataSize;
+            configs[i].value.pdu_size = 32 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 
@@ -452,12 +453,14 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private double full_voltage;
         private double curr_voltage;
+        private double curr_temperature;
         private uint status;
         private uint cycles;
         private void DoReadBatteryStatus()
         {
             full_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("full_voltage");
             curr_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("curr_voltage");
+            curr_temperature = pdu_reader_battery.GetReadOps().GetDataFloat64("curr_temp");
             status = pdu_reader_battery.GetReadOps().GetDataUInt32("status");
             cycles = pdu_reader_battery.GetReadOps().GetDataUInt32("cycles");
             //Debug.Log("full_voltage: " + full_voltage);
@@ -661,6 +664,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public uint get_cycles()
         {
             return cycles;
+        }
+
+        public double get_temperature()
+        {
+            return curr_temperature;
         }
     }
 }
