@@ -31,7 +31,6 @@ public class BatteryUI : MonoBehaviour
         fullVoltageText.text = fullVoltage.ToString("F1");
         currVoltageText.text = currentVoltage.ToString("F1");
         percentageText.text = percentValue.ToString("F1");
-        int active_index = Mathf.CeilToInt(batteryPercentage * batteryBars.Count);
         Color color = Color.white;
 
         // 残量に応じた色を設定
@@ -42,20 +41,19 @@ public class BatteryUI : MonoBehaviour
         else
             color = Color.red;
 
-        int percent_index = 0;
+        double percent = 0;
         // 各バーの色を設定
         for (int i = batteryBars.Count - 1; i >= 0 ; i--)
         {
-            if (percent_index <= active_index)
+            if (percent <= batteryPercentage)
             {
                 batteryBars[i].color = color;
             }
             else
             {
-                // 使用されていないバーはグレーにする
                 batteryBars[i].color = Color.white;
             }
-            percent_index++;
+            percent += 0.1;
         }
     }
 }
