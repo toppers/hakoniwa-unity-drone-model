@@ -13,7 +13,16 @@ using Hakoniwa.AR.Core;
 
 namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
 {
-    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState
+    public interface IDroneBatteryStatus
+    {
+        public double get_full_voltage();
+        public double get_curr_voltage();
+        public uint get_status();
+        public uint get_cycles();
+        public double get_temperature();
+    }
+
+    public class DroneAvator : MonoBehaviour, IRobotPartsController, IRobotPartsConfig, IRobotProperty, IHakoPlayerState, IDroneBatteryStatus
     {
         private GameObject root;
         private TemperatureColorExpression colorExpression;
@@ -22,7 +31,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         private IPduReader pdu_reader_actuator;
         private IPduReader pdu_reader_pos;
         private IPduWriter pdu_writer_collision;
-        private IPduWriter pdu_writer_disturb;
+        //private IPduWriter pdu_writer_disturb;
+        private IPduReader pdu_reader_battery;
 
         public GameObject motor_0;
         public GameObject motor_1;
@@ -45,7 +55,8 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 "hako_msgs/HakoDroneCmdTakeoff",
                 "hako_msgs/HakoDroneCmdMove",
                 "hako_msgs/HakoDroneCmdLand",
-                "hako_msgs/GameControllerOperation"
+                "hako_msgs/GameControllerOperation",
+                "hako_msgs/HakoBatteryStatus"
         };
         public string[] topic_name = {
             "drone_motor",
@@ -56,15 +67,17 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             "drone_cmd_takeoff",
             "drone_cmd_move",
             "drone_cmd_land",
-            "hako_cmd_game"
+            "hako_cmd_game",
+            "hako_battery"
         };
         public int update_cycle = 1;
         public IoMethod io_method = IoMethod.SHM;
         public CommMethod comm_method = CommMethod.DIRECT;
         public RoboPartsConfigData[] GetRoboPartsConfig()
         {
-            RoboPartsConfigData[] configs = new RoboPartsConfigData[9];
-            int i = 0;
+            Debug.Log("topic len: " + topic_name.Length);
+            RoboPartsConfigData[] configs = new RoboPartsConfigData[topic_name.Length];
+            int i = 0; //drone_motor
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -75,7 +88,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 88 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_pos
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -86,7 +99,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = ConstantValues.Twist_pdu_size;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_collision
 
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.WRITE;
@@ -98,7 +111,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 280 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_manual_pos_att_control
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -109,19 +122,19 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 56 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_disturbance
             configs[i] = new RoboPartsConfigData();
-            configs[i].io_dir = IoDir.WRITE;
+            configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
             configs[i].value.org_name = this.topic_name[i];
             configs[i].value.type = this.topic_type[i];
-            configs[i].value.class_name = ConstantValues.pdu_writer_class;
-            configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
+            configs[i].value.class_name = ConstantValues.pdu_reader_class;
+            configs[i].value.conv_class_name = ConstantValues.conv_pdu_reader_class;
             configs[i].value.pdu_size = 64 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 
-            i++;
+            i++;// drone_cmd_takeoff
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -132,7 +145,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 40 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_cmd_move
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -143,7 +156,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 56 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //drone_cmd_land
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -154,7 +167,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.pdu_size = 40 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
-            i++;
+            i++; //hako_cmd_game
             configs[i] = new RoboPartsConfigData();
             configs[i].io_dir = IoDir.READ;
             configs[i].io_method = this.io_method;
@@ -163,6 +176,19 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             configs[i].value.class_name = ConstantValues.pdu_writer_class;
             configs[i].value.conv_class_name = ConstantValues.conv_pdu_writer_class;
             configs[i].value.pdu_size = 112 + ConstantValues.PduMetaDataSize;
+            configs[i].value.write_cycle = this.update_cycle;
+            configs[i].value.method_type = this.comm_method.ToString();
+
+            i++; //hako_battery
+            Debug.Log("index: " + i);
+            configs[i] = new RoboPartsConfigData();
+            configs[i].io_dir = IoDir.READ;
+            configs[i].io_method = this.io_method;
+            configs[i].value.org_name = this.topic_name[i];
+            configs[i].value.type = this.topic_type[i];
+            configs[i].value.class_name = ConstantValues.pdu_reader_class;
+            configs[i].value.conv_class_name = ConstantValues.conv_pdu_reader_class;
+            configs[i].value.pdu_size = 32 + ConstantValues.PduMetaDataSize;
             configs[i].value.write_cycle = this.update_cycle;
             configs[i].value.method_type = this.comm_method.ToString();
 
@@ -231,7 +257,7 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         }
         private void WriteDisturbanceData()
         {
-            this.pdu_writer_disturb.GetWriteOps().Ref("d_temp").SetData("value", (double)this.current_temperature);
+            //this.pdu_writer_disturb.GetWriteOps().Ref("d_temp").SetData("value", (double)this.current_temperature);
         }
         public GameObject target_camera;
         public string audio_filepath;
@@ -419,10 +445,26 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             this.transform.rotation = Quaternion.Euler(this.ConvertRos2Unity(ros_angle));
 
             WriteCollisionData();
-            //WriteDisturbanceData();
 
             this.colorExpression.SetTemperature(this.current_temperature);
 
+            DoReadBatteryStatus();
+
+        }
+        private double full_voltage;
+        private double curr_voltage;
+        private double curr_temperature;
+        private uint status;
+        private uint cycles;
+        private void DoReadBatteryStatus()
+        {
+            full_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("full_voltage");
+            curr_voltage = pdu_reader_battery.GetReadOps().GetDataFloat64("curr_voltage");
+            curr_temperature = pdu_reader_battery.GetReadOps().GetDataFloat64("curr_temp");
+            status = pdu_reader_battery.GetReadOps().GetDataUInt32("status");
+            cycles = pdu_reader_battery.GetReadOps().GetDataUInt32("cycles");
+            //Debug.Log("full_voltage: " + full_voltage);
+            //Debug.Log("curr_voltage: " + curr_voltage);
         }
 
         private AudioSource audioSource;
@@ -501,19 +543,26 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
                 {
                     throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
                 }
+                pdu_reader_name = root_name + "_" + this.topic_name[9] + "Pdu";
+                this.pdu_reader_battery = this.pdu_io.GetReader(pdu_reader_name);
+                if (this.pdu_reader_battery == null)
+                {
+                    throw new ArgumentException("can not found pdu_reader:" + pdu_reader_name);
+                }
                 var pdu_writer_name = root_name + "_" + this.topic_name[2] + "Pdu";
                 this.pdu_writer_collision = this.pdu_io.GetWriter(pdu_writer_name);
                 if (this.pdu_writer_collision == null)
                 {
                     throw new ArgumentException("can not found pud_writer:" + pdu_writer_name);
                 }
-
+#if false
                 pdu_writer_name = root_name + "_" + this.topic_name[4] + "Pdu";
                 this.pdu_writer_disturb = this.pdu_io.GetWriter(pdu_writer_name);
                 if (this.pdu_writer_disturb == null)
                 {
                     throw new ArgumentException("can not found pud_writer:" + pdu_writer_name);
                 }
+#endif
                 motor_parts_0 = motor_0.GetComponent<DroneRotor>();
                 motor_parts_1 = motor_1.GetComponent<DroneRotor>();
                 motor_parts_2 = motor_2.GetComponent<DroneRotor>();
@@ -595,6 +644,31 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
         public int GetState()
         {
             return (int)(this.my_controls * 100.0);
+        }
+
+        public double get_full_voltage()
+        {
+            return full_voltage;
+        }
+
+        public double get_curr_voltage()
+        {
+            return curr_voltage;
+        }
+
+        public uint get_status()
+        {
+            return status;
+        }
+
+        public uint get_cycles()
+        {
+            return cycles;
+        }
+
+        public double get_temperature()
+        {
+            return curr_temperature;
         }
     }
 }

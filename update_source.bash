@@ -49,6 +49,8 @@ cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/LiDAR* \
     drone/Assets/Prefab/Robots/
 cp -rp plugin/plugin-srcs/Assets/Prefab/GUI/Drone* \
     drone/Assets/Prefab/GUI/
+cp -rp plugin/plugin-srcs/Assets/Prefab/GUI/Battery* \
+    drone/Assets/Prefab/GUI/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/AR/Drone/* \
     drone/Assets/Prefab/Robots/AR/Drone/
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/TB3RoboAvatar* \
