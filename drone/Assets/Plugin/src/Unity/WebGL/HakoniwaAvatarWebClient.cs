@@ -6,11 +6,12 @@ using hakoniwa.environment.interfaces;
 using hakoniwa.environment.impl;
 using hakoniwa.pdu.core;
 using hakoniwa.pdu.interfaces;
+using Hakoniwa.PluggableAsset.Assets.Robot.Parts;
 
 namespace Hakoniwa.Web.Core
 {
 
-    public class HakoniwaAvatarWebclient : MonoBehaviour
+    public class HakoniwaAvatarWebclient : MonoBehaviour, IDroneBatteryStatus
     {
         public HakoAvatorObject drone_avatar;
         public DroneAvatorRotors drone_rotors;
@@ -28,7 +29,47 @@ namespace Hakoniwa.Web.Core
             await mgr.StartService();
 
         }
+        private double full_voltage;
+        private double curr_voltage;
+        private double curr_temperature;
+        private uint status;
+        private uint cycles;
+        public double get_full_voltage()
+        {
+            return full_voltage;
+        }
 
+        public double get_curr_voltage()
+        {
+            return curr_voltage;
+        }
+
+        public uint get_status()
+        {
+            return status;
+        }
+
+        public uint get_cycles()
+        {
+            return cycles;
+        }
+
+        public double get_temperature()
+        {
+            return curr_temperature;
+        }
+        private void DoReadBatteryStatus(string robotName)
+        {
+            IPdu battery = mgr.ReadPdu(robotName, "hako_battery");
+            if (battery != null)
+            {
+                full_voltage = battery.GetData<double>("full_voltage");
+                curr_voltage = battery.GetData<double>("curr_voltage");
+                curr_temperature = battery.GetData<double>("curr_temp");
+                status = battery.GetData<UInt32>("status");
+                cycles = battery.GetData<UInt32>("cycles");
+            }
+        }
         void FixedUpdate()
         {
             if (mgr != null)
@@ -65,6 +106,7 @@ namespace Hakoniwa.Web.Core
                 IPdu twist = mgr.ReadPdu(robotName, "drone_pos");
                 IPdu controls = mgr.ReadPdu(robotName, "drone_motor");
                 UpdateDroneAvatar(twist, controls);
+                DoReadBatteryStatus(robotName);
             }
         }
         private void UpdateDroneAvatar(IPdu twist, IPdu controls)
@@ -97,6 +139,7 @@ namespace Hakoniwa.Web.Core
                 mgr.StopService();
             }
         }
+
     }
 }
 
