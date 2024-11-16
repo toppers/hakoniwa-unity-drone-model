@@ -96,8 +96,6 @@ public class DroneMapUI : MonoBehaviour
         // ドローンアイコンの位置をマップ内の相対的な位置に設定
         droneIcon.localPosition = mapLocalPos;
 
-        // ピッチアイコンの高さを設定
-        UpdatePitchIcon(realDronePos);
     }
 
     private void UpdateRotation()
@@ -114,15 +112,19 @@ public class DroneMapUI : MonoBehaviour
         Vector3 iconRoll = droneRollIcon.eulerAngles;
         iconRoll.z = realDroneAngle.z;
         droneRollIcon.eulerAngles = iconRoll;
+
+        // ピッチアイコンの高さを設定
+        UpdatePitchIcon(realDroneAngle);
     }
 
-    private void UpdatePitchIcon(Vector3 realDronePos)
+    private void UpdatePitchIcon(Vector3 realDroneAngle)
     {
         // ピッチ角の設定
-        float pitchAngle = NormalizeAngle(realDronePos.x); // 角度を -180 から 180 の範囲に正規化
+        float pitchAngle = NormalizeAngle(realDroneAngle.x); // 角度を -180 から 180 の範囲に正規化
 
         // ±40度の制限を適用
         pitchAngle = pitch_adjust_scale * Mathf.Clamp(pitchAngle, -40.0f, 40.0f);
+        //Debug.Log("pitchAngle: " + pitchAngle);
 
         // ピッチ角を高さに反映 (初期位置からピッチに応じた高さを設定)
         Vector2 newPitchPosition = initialPitchIconPosition;
