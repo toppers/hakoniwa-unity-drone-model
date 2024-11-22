@@ -6,7 +6,7 @@ cp plugin/plugin-srcs/Assets/Scenes/MultiDrones.unity* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/GyroDemo.unity* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/ApiDemo.unity* drone/Assets/Scenes/
 cp plugin/plugin-srcs/Assets/Scenes/DigitalTwin.unity* drone/Assets/Scenes/
-cp plugin/plugin-srcs/Assets/Scenes/DigitalTwin/* drone/Assets/Scenes/DigitalTwin/
+cp -rp plugin/plugin-srcs/Assets/Scenes/DigitalTwin/* drone/Assets/Scenes/DigitalTwin/
 cp plugin/plugin-srcs/Assets/Scenes/VR/* drone/Assets/Scenes/VR/
 
 #Scripts
@@ -70,3 +70,4 @@ cp -rp plugin/plugin-srcs/Assets/Model/Hakoniwa/Robots/Drone/* \
 
 #drone config
 cp plugin/plugin-srcs/drone_config.json drone/
+cp plugin/plugin-srcs/drone_config_small.json drone/
