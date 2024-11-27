@@ -2449,6 +2449,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 143520714}
     m_Modifications:
+    - target: {fileID: 751094482909179287, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4843551495680455291, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2795,6 +2799,14 @@ PrefabInstance:
       propertyPath: drone
       value: 
       objectReference: {fileID: 800122304783251390}
+    - target: {fileID: 7672480987036538070, guid: e1d588f02bf9e4b11b197aebffb6afc7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672480987036538070, guid: e1d588f02bf9e4b11b197aebffb6afc7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
