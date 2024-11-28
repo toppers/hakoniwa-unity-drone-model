@@ -47,7 +47,14 @@ public class DronePos : MonoBehaviour
         positionText.text = "Position(m): (" + position.x.ToString("F1") + ", " + position.z.ToString("F1") + ")";
 
         // 速度をテキストに更新
-        velocityText.text = "Velocity(m/s): (" + velocity.x.ToString("F1") + ", " + velocity.z.ToString("F1") + ")";
+        // ベクトルの大きさを計算
+        float speedMagnitude = Mathf.Sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
+
+        // メートル毎秒(m/s)を時速(km/h)に変換
+        float speedKmh = speedMagnitude * 3.6f;
+
+        // 速度をテキストに更新
+        velocityText.text = "Speed (km/h): " + speedKmh.ToString("F1");
 
         // 走行距離をテキストに更新
         distanceText.text = "Distance(m): " + totalDistance.ToString("F1");
