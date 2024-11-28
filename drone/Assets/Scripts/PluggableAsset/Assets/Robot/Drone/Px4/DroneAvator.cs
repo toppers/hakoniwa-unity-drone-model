@@ -353,10 +353,11 @@ namespace Hakoniwa.PluggableAsset.Assets.Robot.Parts
             public float Yaw;
         }
         private DroneConfig loadedData = null;
+        public string drone_config_path = "./drone_config.json";
         private void LoadDroneConfig()
         {
             string droneName = this.root_name;
-            string filePath = "./drone_config.json";
+            string filePath = drone_config_path;
             Debug.Log("Looking for config file at: " + filePath);
 
             if (File.Exists(filePath))
