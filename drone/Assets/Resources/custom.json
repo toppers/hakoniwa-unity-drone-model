@@ -31,25 +31,6 @@
       ]
     },
     {
-      "name": "Baggage1",
-      "rpc_pdu_readers": [],
-      "rpc_pdu_writers": [],
-      "shm_pdu_readers": [],
-      "shm_pdu_writers": [
-        {
-          "type": "geometry_msgs/Twist",
-          "org_name": "pos",
-          "name": "Baggage1_pos",
-          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
-          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
-          "channel_id": 0,
-          "pdu_size": 112,
-          "write_cycle": 1,
-          "method_type": "SHM"
-        }
-      ]
-    },
-    {
       "name": "Baggage2",
       "rpc_pdu_readers": [],
       "rpc_pdu_writers": [],
@@ -321,6 +302,25 @@
           "channel_id": 17,
           "pdu_size": 72,
           "write_cycle": 5,
+          "method_type": "SHM"
+        }
+      ]
+    },
+    {
+      "name": "Baggage1",
+      "rpc_pdu_readers": [],
+      "rpc_pdu_writers": [],
+      "shm_pdu_readers": [],
+      "shm_pdu_writers": [
+        {
+          "type": "geometry_msgs/Twist",
+          "org_name": "pos",
+          "name": "Baggage1_pos",
+          "class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriter",
+          "conv_class_name": "Hakoniwa.PluggableAsset.Communication.Pdu.Raw.RawPduWriterConverter",
+          "channel_id": 0,
+          "pdu_size": 112,
+          "write_cycle": 1,
           "method_type": "SHM"
         }
       ]
