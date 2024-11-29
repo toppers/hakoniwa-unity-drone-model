@@ -36,6 +36,10 @@ cp -rp plugin/plugin-srcs/Assets/Plugin/src/Unity/AR/Bridge \
 #Packages
 cp plugin/plugin-srcs/Packages/*  drone/Packages/
 
+#Resources
+cp -rp plugin/plugin-srcs/Assets/Resources/* drone/Assets/Resources/
+cp custom.json drone/Assets/Resources/
+
 #Prefab
 cp -rp plugin/plugin-srcs/Assets/Prefab/Robots/Drone* \
     drone/Assets/Prefab/Robots/

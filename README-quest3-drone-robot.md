@@ -75,7 +75,7 @@
 
 以下から、DroneAppAppleSilicon.zip をダウンロードしてください。
 
-https://github.com/toppers/hakoniwa-unity-drone-model/releases/tag/v2.2.1
+https://github.com/toppers/hakoniwa-unity-drone-model/releases/tag/v2.8.0
 
 
 DroneAppAppleSilicon.zip をお好みの場所で解凍してください。
@@ -189,7 +189,7 @@ bash drone-app.bash <Unityアプリのパス> config/rc-battery
 
 ```
 cd hakoniwa-webserver
-python server/main.py --asset_name WebServer --config_path config/custom.json --delta_time_usec 20000
+python server/main.py --asset_name WebServer --config_path config/twin-custom.json --delta_time_usec 20000
 ```
 
 ## QUEST3でARアプリを起動する
