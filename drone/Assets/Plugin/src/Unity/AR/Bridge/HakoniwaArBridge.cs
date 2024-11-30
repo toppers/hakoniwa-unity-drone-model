@@ -12,6 +12,7 @@ namespace hakoniwa.ar.bridge
         private IHakoniwaArBridgePlayer player;
         private UdpComm udp_service;
         private HakoniwaArBridgeStateManager state_manager;
+        private bool isStartedWebSocket = false;
         private string serverUri;
 
         public HakoniwaArBridge()
@@ -49,6 +50,18 @@ namespace hakoniwa.ar.bridge
 
                 var ipAddress = packet.Data["ip_address"] as string;
                 serverUri = $"ws://{ipAddress}:8765";
+                if (isStartedWebSocket == false)
+                {
+                    try
+                    {
+                        player.StartService(serverUri);
+                        isStartedWebSocket = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error starting player service: {ex.Message}");
+                    }
+                }
 
                 // 現在の状態を文字列として取得し、HeartBeatResponseに設定
                 var reply = new HeartBeatResponse(state_manager.GetState().ToString());
@@ -103,21 +116,13 @@ namespace hakoniwa.ar.bridge
         private void PlayStartEvent()
         {
             state_manager.EventPlayStart();
-            try
-            {
-                player.StartService(serverUri);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error starting player service: {ex.Message}");
-                return;
-            }
         }
         private void ResetEvent()
         {
             if (state_manager.GetState() == BridgeState.PLAYING) {
                 player.ResetPostion();
                 player.StopService();
+                isStartedWebSocket = false;
             }
             else {
                 //nothing to do
@@ -141,9 +146,7 @@ namespace hakoniwa.ar.bridge
             if (state_manager.GetState() == BridgeState.POSITIONING) {
                 RunPositioning();
             }
-            else {
-                RunPlaying();
-            }
+            RunPlaying();
         }
 
         public bool Start()
