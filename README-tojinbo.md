@@ -18,12 +18,27 @@
 # 手順
 
 - FlightOverTojinboSummer.zipをダウンロードして解凍する
-- 解凍されたfbxファイルをUnityにインポートする(お好みのものを選択)
+- 解凍されたfbxファイルとpngファイルをUnityにインポートする(お好みのものを選択)
 - ApiDemoシーンの風景を差し替える
+
+![image](images/tojinbo-scene.png)
+
+
+# 3D設置情報
+
+* 3Dモデル：
+  * X: -27.9, Y: -3, Z: 173.9
+  * Scale(X: 400, Y: 400, Z: 400)
+* Water(Water Specular Mirror)
+  * X:0, Y: 0.8, Z: 0
+  * Scale:100, 4枚。1000m
+* FloorKinematics
+  * X:0, Y: -0.76, Z: 0
+  * Scale(X: 10000, Y: 1, Z: 10000)
 
 # 参考
 
-お進める追加アセット
+おすすめの追加アセット
 
 - [海](https://assetstore.unity.com/packages/vfx/shaders/water-shaders-v2-x-149916)
 - [空](https://assetstore.unity.com/packages/2d/textures-materials/sky/colorskies-91541)
@@ -32,3 +47,11 @@
 - [鳥](https://assetstore.unity.com/packages/3d/characters/animals/birds/living-birds-15649)
 - [船1](https://assetstore.unity.com/packages/3d/vehicles/sea/boats-polypack-189866)
 - [船2](https://assetstore.unity.com/packages/3d/vehicles/sea/brig-sloop-sailing-ship-77862)
+
+# 補足
+
+## スカイボックスの適用方法
+
+- メニューから [Window] -> [Rendering] -> [Lighting] を開きます。
+- Environment タブを選択します（Unityバージョンによって名称が異なる場合があります）。
+- Skybox Material のフィールドに作成したスカイボックスのマテリアルをドラッグ&ドロップします。
