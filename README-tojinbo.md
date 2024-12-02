@@ -2,6 +2,11 @@
 
 東尋坊 3D モデルを箱庭ドローンシミュレータに組み込む手順を説明します。
 
+出来上がり例：
+
+
+![image](images/tojinbo.png)
+
 # 必要なもの
 
 - [箱庭ドローンシミュレータ](https://github.com/toppers/hakoniwa-px4sim)
