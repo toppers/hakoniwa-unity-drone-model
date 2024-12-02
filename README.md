@@ -1,10 +1,8 @@
 English ｜ [日本語](README-ja.md)
 
-Here is the English version of your GitHub README:
-
----
-
 This repository contains a drone simulator created with Unity that is compatible with PX4.
+
+![image](images/tojinbo.png)
 
 The simulator can be used for real-time drone flight simulation and testing flight control algorithms.
 
@@ -13,6 +11,7 @@ For those who want to use the Hakoniwa Drone Simulator on native Windows, please
 # Table of Contents
 
 - [Hakoniwa Drone Model](#hakoniwa-drone-model)
+- [Tojinbo 3D Model](#tojinbo-3d-model)
 - [Integration with PX4](#integration-with-px4)
 - [Supported Environments](#supported-environments)
   - [Mac Environment](#mac-environment)
@@ -31,6 +30,23 @@ The drone model created in Unity is an original Hakoniwa model and is a quadcopt
 ![image](https://github.com/toppers/hakoniwa-unity-drone-model/assets/164193/201fce8f-5f8c-43de-9d19-26870348624f)
 
 Unity assets of the Hakoniwa Drone Model H1 are based on data provided by Mr. Hodaka Nakamura of Ida B. Wells-Barnett High School. We want to express our deepest gratitude for his awesome contribution :D
+
+# Tojinbo 3D Model
+
+The Tojinbo 3D model was created with the generous support of the following individuals:
+
+- **Mr. Ueno from Virtual Sky**  
+  - Provided 360-degree drone footage of the Tojinbo landscape.  
+  - For more details, please visit the [Virtual Sky official website](https://www.vsky2019.com/).
+
+- **Mr. Komori from Komori Laboratory**  
+  - Converted the captured data into a 3D model.  
+  - For more details, please visit the [Komori Laboratory official website](https://komori-lab.com/).
+
+This model could not have been completed without their invaluable assistance. We deeply appreciate their contributions to Hakoniwa's OSS initiatives.
+
+For instructions on integrating the Tojinbo 3D model into the Hakoniwa Drone Simulator, please refer to [this guide](README-tojinbo.md).
+
 
 # Integration with PX4
 
