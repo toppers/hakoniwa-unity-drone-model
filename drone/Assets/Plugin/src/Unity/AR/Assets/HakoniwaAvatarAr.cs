@@ -105,7 +105,7 @@ namespace Hakoniwa.AR.Core
                 //Debug.Log("baggage name: " + baggage.name);
                 update_avatar_pos_rot(baggage.name, "pos", baggage, 0);
             }
-            update_avatar_pos_rot(tb3.name, "pos", tb3, 0);
+            update_avatar_pos_rot(tb3.name, "cmd_pos", tb3, 0);
             update_signal();
             IPdu twist = mgr.ReadPdu(robotName, "drone_pos");
             //Debug.Log("Twist data: " + twist);

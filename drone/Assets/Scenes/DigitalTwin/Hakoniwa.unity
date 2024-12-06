@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneTransporter
       objectReference: {fileID: 0}
+    - target: {fileID: 3763998860868167119, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
+      propertyPath: distance
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4360193634706193480, guid: 6f90e4429a0794673b3d349f511bdcc4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25
@@ -605,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1826046047967688911, guid: e23a8a496cfa14939ba7421a6fbf29f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.141
+      value: 0.238
       objectReference: {fileID: 0}
     - target: {fileID: 1826046047967688911, guid: e23a8a496cfa14939ba7421a6fbf29f7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -760,7 +764,7 @@ Transform:
   m_GameObject: {fileID: 784572853}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.022, y: -0.201, z: 0.902}
+  m_LocalPosition: {x: -0.022, y: 0.002, z: 0.902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1076,7 +1080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4261677123761169614, guid: 5d896356c0a7c4caea319c5536ad291f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.087
       objectReference: {fileID: 0}
     - target: {fileID: 4261677123761169614, guid: 5d896356c0a7c4caea319c5536ad291f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1351,7 +1355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4261677123761169614, guid: 5d896356c0a7c4caea319c5536ad291f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.087
       objectReference: {fileID: 0}
     - target: {fileID: 4261677123761169614, guid: 5d896356c0a7c4caea319c5536ad291f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1797,7 +1801,7 @@ Transform:
   m_GameObject: {fileID: 7459836755826686620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 10000, y: 1, z: 10000}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1922,7 +1926,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8074254081557870470, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
       propertyPath: base_position_y
-      value: -0.175
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074254081557870470, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
+      propertyPath: base_position_z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074254081557870470, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
+      propertyPath: topic_name.Array.data[0]
+      value: cmd_pos
       objectReference: {fileID: 0}
     - target: {fileID: 8863308035854364725, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1934,7 +1946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8863308035854364725, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8863308035854364725, guid: d8b6ef6012ed24e9e99bf3d95e614033, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2472,9 +2484,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 73165409}
   currentMode: 0
-  wheelSpeed: 8
-  moveSpeed: 8
-  rotateSpeed: 8
+  wheelSpeed: 4
+  moveSpeed: 4
+  rotateSpeed: 4
   useGimbal: 1
   gimbalSmoothSpeed: 2
   fixedDistance: {x: 0, y: 2, z: -7}
