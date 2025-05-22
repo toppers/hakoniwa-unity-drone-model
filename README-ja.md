@@ -1,5 +1,16 @@
 [English](README.md) ｜ 日本語
 
+# 🚨【重要なお知らせ / Important Notice】🚨  
+このリポジトリは、かつて Hakoniwa Drone Simulator の Unity用ビジュアルモデルとして開発されましたが、  
+現在は後継の [`hakoniwa-unity-drone`](https://github.com/hakoniwalab/hakoniwa-unity-drone) に完全移行しています。
+
+本リポジトリの内容はアーカイブ目的で残されており、今後の更新やサポートは行われません。  
+新規プロジェクトでの利用や参照は、必ず以下の後継リポジトリをご確認ください。
+
+👉 https://github.com/hakoniwalab/hakoniwa-unity-drone
+
+----
+
 このリポジトリは、PX4と連携可能なUnityで作られたドローンシミュレータです。
 
 ![image](images/tojinbo.png)
