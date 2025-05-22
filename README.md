@@ -1,5 +1,17 @@
 English ｜ [日本語](README-ja.md)
 
+# 🚨【Important Notice】🚨  
+This repository was originally developed as the Unity-based visualization model for the Hakoniwa Drone Simulator.  
+However, development has now **fully transitioned** to its successor:  
+[`hakoniwa-unity-drone`](https://github.com/hakoniwalab/hakoniwa-unity-drone).
+
+This repository is preserved **for archival purposes only**, and **no further updates or support will be provided**.  
+For all new projects or references, please use the following repository:
+
+👉 https://github.com/hakoniwalab/hakoniwa-unity-drone
+
+----
+
 This repository contains a drone simulator created with Unity that is compatible with PX4.
 
 ![image](images/tojinbo.png)
